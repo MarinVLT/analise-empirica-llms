@@ -20,6 +20,7 @@
         <quality.skip>false</quality.skip>
         <pit.threshold>100</pit.threshold>
         <test.group>suite</test.group>
+        <experiment.target>legacy</experiment.target>
         <tests.include>**/*Test.java,**/*Teste.java</tests.include>
         <jacoco.check.skip>false</jacoco.check.skip>
     </properties>
@@ -342,17 +343,19 @@
         </profile>
         <profile>
             <id>tsdetect</id>
-            <properties>
-                <test.group>suite</test.group>
-                <tests.include>**/*Test.java,**/*Teste.java</tests.include>
-            </properties>
             <build><plugins><plugin>
                 <groupId>org.codehaus.mojo</groupId><artifactId>exec-maven-plugin</artifactId><version>3.5.0</version>
                 <executions><execution>
                     <id>detect-test-smells</id><phase>verify</phase><goals><goal>exec</goal></goals>
                     <configuration>
                         <executable>${python.executable}</executable>
-                        <arguments><argument>${project.basedir}/scripts/quality.py</argument><argument>tsdetect</argument></arguments>
+                        <arguments>
+                            <argument>${project.basedir}/scripts/quality.py</argument>
+                            <argument>tsdetect</argument>
+                            <argument>${test.group}</argument>
+                            <argument>${tests.include}</argument>
+                            <argument>${experiment.target}</argument>
+                        </arguments>
                     </configuration>
                 </execution></executions>
             </plugin></plugins></build>

@@ -4,7 +4,7 @@ Nesta atividade, vocês usarão uma LLM para projetar testes unitários e devolv
 
 O grupo prepara parte desse material aplicando técnicas que já conhece. Da análise caixa-preta vêm classes de equivalência, valores-limite e regras em tabelas de decisão. Da análise caixa-branca vêm decisões, condições, ramos ou caminhos que merecem cobertura. A LLM usa as informações disponíveis para **escolher as entradas concretas, determinar os resultados esperados e escrever as asserções JUnit 5**. O grupo executa os testes e verifica se o que foi gerado faz sentido à luz da especificação.
 
-A pergunta da atividade é **como a qualidade das suítes muda quando retiramos um bloco do prompt?** Ao final, vocês vão comparar cobertura e mutação e examinar os testes gerados para explicar as diferenças.
+A pergunta da atividade é **como a qualidade das suítes muda quando retiramos um bloco do prompt?** Ao final, vocês vão comparar cobertura, mutação e test smells e examinar os testes gerados para explicar as diferenças.
 
 Trabalhem em **dupla ou trio**. Atualizem o `artifactId` no `pom.xml` para identificar todos os integrantes, sem espaços ou acentos. Um exemplo é `AnaSilva-BrunoLima`. Usem o mesmo identificador na entrega e indiquem os nomes completos no relatório.
 
@@ -74,23 +74,29 @@ Usem JDK 17 e Maven ou o wrapper do projeto. O JDK 21 também pode executar a at
 Para executar apenas uma suíte, por exemplo, usem `./mvnw -Paluguel-completa test`. Para medir as doze, executem os comandos abaixo separadamente, com uma condição por vez. No Windows, usem `mvnw.cmd`.
 
 ```sh
-./mvnw -Paluguel-completa,medir verify
-./mvnw -Paluguel-sem-codigo,medir verify
-./mvnw -Paluguel-sem-especificacao,medir verify
-./mvnw -Paluguel-sem-analise,medir verify
-./mvnw -Ppoquer-completa,medir verify
-./mvnw -Ppoquer-sem-codigo,medir verify
-./mvnw -Ppoquer-sem-especificacao,medir verify
-./mvnw -Ppoquer-sem-analise,medir verify
-./mvnw -Pacademico-completa,medir verify
-./mvnw -Pacademico-sem-codigo,medir verify
-./mvnw -Pacademico-sem-especificacao,medir verify
-./mvnw -Pacademico-sem-analise,medir verify
+./mvnw -Paluguel-completa,medir,tsdetect verify
+./mvnw -Paluguel-sem-codigo,medir,tsdetect verify
+./mvnw -Paluguel-sem-especificacao,medir,tsdetect verify
+./mvnw -Paluguel-sem-analise,medir,tsdetect verify
+./mvnw -Ppoquer-completa,medir,tsdetect verify
+./mvnw -Ppoquer-sem-codigo,medir,tsdetect verify
+./mvnw -Ppoquer-sem-especificacao,medir,tsdetect verify
+./mvnw -Ppoquer-sem-analise,medir,tsdetect verify
+./mvnw -Pacademico-completa,medir,tsdetect verify
+./mvnw -Pacademico-sem-codigo,medir,tsdetect verify
+./mvnw -Pacademico-sem-especificacao,medir,tsdetect verify
+./mvnw -Pacademico-sem-analise,medir,tsdetect verify
 ```
 
-Para cada perfil, guardem o relatório Surefire de `target/surefire-reports/<perfil>/`, JaCoCo de `target/site/jacoco/<perfil>/` e PIT de `target/pit-reports/<perfil>/`, incluindo HTML e XML quando gerados. Copiem as evidências antes de executar `clean`. O perfil mede a classe principal daquela funcionalidade com a suíte selecionada. Os tipos auxiliares, como os enums, ficam fora desse recorte. O perfil `medir` usa o conjunto padrão de mutadores, sem meta mínima de cobertura ou mutação.
+Para cada perfil, guardem o relatório Surefire de `target/surefire-reports/<perfil>/`, JaCoCo de `target/site/jacoco/<perfil>/` e PIT de `target/pit-reports/<perfil>/`, incluindo HTML e XML quando gerados. Guardem também `test-smells.csv` e `summary.json` de `target/tsdetect/<perfil>/` em `evidencias/<perfil>/tsdetect/`. Copiem as evidências antes de executar `clean`. O perfil mede a classe principal daquela funcionalidade com a suíte selecionada. Os tipos auxiliares, como os enums, ficam fora desse recorte. O perfil `medir` usa o conjunto padrão de mutadores, sem meta mínima de cobertura ou mutação.
 
 Para cada funcionalidade, apresentem lado a lado o número de testes, falhas e exclusões, linhas e ramos cobertos sobre o total, e mutantes mortos sobre o total. Registrem separadamente os sobreviventes, sem cobertura, timeouts e demais estados do XML. Calculem Completa menos cada ablação em pontos percentuais quando houver denominador válido. Tratem Completa menos Sem análise como a comparação principal para avaliar a contribuição dos alunos. Se a execução falhar ou a métrica não estiver disponível, registrem o motivo. Justifiquem as diferenças com casos concretos, incluindo oráculos fracos, redundâncias ou regras que a IA deixou de cobrir. Discutam como a análise do grupo afetou as suítes e o que vocês mudariam no projeto de testes.
+
+### Análise de test smells
+
+O tsDetect inspeciona o código dos testes em busca de padrões que podem dificultar a leitura, a manutenção ou o diagnóstico de falhas. O perfil `tsdetect` analisa a suíte selecionada e registra a quantidade de ocorrências por tipo. Na primeira execução, a ferramenta é baixada e compilada. Tenham Git, Maven, Java e Python 3.9 ou superior disponíveis no terminal.
+
+Para cada suíte, registrem o número de métodos reconhecidos, o total de ocorrências e os tipos detectados. Na comparação, considerem o tamanho das suítes e expliquem, com um trecho ou método, os achados mais relevantes. Quando o detector não reconhecer os testes ou a medição falhar, registrem `ND` com a justificativa. Preservem os achados da suíte medida e registrem eventuais propostas de melhoria no relatório.
 
 ## Referência externa com EvoSuite
 
@@ -100,7 +106,7 @@ A referência externa do EvoSuite será fornecida separadamente pelo docente. Us
 
 - Entreguem o projeto Maven. Preencham o [modelo de relatório](relatorio-llm.md) na raiz do projeto com todas as respostas, análises e justificativas, incluindo identificação, ambiente, comandos, as análises caixa-preta e caixa-branca das três funcionalidades, tabela comparativa e discussão. Mantenham o código das doze suítes em `src/test/java` e referenciem as evidências por links relativos no relatório.
 - Em cada pasta `evidencias/<perfil>/`, copiem o [modelo de registro](docs/modelos/registro.md) como `registro.md` e preservem os nomes de arquivos indicados no modelo. Entreguem o manifesto, os arquivos automáticos da API, os relatórios de teste e o histórico de ajustes. Excluam segredos e dados pessoais dos registros.
-- Na correção serão considerados a qualidade das análises caixa-preta e caixa-branca, a fidelidade ao protocolo e a rastreabilidade, a correção e execução dos testes e a interpretação dos resultados. Demonstrem a contribuição do grupo com a análise produzida antes da IA e a crítica dos testes após a geração.
+- Na correção serão considerados a qualidade das análises caixa-preta e caixa-branca, a fidelidade ao protocolo e a rastreabilidade, a correção e execução dos testes e a interpretação das métricas e dos test smells. Demonstrem a contribuição do grupo com a análise produzida antes da IA e a crítica dos testes após a geração.
 
 ## Adaptações dos materiais de origem
 

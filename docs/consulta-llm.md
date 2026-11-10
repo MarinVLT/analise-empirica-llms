@@ -54,11 +54,11 @@ python3 scripts/gerar_testes_llm.py gerar --perfil aluguel-completa --saida targ
 
 O cabeçalho de autenticação fica fora dos arquivos. Se a API ecoar a chave no corpo, o script a oculta e marca a ocorrência nos metadados. O manifesto permite detectar alterações nos arquivos congelados. A versão entregue antes da geração registra quais prompts foram apresentados.
 
-Completem as evidências com `registro.md`, o log Maven e os relatórios Surefire, JaCoCo e PIT, seguindo o modelo do projeto. Para guardar a saída completa do Maven, use o perfil correspondente, como neste exemplo:
+Completem as evidências com `registro.md`, o log Maven e os relatórios Surefire, JaCoCo, PIT e tsDetect, seguindo o modelo do projeto. Para guardar a saída completa do Maven, use o perfil correspondente, como neste exemplo:
 
 ```sh
 mkdir -p evidencias/aluguel-completa
-./mvnw -Paluguel-completa,medir verify > evidencias/aluguel-completa/execucao.log 2>&1
+./mvnw -Paluguel-completa,medir,tsdetect verify > evidencias/aluguel-completa/execucao.log 2>&1
 ```
 
 ### Piloto docente dos doze perfis

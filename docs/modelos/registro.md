@@ -18,6 +18,7 @@ Copiem este modelo como `evidencias/<perfil>/registro.md` para cada perfil. Subs
 | Surefire | `surefire/` |
 | JaCoCo | `jacoco/` |
 | PIT | `pit/` |
+| tsDetect | `tsdetect/test-smells.csv` e `tsdetect/summary.json` |
 
 Copiem os relatórios gerados mantendo os nomes originais. Listem abaixo os arquivos ou relatórios indisponíveis e os motivos.
 

@@ -55,15 +55,17 @@ def agora():
 def codigo_sem_javadoc(codigo):
     # Reconhece literais e comentários para preservar delimitadores dentro de strings.
     elementos = re.compile(
-        r'"{3}(?:\\.|(?!"{3}).)*"{3}|"(?:\\.|[^"\\])*"|'
-        r"'(?:\\.|[^'\\])*'|//[^\r\n]*|/\*.*?\*/",
-        re.DOTALL,
+        r'^[ \t]*/\*\*.*?\*/[ \t]*(?:\n|$)|"{3}(?:\\.|(?!"{3}).)*"{3}|"(?:\\.|[^"\\])*"|'
+        r"'(?:\\.|[^'\\])*'|//[^\r\n]*|/\*.*?\*/|\n(?:[ \t]*\n){2,}",
+        re.DOTALL | re.MULTILINE,
     )
 
     def preservar(elemento):
         trecho = elemento.group()
-        if trecho.startswith("/**"):
-            return "\n" * trecho.count("\n") or " "
+        if trecho.lstrip().startswith("/**"):
+            return "" if trecho.endswith("\n") else " "
+        if trecho.startswith("\n"):
+            return "\n\n"
         return trecho
 
     return elementos.sub(preservar, codigo)
@@ -87,7 +89,7 @@ def preparar(analises, plano):
         fontes[f"analises/{funcao}.md"] = sha256(analise)
         analises_originais[funcao] = analise
 
-        partes = re.split(r"(?m)^## (Código|Especificação|Análise)\n", modelo_bytes.decode("utf-8"))
+        partes = re.split(r"(?m)^## (Código|Especificação|Análise)\n", modelo_bytes.decode("utf-8").replace("\r\n", "\n"))
         if tuple(partes[1::2]) != BLOCOS:
             raise ValueError(f"Blocos inesperados no modelo de {funcao}")
         campos = re.findall(r"\[[^\]\n]+\]", partes[6])
@@ -99,12 +101,15 @@ def preparar(analises, plano):
             caminho = arquivo.relative_to(RAIZ).as_posix()
             conteudo = arquivo.read_bytes()
             fontes[caminho] = sha256(conteudo)
-            codigo = codigo_sem_javadoc(conteudo.decode('utf-8')).rstrip()
+            codigo = codigo_sem_javadoc(conteudo.decode('utf-8').replace('\r\n', '\n')).rstrip()
             codigos.append(f"`{caminho}`\n\n```java\n{codigo}\n```")
         if not codigos:
             raise ValueError(f"Nenhum fonte Java encontrado para {funcao}")
+        codigo_esperado = "\n" + "\n\n".join(codigos) + "\n\n"
+        if partes[2] != codigo_esperado:
+            raise ValueError(f"Bloco Código do modelo de {funcao} diverge dos fontes sem Javadoc")
         blocos = {
-            "Código": "\n" + "\n\n".join(codigos) + "\n\n",
+            "Código": partes[2],
             "Especificação": partes[4],
             "Análise": "\n" + texto_analise + "\n",
         }

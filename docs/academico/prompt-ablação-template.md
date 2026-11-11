@@ -1,4 +1,4 @@
-Projete os casos de teste a partir do material fornecido. Escolha as entradas concretas e determine os resultados ou exceções esperados. Implemente os casos em uma suíte de testes unitários Java com JUnit 5 para a API a seguir.
+Você é especialista em testes unitários Java com JUnit 5. Use o material fornecido para projetar os casos de teste, escolher as entradas e determinar os resultados ou exceções esperados. Responda somente com o código Java completo da suíte JUnit 5, incluindo o pacote e os imports necessários. Entregue o código em texto puro, sem cercas de Markdown nem explicações.
 
 # Consolidação parcial acadêmica
 
@@ -15,7 +15,64 @@ O enum de retorno `SituacaoAcademica` contém `REMF`, `REPF`, `REP`, `APR`, `APR
 
 ## Código
 
-[Insira o código dos arquivos Java necessários em src/main/java/br/com/academico/. Identifique o caminho de cada arquivo.]
+`src/main/java/br/com/academico/ConsolidacaoParcial.java`
+
+```java
+package br.com.academico;
+
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.util.Objects;
+
+public class ConsolidacaoParcial {
+    public static SituacaoAcademica consolidarParcialmente(
+            Float nota1, Float nota2, Float nota3, Integer frequencia) {
+        Objects.requireNonNull(frequencia, "frequencia");
+        if (frequencia < 0 || frequencia > 100) {
+            throw new IllegalArgumentException("Frequência deve estar entre 0 e 100");
+        }
+
+        BigDecimal primeira = arredondarNota(nota1);
+        BigDecimal segunda = arredondarNota(nota2);
+        BigDecimal terceira = arredondarNota(nota3);
+        BigDecimal media = primeira.add(segunda).add(terceira)
+                .divide(BigDecimal.valueOf(3), 1, RoundingMode.HALF_UP);
+
+        if (media.compareTo(BigDecimal.valueOf(3)) < 0) {
+            return frequencia < 75 ? SituacaoAcademica.REMF : SituacaoAcademica.REP;
+        }
+        if (frequencia < 75) {
+            return SituacaoAcademica.REPF;
+        }
+        if (media.compareTo(BigDecimal.valueOf(7)) >= 0) {
+            return SituacaoAcademica.APR;
+        }
+        BigDecimal menorNota = primeira.min(segunda).min(terceira);
+        if (media.compareTo(BigDecimal.valueOf(5)) >= 0 && menorNota.compareTo(BigDecimal.valueOf(3)) >= 0) {
+            return SituacaoAcademica.APRN;
+        }
+        return SituacaoAcademica.REC;
+    }
+
+    private static BigDecimal arredondarNota(Float nota) {
+        Objects.requireNonNull(nota, "nota");
+        if (!Float.isFinite(nota) || nota < 0 || nota > 10) {
+            throw new IllegalArgumentException("Nota deve ser finita e estar entre 0 e 10");
+        }
+        return new BigDecimal(nota.toString()).setScale(1, RoundingMode.HALF_UP);
+    }
+}
+```
+
+`src/main/java/br/com/academico/SituacaoAcademica.java`
+
+```java
+package br.com.academico;
+
+public enum SituacaoAcademica {
+    REPF, REP, REC, APR, APRN, REMF
+}
+```
 
 ## Especificação
 

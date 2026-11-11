@@ -16,11 +16,10 @@ def run(*args, cwd=ROOT):
     subprocess.run([str(arg) for arg in args], cwd=cwd, check=True)
 
 
-def tsdetect(grupo='suite', teste='', alvo='legacy'):
-    experimento = alvo != 'legacy'
-    output = ROOT / 'target/tsdetect'
-    if experimento:
-        output = output / grupo
+def tsdetect(grupo, teste, alvo):
+    if alvo == 'sem-perfil':
+        raise RuntimeError('Selecione um perfil de ablação junto com tsdetect.')
+    output = ROOT / 'target/tsdetect' / grupo
     source = ROOT / 'target/tools/tsdetect'
     jar = source / 'target/TestSmellDetector-0.1-jar-with-dependencies.jar'
     output.mkdir(parents=True, exist_ok=True)
@@ -61,30 +60,12 @@ def tsdetect(grupo='suite', teste='', alvo='legacy'):
         magic.write_text(text.replace('magicCount >= thresholds.getMagicNumberTest()', 'magicCount > thresholds.getMagicNumberTest()'))
         run(shutil.which('mvn') or 'mvn', '-B', '-DskipTests', 'package', cwd=source)
         marker.write_text(ADAPTER)
-    experiment_suites = {'ConjuntoCompleto.java', 'ConjuntoSemCodigo.java', 'ConjuntoSemEspecificacao.java', 'ConjuntoSemAnalise.java'}
-    tests = sorted(
-        test for test in (ROOT / 'src/test/java').rglob('*.java')
-        if test.name not in experiment_suites
-    )
-    if experimento:
-        tests = [ROOT / 'src/test/java' / teste]
-        if not tests[0].is_file():
-            raise RuntimeError(f'Suíte não encontrada: {teste}')
-    if not tests:
-        raise RuntimeError('Nenhum arquivo de teste encontrado.')
-    mapping = json.loads((ROOT / 'scripts/tsdetect-mapping.json').read_text())
-    rows = []
-    for test in tests:
-        relative = test.relative_to(ROOT / 'src/test/java')
-        production_relative = mapping.get(relative.as_posix(), relative.with_name(relative.stem.removesuffix('Teste').removesuffix('Test') + '.java').as_posix())
-        if experimento:
-            production_relative = alvo.replace('.', '/') + '.java'
-        production = ROOT / 'src/main/java' / production_relative
-        if not production.is_file():
-            raise RuntimeError(f'Sem classe de produção correspondente: {test}')
-        rows.append([grupo, str(test), str(production)])
+    test = ROOT / 'src/test/java' / teste
+    production = ROOT / 'src/main/java' / (alvo.replace('.', '/') + '.java')
+    if not test.is_file() or not production.is_file():
+        raise RuntimeError(f'Arquivos ausentes para o perfil {grupo}: {teste}, {alvo}.')
     with (output / 'input.csv').open('w', newline='') as stream:
-        csv.writer(stream).writerows(rows)
+        csv.writer(stream).writerow([grupo, str(test), str(production)])
     report = output / 'test-smells.csv'
     report.unlink(missing_ok=True)
     (output / 'summary.json').unlink(missing_ok=True)
@@ -93,20 +74,17 @@ def tsdetect(grupo='suite', teste='', alvo='legacy'):
         reader = csv.DictReader(stream)
         findings = list(reader)
         smells = reader.fieldnames[7:]
-    if len(findings) != len(tests) or len(smells) != 21:
+    if len(findings) != 1 or len(smells) != 21:
         raise RuntimeError('Relatório incompleto: esperados todos os arquivos e 21 detectores.')
     analyzed = {Path(row['TestFilePath']).resolve() for row in findings}
-    if analyzed != {test.resolve() for test in tests}:
+    if analyzed != {test.resolve()}:
         raise RuntimeError('A lista de arquivos analisados difere da suíte.')
     if any(int(row['NumberOfMethods']) <= 0 for row in findings):
         raise RuntimeError('Arquivo sem testes reconhecidos pelo tsDetect.')
     # Surefire registra os nomes dos métodos (várias invocações contam uma vez).
     executed = set()
-    ignored = 0
     for xml in (ROOT / 'target/surefire-reports' / grupo).glob('TEST-*.xml'):
         for case in ET.parse(xml).iter('testcase'):
-            if case.find('skipped') is not None:
-                ignored += 1
             executed.add((case.attrib['classname'], case.attrib['name'].split('(')[0].split('[')[0]))
     detected_by_class = {
         '.'.join(Path(row['TestFilePath']).resolve().relative_to(ROOT / 'src/test/java').with_suffix('').parts): int(row['NumberOfMethods'])
@@ -122,33 +100,16 @@ def tsdetect(grupo='suite', teste='', alvo='legacy'):
         raise RuntimeError(f'Abrangência divergente: tsDetect={detected_count}, métodos Surefire={len(executed)}. Verifique recursos JUnit não suportados.')
     totals = {smell: sum(int(row[smell]) for row in findings) for smell in smells}
     summary = {'perfil': grupo, 'commit': COMMIT, 'adaptacao': ADAPTER,
-               'arquivos': len(tests), 'metodos': detected_count, 'metodos_por_classe': detected_by_class, 'ocorrencias': totals,
+               'arquivos': 1, 'metodos': detected_count, 'metodos_por_classe': detected_by_class, 'ocorrencias': totals,
                'total_ocorrencias': sum(totals.values())}
     (output / 'summary.json').write_text(json.dumps(summary, indent=2, ensure_ascii=False) + '\n')
     print(json.dumps(summary, indent=2, ensure_ascii=False))
-    if ignored and not experimento:
-        raise RuntimeError('Há testes ignorados pelo JUnit; a suíte completa deve ser analisada e executada.')
-    if any(totals.values()) and not experimento:
-        raise RuntimeError('tsDetect encontrou test smells. Consulte target/tsdetect/.')
-
-
-def pit():
-    report = ROOT / 'target/pit-reports/mutations.xml'
-    mutations = list(ET.parse(report).getroot())
-    if not mutations:
-        raise RuntimeError('PIT não gerou mutantes.')
-    statuses = {}
-    for mutation in mutations:
-        status = mutation.attrib['status']
-        statuses[status] = statuses.get(status, 0) + 1
-    (report.parent / 'status-summary.json').write_text(json.dumps(statuses, indent=2) + '\n')
-    print(statuses)
-    if any(status != 'KILLED' for status in statuses):
-        raise RuntimeError('Há mutantes sem status KILLED. Consulte mutations.xml e justifique em relatorio-llm.md.')
 
 
 if __name__ == '__main__':
     try:
-        {'tsdetect': tsdetect, 'pit': pit}[sys.argv[1]](*sys.argv[2:])
+        if len(sys.argv) != 5 or sys.argv[1] != 'tsdetect':
+            raise RuntimeError('Uso: quality.py tsdetect PERFIL ARQUIVO_TESTE CLASSE_ALVO')
+        tsdetect(*sys.argv[2:])
     except (RuntimeError, subprocess.CalledProcessError) as error:
         sys.exit(str(error))

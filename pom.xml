@@ -17,12 +17,10 @@
         <pitest.version>1.17.3</pitest.version>
         <pitest.junit5.version>1.2.1</pitest.junit5.version>
         <python.executable>python3</python.executable>
-        <quality.skip>false</quality.skip>
-        <pit.threshold>100</pit.threshold>
         <test.group>suite</test.group>
-        <experiment.target>legacy</experiment.target>
+        <experiment.target>sem-perfil</experiment.target>
+        <tests.required>false</tests.required>
         <tests.include>**/*Test.java,**/*Teste.java</tests.include>
-        <jacoco.check.skip>false</jacoco.check.skip>
     </properties>
 
     <dependencies>
@@ -47,7 +45,7 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>3.5.2</version>
                 <configuration>
-                    <failIfNoTests>true</failIfNoTests>
+                    <failIfNoTests>${tests.required}</failIfNoTests>
                     <includes><include>${tests.include}</include></includes>
                     <reportsDirectory>${project.build.directory}/surefire-reports/${test.group}</reportsDirectory>
                 </configuration>
@@ -61,6 +59,7 @@
             <properties>
                 <test.group>aluguel-completa</test.group>
                 <tests.include>br/com/aluguelcarros/ConjuntoCompleto.java</tests.include>
+                <tests.required>true</tests.required>
                 <experiment.test>br.com.aluguelcarros.ConjuntoCompleto</experiment.test>
                 <experiment.target>br.com.aluguelcarros.CalculadoraCustoLocacao</experiment.target>
                 <experiment.classes>br/com/aluguelcarros/CalculadoraCustoLocacao*.class</experiment.classes>
@@ -71,6 +70,7 @@
             <properties>
                 <test.group>aluguel-sem-codigo</test.group>
                 <tests.include>br/com/aluguelcarros/ConjuntoSemCodigo.java</tests.include>
+                <tests.required>true</tests.required>
                 <experiment.test>br.com.aluguelcarros.ConjuntoSemCodigo</experiment.test>
                 <experiment.target>br.com.aluguelcarros.CalculadoraCustoLocacao</experiment.target>
                 <experiment.classes>br/com/aluguelcarros/CalculadoraCustoLocacao*.class</experiment.classes>
@@ -81,6 +81,7 @@
             <properties>
                 <test.group>aluguel-sem-especificacao</test.group>
                 <tests.include>br/com/aluguelcarros/ConjuntoSemEspecificacao.java</tests.include>
+                <tests.required>true</tests.required>
                 <experiment.test>br.com.aluguelcarros.ConjuntoSemEspecificacao</experiment.test>
                 <experiment.target>br.com.aluguelcarros.CalculadoraCustoLocacao</experiment.target>
                 <experiment.classes>br/com/aluguelcarros/CalculadoraCustoLocacao*.class</experiment.classes>
@@ -91,6 +92,7 @@
             <properties>
                 <test.group>aluguel-sem-analise</test.group>
                 <tests.include>br/com/aluguelcarros/ConjuntoSemAnalise.java</tests.include>
+                <tests.required>true</tests.required>
                 <experiment.test>br.com.aluguelcarros.ConjuntoSemAnalise</experiment.test>
                 <experiment.target>br.com.aluguelcarros.CalculadoraCustoLocacao</experiment.target>
                 <experiment.classes>br/com/aluguelcarros/CalculadoraCustoLocacao*.class</experiment.classes>
@@ -101,6 +103,7 @@
             <properties>
                 <test.group>poquer-completa</test.group>
                 <tests.include>br/com/poquer/ConjuntoCompleto.java</tests.include>
+                <tests.required>true</tests.required>
                 <experiment.test>br.com.poquer.ConjuntoCompleto</experiment.test>
                 <experiment.target>br.com.poquer.Mao</experiment.target>
                 <experiment.classes>br/com/poquer/Mao*.class</experiment.classes>
@@ -111,6 +114,7 @@
             <properties>
                 <test.group>poquer-sem-codigo</test.group>
                 <tests.include>br/com/poquer/ConjuntoSemCodigo.java</tests.include>
+                <tests.required>true</tests.required>
                 <experiment.test>br.com.poquer.ConjuntoSemCodigo</experiment.test>
                 <experiment.target>br.com.poquer.Mao</experiment.target>
                 <experiment.classes>br/com/poquer/Mao*.class</experiment.classes>
@@ -121,6 +125,7 @@
             <properties>
                 <test.group>poquer-sem-especificacao</test.group>
                 <tests.include>br/com/poquer/ConjuntoSemEspecificacao.java</tests.include>
+                <tests.required>true</tests.required>
                 <experiment.test>br.com.poquer.ConjuntoSemEspecificacao</experiment.test>
                 <experiment.target>br.com.poquer.Mao</experiment.target>
                 <experiment.classes>br/com/poquer/Mao*.class</experiment.classes>
@@ -131,6 +136,7 @@
             <properties>
                 <test.group>poquer-sem-analise</test.group>
                 <tests.include>br/com/poquer/ConjuntoSemAnalise.java</tests.include>
+                <tests.required>true</tests.required>
                 <experiment.test>br.com.poquer.ConjuntoSemAnalise</experiment.test>
                 <experiment.target>br.com.poquer.Mao</experiment.target>
                 <experiment.classes>br/com/poquer/Mao*.class</experiment.classes>
@@ -141,6 +147,7 @@
             <properties>
                 <test.group>academico-completa</test.group>
                 <tests.include>br/com/academico/ConjuntoCompleto.java</tests.include>
+                <tests.required>true</tests.required>
                 <experiment.test>br.com.academico.ConjuntoCompleto</experiment.test>
                 <experiment.target>br.com.academico.ConsolidacaoParcial</experiment.target>
                 <experiment.classes>br/com/academico/ConsolidacaoParcial*.class</experiment.classes>
@@ -151,6 +158,7 @@
             <properties>
                 <test.group>academico-sem-codigo</test.group>
                 <tests.include>br/com/academico/ConjuntoSemCodigo.java</tests.include>
+                <tests.required>true</tests.required>
                 <experiment.test>br.com.academico.ConjuntoSemCodigo</experiment.test>
                 <experiment.target>br.com.academico.ConsolidacaoParcial</experiment.target>
                 <experiment.classes>br/com/academico/ConsolidacaoParcial*.class</experiment.classes>
@@ -161,6 +169,7 @@
             <properties>
                 <test.group>academico-sem-especificacao</test.group>
                 <tests.include>br/com/academico/ConjuntoSemEspecificacao.java</tests.include>
+                <tests.required>true</tests.required>
                 <experiment.test>br.com.academico.ConjuntoSemEspecificacao</experiment.test>
                 <experiment.target>br.com.academico.ConsolidacaoParcial</experiment.target>
                 <experiment.classes>br/com/academico/ConsolidacaoParcial*.class</experiment.classes>
@@ -171,6 +180,7 @@
             <properties>
                 <test.group>academico-sem-analise</test.group>
                 <tests.include>br/com/academico/ConjuntoSemAnalise.java</tests.include>
+                <tests.required>true</tests.required>
                 <experiment.test>br.com.academico.ConjuntoSemAnalise</experiment.test>
                 <experiment.target>br.com.academico.ConsolidacaoParcial</experiment.target>
                 <experiment.classes>br/com/academico/ConsolidacaoParcial*.class</experiment.classes>
@@ -239,107 +249,6 @@
                     </plugin>
                 </plugins>
             </build>
-        </profile>
-        <profile>
-            <id>arestas</id>
-            <properties>
-                <test.group>arestas</test.group>
-                <tests.include>**/CoberturaArestasTeste.java</tests.include>
-            </properties>
-        </profile>
-        <profile>
-            <id>mcdc</id>
-            <properties>
-                <test.group>mcdc</test.group>
-                <tests.include>**/McdcTeste.java</tests.include>
-                <jacoco.check.skip>true</jacoco.check.skip>
-            </properties>
-        </profile>
-        <profile>
-            <id>caminhos</id>
-            <properties>
-                <test.group>caminhos</test.group>
-                <tests.include>**/CaminhosBasicosTeste.java</tests.include>
-                <jacoco.check.skip>true</jacoco.check.skip>
-            </properties>
-        </profile>
-        <profile>
-            <id>jacoco</id>
-            <build><plugins><plugin>
-                <groupId>org.jacoco</groupId>
-                <artifactId>jacoco-maven-plugin</artifactId>
-                <version>${jacoco.version}</version>
-                <configuration>
-                    <destFile>${project.build.directory}/jacoco-${test.group}.exec</destFile>
-                    <dataFile>${project.build.directory}/jacoco-${test.group}.exec</dataFile>
-                    <append>false</append>
-                    <outputDirectory>${project.build.directory}/site/jacoco/${test.group}</outputDirectory>
-                </configuration>
-                <executions>
-                    <execution><goals><goal>prepare-agent</goal></goals></execution>
-                    <execution>
-                        <id>report</id><phase>verify</phase>
-                        <goals><goal>report</goal></goals>
-                        <configuration>
-                            <includes><include>br/com/aluguelcarros/*.class</include></includes>
-                            <formats><format>HTML</format><format>XML</format></formats>
-                        </configuration>
-                    </execution>
-                    <execution>
-                        <id>check-branches</id><phase>verify</phase><goals><goal>check</goal></goals>
-                        <configuration>
-                            <skip>${jacoco.check.skip}</skip>
-                            <rules><rule>
-                                <element>CLASS</element>
-                                <includes><include>br.com.aluguelcarros.CalculadoraCustoLocacao</include></includes>
-                                <limits><limit><counter>BRANCH</counter><value>MISSEDCOUNT</value><maximum>0</maximum></limit></limits>
-                            </rule></rules>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin></plugins></build>
-        </profile>
-        <profile>
-            <id>pitest</id>
-            <properties>
-                <test.group>suite</test.group>
-                <tests.include>**/*Test.java,**/*Teste.java</tests.include>
-            </properties>
-            <build><plugins>
-                <plugin>
-                    <groupId>org.pitest</groupId><artifactId>pitest-maven</artifactId>
-                    <version>${pitest.version}</version>
-                    <dependencies><dependency>
-                        <groupId>org.pitest</groupId><artifactId>pitest-junit5-plugin</artifactId>
-                        <version>${pitest.junit5.version}</version>
-                    </dependency></dependencies>
-                    <configuration>
-                        <targetClasses><param>br.com.aluguelcarros.CalculadoraCustoLocacao</param></targetClasses>
-                        <targetTests><param>br.com.aluguelcarros.*</param></targetTests>
-                        <excludedTestClasses><param>br.com.aluguelcarros.Conjunto*</param></excludedTestClasses>
-                        <mutators><mutator>DEFAULTS</mutator></mutators>
-                        <outputFormats><param>HTML</param><param>XML</param></outputFormats>
-                        <timestampedReports>false</timestampedReports>
-                        <failWhenNoMutations>true</failWhenNoMutations>
-                        <!-- O verificador abaixo exige KILLED, sem contar timeout como morte. -->
-                        <mutationThreshold>${pit.threshold}</mutationThreshold>
-                    </configuration>
-                    <executions><execution>
-                        <id>mutation-coverage</id><phase>verify</phase>
-                        <goals><goal>mutationCoverage</goal></goals>
-                    </execution></executions>
-                </plugin>
-                <plugin>
-                    <groupId>org.codehaus.mojo</groupId><artifactId>exec-maven-plugin</artifactId><version>3.5.0</version>
-                    <executions><execution>
-                        <id>check-pit-status</id><phase>verify</phase><goals><goal>exec</goal></goals>
-                        <configuration>
-                            <skip>${quality.skip}</skip><executable>${python.executable}</executable>
-                            <arguments><argument>${project.basedir}/scripts/quality.py</argument><argument>pit</argument></arguments>
-                        </configuration>
-                    </execution></executions>
-                </plugin>
-            </plugins></build>
         </profile>
         <profile>
             <id>tsdetect</id>

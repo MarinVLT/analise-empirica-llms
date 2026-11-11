@@ -1,5 +1,5 @@
 package br.com.poquer;
 
-class ConjuntoSemAnalise {
+class SuiteSemAnalise {
     // Adicione aqui os testes JUnit 5 da condição sem-analise.
 }

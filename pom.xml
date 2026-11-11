@@ -58,9 +58,9 @@
             <id>aluguel-completa</id>
             <properties>
                 <test.group>aluguel-completa</test.group>
-                <tests.include>br/com/aluguelcarros/ConjuntoCompleto.java</tests.include>
+                <tests.include>br/com/aluguelcarros/SuiteCompleta.java</tests.include>
                 <tests.required>true</tests.required>
-                <experiment.test>br.com.aluguelcarros.ConjuntoCompleto</experiment.test>
+                <experiment.test>br.com.aluguelcarros.SuiteCompleta</experiment.test>
                 <experiment.target>br.com.aluguelcarros.CalculadoraCustoLocacao</experiment.target>
                 <experiment.classes>br/com/aluguelcarros/CalculadoraCustoLocacao*.class</experiment.classes>
             </properties>
@@ -69,9 +69,9 @@
             <id>aluguel-sem-codigo</id>
             <properties>
                 <test.group>aluguel-sem-codigo</test.group>
-                <tests.include>br/com/aluguelcarros/ConjuntoSemCodigo.java</tests.include>
+                <tests.include>br/com/aluguelcarros/SuiteSemCodigo.java</tests.include>
                 <tests.required>true</tests.required>
-                <experiment.test>br.com.aluguelcarros.ConjuntoSemCodigo</experiment.test>
+                <experiment.test>br.com.aluguelcarros.SuiteSemCodigo</experiment.test>
                 <experiment.target>br.com.aluguelcarros.CalculadoraCustoLocacao</experiment.target>
                 <experiment.classes>br/com/aluguelcarros/CalculadoraCustoLocacao*.class</experiment.classes>
             </properties>
@@ -80,9 +80,9 @@
             <id>aluguel-sem-especificacao</id>
             <properties>
                 <test.group>aluguel-sem-especificacao</test.group>
-                <tests.include>br/com/aluguelcarros/ConjuntoSemEspecificacao.java</tests.include>
+                <tests.include>br/com/aluguelcarros/SuiteSemEspecificacao.java</tests.include>
                 <tests.required>true</tests.required>
-                <experiment.test>br.com.aluguelcarros.ConjuntoSemEspecificacao</experiment.test>
+                <experiment.test>br.com.aluguelcarros.SuiteSemEspecificacao</experiment.test>
                 <experiment.target>br.com.aluguelcarros.CalculadoraCustoLocacao</experiment.target>
                 <experiment.classes>br/com/aluguelcarros/CalculadoraCustoLocacao*.class</experiment.classes>
             </properties>
@@ -91,9 +91,9 @@
             <id>aluguel-sem-analise</id>
             <properties>
                 <test.group>aluguel-sem-analise</test.group>
-                <tests.include>br/com/aluguelcarros/ConjuntoSemAnalise.java</tests.include>
+                <tests.include>br/com/aluguelcarros/SuiteSemAnalise.java</tests.include>
                 <tests.required>true</tests.required>
-                <experiment.test>br.com.aluguelcarros.ConjuntoSemAnalise</experiment.test>
+                <experiment.test>br.com.aluguelcarros.SuiteSemAnalise</experiment.test>
                 <experiment.target>br.com.aluguelcarros.CalculadoraCustoLocacao</experiment.target>
                 <experiment.classes>br/com/aluguelcarros/CalculadoraCustoLocacao*.class</experiment.classes>
             </properties>
@@ -102,9 +102,9 @@
             <id>poquer-completa</id>
             <properties>
                 <test.group>poquer-completa</test.group>
-                <tests.include>br/com/poquer/ConjuntoCompleto.java</tests.include>
+                <tests.include>br/com/poquer/SuiteCompleta.java</tests.include>
                 <tests.required>true</tests.required>
-                <experiment.test>br.com.poquer.ConjuntoCompleto</experiment.test>
+                <experiment.test>br.com.poquer.SuiteCompleta</experiment.test>
                 <experiment.target>br.com.poquer.Mao</experiment.target>
                 <experiment.classes>br/com/poquer/Mao*.class</experiment.classes>
             </properties>
@@ -113,9 +113,9 @@
             <id>poquer-sem-codigo</id>
             <properties>
                 <test.group>poquer-sem-codigo</test.group>
-                <tests.include>br/com/poquer/ConjuntoSemCodigo.java</tests.include>
+                <tests.include>br/com/poquer/SuiteSemCodigo.java</tests.include>
                 <tests.required>true</tests.required>
-                <experiment.test>br.com.poquer.ConjuntoSemCodigo</experiment.test>
+                <experiment.test>br.com.poquer.SuiteSemCodigo</experiment.test>
                 <experiment.target>br.com.poquer.Mao</experiment.target>
                 <experiment.classes>br/com/poquer/Mao*.class</experiment.classes>
             </properties>
@@ -124,9 +124,9 @@
             <id>poquer-sem-especificacao</id>
             <properties>
                 <test.group>poquer-sem-especificacao</test.group>
-                <tests.include>br/com/poquer/ConjuntoSemEspecificacao.java</tests.include>
+                <tests.include>br/com/poquer/SuiteSemEspecificacao.java</tests.include>
                 <tests.required>true</tests.required>
-                <experiment.test>br.com.poquer.ConjuntoSemEspecificacao</experiment.test>
+                <experiment.test>br.com.poquer.SuiteSemEspecificacao</experiment.test>
                 <experiment.target>br.com.poquer.Mao</experiment.target>
                 <experiment.classes>br/com/poquer/Mao*.class</experiment.classes>
             </properties>
@@ -135,9 +135,9 @@
             <id>poquer-sem-analise</id>
             <properties>
                 <test.group>poquer-sem-analise</test.group>
-                <tests.include>br/com/poquer/ConjuntoSemAnalise.java</tests.include>
+                <tests.include>br/com/poquer/SuiteSemAnalise.java</tests.include>
                 <tests.required>true</tests.required>
-                <experiment.test>br.com.poquer.ConjuntoSemAnalise</experiment.test>
+                <experiment.test>br.com.poquer.SuiteSemAnalise</experiment.test>
                 <experiment.target>br.com.poquer.Mao</experiment.target>
                 <experiment.classes>br/com/poquer/Mao*.class</experiment.classes>
             </properties>
@@ -146,9 +146,9 @@
             <id>academico-completa</id>
             <properties>
                 <test.group>academico-completa</test.group>
-                <tests.include>br/com/academico/ConjuntoCompleto.java</tests.include>
+                <tests.include>br/com/academico/SuiteCompleta.java</tests.include>
                 <tests.required>true</tests.required>
-                <experiment.test>br.com.academico.ConjuntoCompleto</experiment.test>
+                <experiment.test>br.com.academico.SuiteCompleta</experiment.test>
                 <experiment.target>br.com.academico.ConsolidacaoParcial</experiment.target>
                 <experiment.classes>br/com/academico/ConsolidacaoParcial*.class</experiment.classes>
             </properties>
@@ -157,9 +157,9 @@
             <id>academico-sem-codigo</id>
             <properties>
                 <test.group>academico-sem-codigo</test.group>
-                <tests.include>br/com/academico/ConjuntoSemCodigo.java</tests.include>
+                <tests.include>br/com/academico/SuiteSemCodigo.java</tests.include>
                 <tests.required>true</tests.required>
-                <experiment.test>br.com.academico.ConjuntoSemCodigo</experiment.test>
+                <experiment.test>br.com.academico.SuiteSemCodigo</experiment.test>
                 <experiment.target>br.com.academico.ConsolidacaoParcial</experiment.target>
                 <experiment.classes>br/com/academico/ConsolidacaoParcial*.class</experiment.classes>
             </properties>
@@ -168,9 +168,9 @@
             <id>academico-sem-especificacao</id>
             <properties>
                 <test.group>academico-sem-especificacao</test.group>
-                <tests.include>br/com/academico/ConjuntoSemEspecificacao.java</tests.include>
+                <tests.include>br/com/academico/SuiteSemEspecificacao.java</tests.include>
                 <tests.required>true</tests.required>
-                <experiment.test>br.com.academico.ConjuntoSemEspecificacao</experiment.test>
+                <experiment.test>br.com.academico.SuiteSemEspecificacao</experiment.test>
                 <experiment.target>br.com.academico.ConsolidacaoParcial</experiment.target>
                 <experiment.classes>br/com/academico/ConsolidacaoParcial*.class</experiment.classes>
             </properties>
@@ -179,9 +179,9 @@
             <id>academico-sem-analise</id>
             <properties>
                 <test.group>academico-sem-analise</test.group>
-                <tests.include>br/com/academico/ConjuntoSemAnalise.java</tests.include>
+                <tests.include>br/com/academico/SuiteSemAnalise.java</tests.include>
                 <tests.required>true</tests.required>
-                <experiment.test>br.com.academico.ConjuntoSemAnalise</experiment.test>
+                <experiment.test>br.com.academico.SuiteSemAnalise</experiment.test>
                 <experiment.target>br.com.academico.ConsolidacaoParcial</experiment.target>
                 <experiment.classes>br/com/academico/ConsolidacaoParcial*.class</experiment.classes>
             </properties>

@@ -69,7 +69,7 @@ Entreguem uma versão cumulativa a cada semana.
 
 ## Execução e medição
 
-Usem JDK 17 e Maven ou o wrapper do projeto. O JDK 21 também pode executar a atividade. Cada pacote tem quatro arquivos em `src/test/java`, nos diretórios `br/com/aluguelcarros`, `br/com/poquer` e `br/com/academico`. Em cada diretório, preencham `ConjuntoCompleto.java`, `ConjuntoSemCodigo.java`, `ConjuntoSemEspecificacao.java` e `ConjuntoSemAnalise.java` com testes JUnit 5. As classes começam vazias. O Maven exige testes executáveis no perfil selecionado.
+Usem JDK 17 e Maven ou o wrapper do projeto. O JDK 21 também pode executar a atividade. Cada pacote tem quatro arquivos em `src/test/java`, nos diretórios `br/com/aluguelcarros`, `br/com/poquer` e `br/com/academico`. Em cada diretório, preencham `SuiteCompleta.java`, `SuiteSemCodigo.java`, `SuiteSemEspecificacao.java` e `SuiteSemAnalise.java` com testes JUnit 5. As classes começam vazias. O Maven exige testes executáveis no perfil selecionado.
 
 Para executar apenas uma suíte, por exemplo, usem `./mvnw -Paluguel-completa test`. Para medir as doze, executem os comandos abaixo separadamente, com uma condição por vez. No Windows, usem `mvnw.cmd`.
 

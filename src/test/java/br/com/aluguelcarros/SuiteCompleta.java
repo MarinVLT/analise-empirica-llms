@@ -1,5 +1,5 @@
 package br.com.aluguelcarros;
 
-class ConjuntoCompleto {
+class SuiteCompleta {
     // Adicione aqui os testes JUnit 5 da condição completa.
 }

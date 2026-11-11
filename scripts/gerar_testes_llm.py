@@ -52,6 +52,23 @@ def agora():
     return datetime.now(timezone.utc).isoformat()
 
 
+def codigo_sem_javadoc(codigo):
+    # Reconhece literais e comentários para preservar delimitadores dentro de strings.
+    elementos = re.compile(
+        r'"{3}(?:\\.|(?!"{3}).)*"{3}|"(?:\\.|[^"\\])*"|'
+        r"'(?:\\.|[^'\\])*'|//[^\r\n]*|/\*.*?\*/",
+        re.DOTALL,
+    )
+
+    def preservar(elemento):
+        trecho = elemento.group()
+        if trecho.startswith("/**"):
+            return "\n" * trecho.count("\n") or " "
+        return trecho
+
+    return elementos.sub(preservar, codigo)
+
+
 def preparar(analises, plano):
     prompts = {}
     fontes = {}
@@ -82,7 +99,8 @@ def preparar(analises, plano):
             caminho = arquivo.relative_to(RAIZ).as_posix()
             conteudo = arquivo.read_bytes()
             fontes[caminho] = sha256(conteudo)
-            codigos.append(f"`{caminho}`\n\n```java\n{conteudo.decode('utf-8').rstrip()}\n```")
+            codigo = codigo_sem_javadoc(conteudo.decode('utf-8')).rstrip()
+            codigos.append(f"`{caminho}`\n\n```java\n{codigo}\n```")
         if not codigos:
             raise ValueError(f"Nenhum fonte Java encontrado para {funcao}")
         blocos = {

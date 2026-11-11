@@ -12,7 +12,7 @@ No PowerShell, use `Copy-Item .env.example .env`. O Git ignora o `.env` local, e
 
 ### Testar o acesso e preparar os prompts
 
-Preencham os modelos de [aluguel](../analises/aluguel.md), [pôquer](../analises/poquer.md) e [acadêmico](../analises/academico.md). As orientações acima das tabelas descrevem o que colocar em cada coluna e são removidas na montagem do prompt. O script usa os modelos oficiais e os arquivos Java de produção para montar os demais blocos.
+Preencham os modelos de [aluguel](../analises/aluguel.md), [pôquer](../analises/poquer.md) e [acadêmico](../analises/academico.md). As orientações acima das tabelas descrevem o que colocar em cada coluna e são removidas na montagem do prompt. O script usa os modelos oficiais e os arquivos Java de produção para montar os demais blocos. O bloco Código é montado sem Javadoc em todas as condições que o incluem. Assim, Sem especificação omite o bloco Especificação e mantém o mesmo bloco Código da condição Completa.
 
 Por exemplo, uma linha de caixa-branca pode identificar a decisão de fidelidade `PRATA` em `calcularCustoLocacao`, descrever a avaliação em curto-circuito e pedir cobertura da concessão e da rejeição em cada condição avaliada. A linha fica no nível da decisão e da cobertura. A LLM escolhe os argumentos, calcula os totais esperados e escreve as asserções.
 

@@ -1,5 +1,5 @@
-package br.com.aluguelcarros;
+package br.com.poquer;
 
-class ConjuntoSemCodigo {
+class SuiteSemCodigo {
     // Adicione aqui os testes JUnit 5 da condição sem-codigo.
 }

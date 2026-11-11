@@ -1,6 +1,6 @@
 # Critérios de teste — academico
 
-> Orientação: Substituam todos os campos entre colchetes. Acrescentem uma linha por classe, fronteira, regra ou obrigação de cobertura. Se um critério não se aplicar, substituam sua tabela por uma justificativa breve.
+> Orientação: As linhas preenchidas usam um pedido fictício e servem para testar a montagem dos prompts. Substituam todas essas linhas pela análise da funcionalidade deste arquivo antes de preparar o plano oficial. Acrescentem uma linha por classe, fronteira, regra ou obrigação de cobertura. Se um critério não se aplicar, substituam sua tabela por uma justificativa breve.
 
 > Orientação: Registrem somente os critérios e seus resultados de análise. A LLM escolhe os valores de entrada para cada caso, determina o resultado esperado e escreve os testes JUnit.
 
@@ -14,7 +14,7 @@
 
 | Parâmetro ou regra | Classe de equivalência | Domínio ou condição |
 |---|---|---|
-| [parâmetro ou regra] | [nome e validade da classe] | [faixa ou propriedade que define a classe] |
+| Quantidade de itens | Faixa válida | Inteiros de 1 a 10 |
 
 #### Valores-limite
 
@@ -22,7 +22,7 @@
 
 | Parâmetro ou regra | Valor-limite | Classes separadas e inclusão do limite |
 |---|---|---|
-| [parâmetro ou regra] | [valor da fronteira] | [classes de cada lado e classe do limite] |
+| Quantidade de itens | 10 | Até 10 é válido. Acima de 10 é inválido. |
 
 #### Tabela de decisão
 
@@ -30,7 +30,7 @@
 
 | Regra | Combinação de condições | Ação prevista na especificação |
 |---|---|---|
-| [identificador da regra] | [condições e estados aplicáveis] | [ação geral] |
+| DEMO-01 | Quantidade válida e cadastro ativo | Aceitar o pedido |
 
 ### Análise caixa-branca do grupo
 
@@ -38,4 +38,4 @@
 
 | Método ou trecho | Decisão, condição ou caminho | Obrigação de cobertura |
 |---|---|---|
-| [método ou referência ao trecho] | [descrição estrutural] | [resultados, ramos ou caminhos a exercitar] |
+| `validarPedido`, checagem do limite máximo | A decisão verifica se a quantidade excede o limite. | Exercitar os resultados verdadeiro e falso da decisão. |

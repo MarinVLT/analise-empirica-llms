@@ -43,6 +43,17 @@ São **quatro suítes por funcionalidade, totalizando doze**. Cada prompt gera s
 4. **Enviem os prompts.** O script usa o **GPT-OSS 120B pela API da Groq no plano Free**. Nesse contexto, a API da Groq é o serviço que recebe o prompt pelo script e devolve a resposta do modelo. O script envia um prompt de cada vez, sem histórico de outras chamadas, e guarda a resposta original. Sigam o [guia de consulta e reprodução](docs/consulta-llm.md).
 5. **Executem e revisem os testes.** Transcrevam o Java gerado para a classe JUnit 5 do perfil correspondente e rodem o Maven. Registrem os ajustes mínimos de compilação e integração. Confiram os resultados esperados pela especificação e expliquem correções ou exclusões, preservando a resposta original. Apliquem a mesma política nas quatro condições e mantenham fixo o código de produção.
 
+### Experimentar a montagem dos prompts
+
+Os arquivos em `analises/` já vêm com linhas de demonstração sobre um pedido fictício. Para montar e verificar os 12 prompts localmente, usem:
+
+```sh
+python3 scripts/gerar_testes_llm.py preparar --plano target/plano-llm-demo
+python3 scripts/gerar_testes_llm.py verificar --plano target/plano-llm-demo
+```
+
+Esses comandos funcionam sem chave e sem chamada à Groq. Antes da geração oficial, substituam as linhas fictícias pelas análises das três funcionalidades e usem `preparar` sem `--plano` para criar `plano-llm/`.
+
 ## Transparência, auditoria e reprodução
 
 LLMs podem produzir respostas diferentes para o mesmo prompt, mesmo com o mesmo modelo e os mesmos parâmetros. A reprodução mínima consiste em repetir o procedimento de consulta e em executar as suítes entregues a partir das evidências originais. Guardem o prompt exato, o corpo completo da requisição enviada à API, a resposta bruta e o registro de cada consulta para que o avaliador possa conferir a origem dos testes e os ajustes realizados.
@@ -107,9 +118,3 @@ A referência externa do EvoSuite será fornecida separadamente pelo docente. Us
 - Entreguem o projeto Maven. Preencham o [modelo de relatório](relatorio-llm.md) na raiz do projeto com todas as respostas, análises e justificativas, incluindo identificação, ambiente, comandos, as análises caixa-preta e caixa-branca das três funcionalidades, tabela comparativa e discussão. Mantenham o código das doze suítes em `src/test/java` e referenciem as evidências por links relativos no relatório.
 - Em cada pasta `evidencias/<perfil>/`, copiem o [modelo de registro](docs/modelos/registro.md) como `registro.md` e preservem os nomes de arquivos indicados no modelo. Entreguem o manifesto, os arquivos automáticos da API, os relatórios de teste e o histórico de ajustes. Excluam segredos e dados pessoais dos registros.
 - Na correção serão considerados a qualidade das análises caixa-preta e caixa-branca, a fidelidade ao protocolo e a rastreabilidade, a correção e execução dos testes e a interpretação das métricas e dos test smells. Demonstrem a contribuição do grupo com a análise produzida antes da IA e a crítica dos testes após a geração.
-
-## Adaptações dos materiais de origem
-
-O material de pôquer descreve a classificação das mãos e não nomeia o resultado residual. Neste projeto ele se chama `CARTA_ALTA`. O contrato público também explicita a validação de cartas e mãos.
-
-O exercício acadêmico menciona `academic.jar` e `academic-buggy.jar`. Os binários não acompanham este projeto. A versão em código-fonte segue as regras e a assinatura do exercício e explicita decisões locais sobre arredondamento e entradas inválidas no contrato. Use a frequência percentual já calculada sobre a base aplicável. A tarefa mede mutantes gerados pelo PIT a partir dessa implementação.

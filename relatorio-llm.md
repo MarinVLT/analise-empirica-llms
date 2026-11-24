@@ -4,7 +4,7 @@ Substituam os campos entre colchetes. Preservem os títulos, os nomes dos perfis
 
 ## Identificação e ambiente
 
-- Integrantes: [nomes completos da dupla ou trio]
+- Integrantes: Marina Vitoria de Lima Torres, Arthur Madureira
 - artifactId: [valor no pom.xml]
 - Java: [versão]
 - Maven: [versão]

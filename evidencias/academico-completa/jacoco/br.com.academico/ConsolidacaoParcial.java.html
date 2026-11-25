@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="pt"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ConsolidacaoParcial.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">MarinaTorres-ArthurMadureira</a> &gt; <a href="index.source.html" class="el_package">br.com.academico</a> &gt; <span class="el_source">ConsolidacaoParcial.java</span></div><h1>ConsolidacaoParcial.java</h1><pre class="source lang-java linenums">package br.com.academico;
+
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.util.Objects;
+
+<span class="nc" id="L7">public class ConsolidacaoParcial {</span>
+    /**
+     * Determina a situação acadêmica parcial com base nas notas e na frequência.
+     * As notas e a média são arredondadas para uma casa decimal com arredondamento
+     * de metade para cima antes da aplicação das regras de aprovação.
+     *
+     * @param nota1 nota da primeira unidade, entre 0 e 10
+     * @param nota2 nota da segunda unidade, entre 0 e 10
+     * @param nota3 nota da terceira unidade, entre 0 e 10
+     * @param frequencia frequência percentual inteira, entre 0 e 100
+     * @return situação acadêmica após a consolidação parcial
+     * @throws NullPointerException se algum argumento for nulo
+     * @throws IllegalArgumentException se uma nota for não finita ou algum valor estiver fora da faixa
+     */
+    public static SituacaoAcademica consolidarParcialmente(
+            Float nota1, Float nota2, Float nota3, Integer frequencia) {
+<span class="fc" id="L23">        Objects.requireNonNull(frequencia, &quot;frequencia&quot;);</span>
+<span class="fc bfc" id="L24" title="All 4 branches covered.">        if (frequencia &lt; 0 || frequencia &gt; 100) {</span>
+<span class="fc" id="L25">            throw new IllegalArgumentException(&quot;Frequência deve estar entre 0 e 100&quot;);</span>
+        }
+
+<span class="fc" id="L28">        BigDecimal primeira = arredondarNota(nota1);</span>
+<span class="fc" id="L29">        BigDecimal segunda = arredondarNota(nota2);</span>
+<span class="fc" id="L30">        BigDecimal terceira = arredondarNota(nota3);</span>
+<span class="fc" id="L31">        BigDecimal media = primeira.add(segunda).add(terceira)</span>
+<span class="fc" id="L32">                .divide(BigDecimal.valueOf(3), 1, RoundingMode.HALF_UP);</span>
+
+<span class="fc bfc" id="L34" title="All 2 branches covered.">        if (media.compareTo(BigDecimal.valueOf(3)) &lt; 0) {</span>
+<span class="fc bfc" id="L35" title="All 2 branches covered.">            return frequencia &lt; 75 ? SituacaoAcademica.REMF : SituacaoAcademica.REP;</span>
+        }
+<span class="fc bfc" id="L37" title="All 2 branches covered.">        if (frequencia &lt; 75) {</span>
+<span class="fc" id="L38">            return SituacaoAcademica.REPF;</span>
+        }
+<span class="fc bfc" id="L40" title="All 2 branches covered.">        if (media.compareTo(BigDecimal.valueOf(7)) &gt;= 0) {</span>
+<span class="fc" id="L41">            return SituacaoAcademica.APR;</span>
+        }
+<span class="fc" id="L43">        BigDecimal menorNota = primeira.min(segunda).min(terceira);</span>
+<span class="fc bfc" id="L44" title="All 4 branches covered.">        if (media.compareTo(BigDecimal.valueOf(5)) &gt;= 0 &amp;&amp; menorNota.compareTo(BigDecimal.valueOf(3)) &gt;= 0) {</span>
+<span class="fc" id="L45">            return SituacaoAcademica.APRN;</span>
+        }
+<span class="fc" id="L47">        return SituacaoAcademica.REC;</span>
+    }
+
+    private static BigDecimal arredondarNota(Float nota) {
+<span class="fc" id="L51">        Objects.requireNonNull(nota, &quot;nota&quot;);</span>
+<span class="fc bfc" id="L52" title="All 6 branches covered.">        if (!Float.isFinite(nota) || nota &lt; 0 || nota &gt; 10) {</span>
+<span class="fc" id="L53">            throw new IllegalArgumentException(&quot;Nota deve ser finita e estar entre 0 e 10&quot;);</span>
+        }
+<span class="fc" id="L55">        return new BigDecimal(nota.toString()).setScale(1, RoundingMode.HALF_UP);</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

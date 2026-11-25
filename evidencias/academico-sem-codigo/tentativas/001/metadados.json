@@ -1,0 +1,45 @@
+{
+  "perfil": "academico-sem-codigo",
+  "tentativa": 1,
+  "inicio_utc": "2026-11-24T22:15:38.990252+00:00",
+  "endpoint": "https://api.groq.com/openai/v1/chat/completions",
+  "requisicao_sha256": "31dffca12587999968465aab6075caeef014861e011d513d6568deb7b9d68e40",
+  "cabecalhos_requisicao": {
+    "Content-Type": "application/json",
+    "User-Agent": "analise-empirica-testes-llms/1.0"
+  },
+  "evidencia": "academico-sem-codigo/tentativas/001",
+  "http": 200,
+  "cabecalhos": {
+    "date": "Tue, 24 Nov 2026 22:16:37 GMT",
+    "content-type": "application/json",
+    "x-ratelimit-limit-requests": "1000",
+    "x-ratelimit-limit-tokens": "8000",
+    "x-ratelimit-remaining-requests": "988",
+    "x-ratelimit-remaining-tokens": "1871",
+    "x-ratelimit-reset-requests": "17m16.8s",
+    "x-ratelimit-reset-tokens": "45.967s",
+    "x-request-id": "req_01m87t3hs0e2cax3sydtw0abv5"
+  },
+  "credencial_omitida": false,
+  "resposta_sha256": "46f74332957c0f4aef055ec7212a0d863b164058b4338432f4f1ab12ddb3897b",
+  "id_resposta": "chatcmpl-040bc168-bc70-4d00-901e-a3214346ee17",
+  "modelo_retornado": "openai/gpt-oss-120b",
+  "system_fingerprint": "fp_4727af4560",
+  "uso": {
+    "queue_time": 0.310812816,
+    "prompt_tokens": 2304,
+    "prompt_time": 0.094339423,
+    "completion_tokens": 3214,
+    "completion_time": 6.614393001,
+    "total_tokens": 5518,
+    "total_time": 6.708732424,
+    "completion_tokens_details": {
+      "reasoning_tokens": 70
+    }
+  },
+  "motivo_termino": "stop",
+  "estado": "ok",
+  "fim_utc": "2026-11-24T22:16:37.172182+00:00",
+  "duracao_s": 58.172
+}

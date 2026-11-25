@@ -1,0 +1,45 @@
+{
+  "perfil": "poquer-sem-especificacao",
+  "tentativa": 1,
+  "inicio_utc": "2026-11-24T22:12:51.366310+00:00",
+  "endpoint": "https://api.groq.com/openai/v1/chat/completions",
+  "requisicao_sha256": "7535eca23e830792119a3ca5802a9f84dc27423809f3e07422fc092fdf342337",
+  "cabecalhos_requisicao": {
+    "Content-Type": "application/json",
+    "User-Agent": "analise-empirica-testes-llms/1.0"
+  },
+  "evidencia": "poquer-sem-especificacao/tentativas/001",
+  "http": 200,
+  "cabecalhos": {
+    "date": "Tue, 24 Nov 2026 22:13:51 GMT",
+    "content-type": "application/json",
+    "x-ratelimit-limit-requests": "1000",
+    "x-ratelimit-limit-tokens": "8000",
+    "x-ratelimit-remaining-requests": "991",
+    "x-ratelimit-remaining-tokens": "718",
+    "x-ratelimit-reset-requests": "12m57.599s",
+    "x-ratelimit-reset-tokens": "54.615s",
+    "x-request-id": "req_01m87syhgzev3vwzb9r9vqej01"
+  },
+  "credencial_omitida": false,
+  "resposta_sha256": "15631ab947ffafdb3233d2b5627efa1a3f949471062bf32f74fe44a2ed22ad81",
+  "id_resposta": "chatcmpl-f35c389e-97f9-40a7-90ce-9cdea50bcd76",
+  "modelo_retornado": "openai/gpt-oss-120b",
+  "system_fingerprint": "fp_e1a78f200e",
+  "uso": {
+    "queue_time": 0.209279956,
+    "prompt_tokens": 3457,
+    "prompt_time": 0.146756713,
+    "completion_tokens": 2257,
+    "completion_time": 4.722233929,
+    "total_tokens": 5714,
+    "total_time": 4.868990642,
+    "completion_tokens_details": {
+      "reasoning_tokens": 70
+    }
+  },
+  "motivo_termino": "stop",
+  "estado": "ok",
+  "fim_utc": "2026-11-24T22:13:51.149862+00:00",
+  "duracao_s": 59.781
+}

@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="pt"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Mao.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">MarinaTorres-ArthurMadureira</a> &gt; <a href="index.source.html" class="el_package">br.com.poquer</a> &gt; <span class="el_source">Mao.java</span></div><h1>Mao.java</h1><pre class="source lang-java linenums">package br.com.poquer;
+
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
+public class Mao {
+    private final List&lt;ValorCarta&gt; valores;
+    private final List&lt;Naipe&gt; naipes;
+
+<span class="fc" id="L12">    public Mao(List&lt;ValorCarta&gt; valores, List&lt;Naipe&gt; naipes) {</span>
+<span class="fc" id="L13">        this.valores = List.copyOf(valores);</span>
+<span class="fc" id="L14">        this.naipes = List.copyOf(naipes);</span>
+<span class="pc bpc" id="L15" title="1 of 4 branches missed.">        if (this.valores.size() != 5 || this.naipes.size() != 5) {</span>
+<span class="fc" id="L16">            throw new IllegalArgumentException(&quot;Uma mão deve conter cinco valores e cinco naipes&quot;);</span>
+        }
+
+<span class="fc" id="L19">        Set&lt;Map.Entry&lt;ValorCarta, Naipe&gt;&gt; cartasDistintas = new HashSet&lt;&gt;();</span>
+<span class="fc bfc" id="L20" title="All 2 branches covered.">        for (int indice = 0; indice &lt; this.valores.size(); indice++) {</span>
+<span class="fc bfc" id="L21" title="All 2 branches covered.">            if (!cartasDistintas.add(Map.entry(this.valores.get(indice), this.naipes.get(indice)))) {</span>
+<span class="fc" id="L22">                throw new IllegalArgumentException(&quot;Uma mão deve conter cinco cartas distintas&quot;);</span>
+            }
+        }
+<span class="fc" id="L25">    }</span>
+
+    /**
+     * Determina a classificação de maior prioridade para as cinco cartas da mão.
+     * A ordem das cartas não altera o resultado. O ás pode iniciar a sequência
+     * mais baixa ou terminar a sequência mais alta.
+     *
+     * @return classificação da mão de pôquer
+     */
+    public ClassificacaoMao classificar() {
+<span class="fc" id="L35">        List&lt;Integer&gt; valoresOrdenados = valores.stream()</span>
+<span class="fc" id="L36">                .map(ValorCarta::numero).distinct().sorted().toList();</span>
+<span class="fc" id="L37">        boolean sequenciaAltaComAs = valoresOrdenados.equals(List.of(1, 10, 11, 12, 13));</span>
+<span class="fc bfc" id="L38" title="All 2 branches covered.">        boolean sequencia = sequenciaAltaComAs</span>
+<span class="fc bfc" id="L39" title="All 4 branches covered.">                || (valoresOrdenados.size() == 5 &amp;&amp; valoresOrdenados.get(4) - valoresOrdenados.get(0) == 4);</span>
+<span class="fc bfc" id="L40" title="All 2 branches covered.">        boolean mesmoNaipe = naipes.stream().allMatch(naipe -&gt; naipe == naipes.get(0));</span>
+
+<span class="fc" id="L42">        int[] frequencias = new int[14];</span>
+<span class="fc bfc" id="L43" title="All 2 branches covered.">        for (ValorCarta valor : valores) {</span>
+<span class="fc" id="L44">            frequencias[valor.numero()]++;</span>
+<span class="fc" id="L45">        }</span>
+<span class="fc" id="L46">        int pares = 0;</span>
+<span class="fc" id="L47">        int maiorFrequencia = 0;</span>
+<span class="fc bfc" id="L48" title="All 2 branches covered.">        for (int frequencia : frequencias) {</span>
+<span class="fc bfc" id="L49" title="All 2 branches covered.">            if (frequencia == 2) {</span>
+<span class="fc" id="L50">                pares++;</span>
+            }
+<span class="fc" id="L52">            maiorFrequencia = Math.max(maiorFrequencia, frequencia);</span>
+        }
+
+<span class="fc bfc" id="L55" title="All 4 branches covered.">        if (mesmoNaipe &amp;&amp; sequenciaAltaComAs) {</span>
+<span class="fc" id="L56">            return ClassificacaoMao.SEQUENCIA_REAL_DO_MESMO_NAIPE;</span>
+        }
+<span class="fc bfc" id="L58" title="All 4 branches covered.">        if (mesmoNaipe &amp;&amp; sequencia) {</span>
+<span class="fc" id="L59">            return ClassificacaoMao.SEQUENCIA_DO_MESMO_NAIPE;</span>
+        }
+<span class="fc bfc" id="L61" title="All 2 branches covered.">        if (maiorFrequencia == 4) {</span>
+<span class="fc" id="L62">            return ClassificacaoMao.QUADRA;</span>
+        }
+<span class="fc bfc" id="L64" title="All 4 branches covered.">        if (maiorFrequencia == 3 &amp;&amp; pares == 1) {</span>
+<span class="fc" id="L65">            return ClassificacaoMao.TRINCA_E_PAR;</span>
+        }
+<span class="fc bfc" id="L67" title="All 2 branches covered.">        if (mesmoNaipe) {</span>
+<span class="fc" id="L68">            return ClassificacaoMao.CINCO_DO_MESMO_NAIPE;</span>
+        }
+<span class="fc bfc" id="L70" title="All 2 branches covered.">        if (sequencia) {</span>
+<span class="fc" id="L71">            return ClassificacaoMao.SEQUENCIA;</span>
+        }
+<span class="fc bfc" id="L73" title="All 2 branches covered.">        if (maiorFrequencia == 3) {</span>
+<span class="fc" id="L74">            return ClassificacaoMao.TRINCA;</span>
+        }
+<span class="fc bfc" id="L76" title="All 2 branches covered.">        if (pares == 2) {</span>
+<span class="fc" id="L77">            return ClassificacaoMao.DOIS_PARES;</span>
+        }
+<span class="fc bfc" id="L79" title="All 2 branches covered.">        if (pares == 1) {</span>
+<span class="fc" id="L80">            return ClassificacaoMao.UM_PAR;</span>
+        }
+<span class="fc" id="L82">        return ClassificacaoMao.CARTA_ALTA;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

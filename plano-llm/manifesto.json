@@ -1,0 +1,58 @@
+{
+  "criado_em_utc": "2026-11-24T22:07:44.379793+00:00",
+  "endpoint": "https://api.groq.com/openai/v1/chat/completions",
+  "parametros": {
+    "model": "openai/gpt-oss-120b",
+    "temperature": 0,
+    "max_completion_tokens": 8192,
+    "reasoning_effort": "low",
+    "stream": false
+  },
+  "script_sha256": "c7a3a0cc768f8e6e8e9a36896174372d6855d52d2b267305492ffeab20c8d857",
+  "ordem": [
+    "aluguel-completa",
+    "aluguel-sem-codigo",
+    "aluguel-sem-especificacao",
+    "aluguel-sem-analise",
+    "poquer-completa",
+    "poquer-sem-codigo",
+    "poquer-sem-especificacao",
+    "poquer-sem-analise",
+    "academico-completa",
+    "academico-sem-codigo",
+    "academico-sem-especificacao",
+    "academico-sem-analise"
+  ],
+  "prompts_sha256": {
+    "aluguel-completa": "5696bf0ba1e8c94fd54e21e01015969f386d106a4a49e962fd9fe1570af77188",
+    "aluguel-sem-codigo": "f21a25fa80851411ac745f298b1524b79c5a2e0e147eb5f0dde7fe7fe79df062",
+    "aluguel-sem-especificacao": "784c3a19073a3a543ad07781a58f50d53434039a3d42bcbff767273c773f1dfc",
+    "aluguel-sem-analise": "575e39df2a6419058c4bdae2f16890b61fcc41deafa205242ac7cdee4ac91da5",
+    "poquer-completa": "80c6a2394f1aa443cdc933ac0f872c097375ef59d6ced4a61a1c4782228b5f03",
+    "poquer-sem-codigo": "c95269a620dca93a5cbc514198f02c394924c4847f1a57f7c160c54a894ee1a2",
+    "poquer-sem-especificacao": "3be6c817428acab862ff848d4a5cf9b40a29f8e8f1ce355d15f015b5966825a2",
+    "poquer-sem-analise": "120976158ff869fc9c649906ce7a55924715ea5619d5a6d218c0770f17bbdc25",
+    "academico-completa": "83d1a310bfa6819953f508dc07f5163b766391bb6dc8e8255d735af2f9d44b99",
+    "academico-sem-codigo": "3bc52280a690044dd0ddfd87a76137ca11a6be6260f535dbc36d8f299d8b7283",
+    "academico-sem-especificacao": "d4e2d4c2f07e6c940301efbb27f9456ef1591e6c722dc79ef2e93fdc7e55cdbd",
+    "academico-sem-analise": "84f59a5f289b90a6a0993872a1c24f154e3586c5a5612c33116d0b13bf63162a"
+  },
+  "fontes_sha256": {
+    "docs/aluguel/prompt-ablação-template.md": "b9fee1736cd8bdcbe3e577cda117ff64793309526eb2390da1da9ff05a2ad537",
+    "analises/aluguel.md": "c693b5c480c6ad2771ab97b6c7be9fbd06508ed36df8eecc5196a0b2a13d10d7",
+    "src/main/java/br/com/aluguelcarros/CalculadoraCustoLocacao.java": "0cf9ed5601b5b65f3e4628fca4ea866669de19a2ec5562bf67c360069378ae70",
+    "src/main/java/br/com/aluguelcarros/CategoriaVeiculo.java": "797c5bdcecf1a8168e7a992c50e5b3479509b355497f0d2e16beb296c76e49bd",
+    "src/main/java/br/com/aluguelcarros/NivelCliente.java": "33a9e096da23282ce3cbaa0ce99888a9e431b84e4cc1398cdc36d56c85c15b67",
+    "src/main/java/br/com/aluguelcarros/TipoSeguro.java": "56b073842452f87447a866e063a4a2954487e5d612604a1122323ce43ab0a157",
+    "docs/poquer/prompt-ablação-template.md": "0aa791be095267e1ada26c9699ca7cedcdf297da3fa9f1df48cfb59d31c06fbc",
+    "analises/poquer.md": "49dcca862d8ac1b5415d430722f6e0b79f53c5eacf47cfd5145ce519f8b98c41",
+    "src/main/java/br/com/poquer/ClassificacaoMao.java": "6694406c24c6fca524f899b3d75419f0b8b713d442955edd81c8617eeff13154",
+    "src/main/java/br/com/poquer/Mao.java": "20948c42da942ae7a9c7e07fc62a90ddd02687d5e13e47fb728f90ab01bff1ff",
+    "src/main/java/br/com/poquer/Naipe.java": "ecf2cb02ef78eab67ccb44a249a992765c2bc9116f689d0b0b6259fecc23e32d",
+    "src/main/java/br/com/poquer/ValorCarta.java": "4395822100a3c7d53fa4958ef074aff2cdd38e3fac95213c18d66f958dc43651",
+    "docs/academico/prompt-ablação-template.md": "f62382c6c4a7a69e713ebdd63aa10ae4970c30445d8eff27fd661a64f016323b",
+    "analises/academico.md": "73532a33e0c50bfb91e0e081f6ba107818eb2cacc3f3fe1df140d118c32de9ce",
+    "src/main/java/br/com/academico/ConsolidacaoParcial.java": "f13d542cfa13f843e2c00b59cd13dd1e72068ac9f6a513dbf9944a67070c6154",
+    "src/main/java/br/com/academico/SituacaoAcademica.java": "428ec9a5a64d8a4206c762a2da6f38bc656c865e17cf5495ae99db8fb6ab26ac"
+  }
+}

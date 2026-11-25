@@ -1,5 +1,290 @@
 package br.com.academico;
 
+import br.com.academico.ConsolidacaoParcial;
+import br.com.academico.SituacaoAcademica;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Nested;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
+
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+
+import static org.junit.jupiter.api.Assertions.*;
+
 class SuiteSemCodigo {
-    // Adicione aqui os testes JUnit 5 da condição sem-codigo.
+
+    /* ---------- Helper to compute rounded values like the implementation ---------- */
+    private static Float roundHalfUp(Float value) {
+        return new BigDecimal(value.toString())
+                .setScale(1, RoundingMode.HALF_UP)
+                .floatValue();
+    }
+
+    /* ---------- Invalid argument tests ---------- */
+    @Nested
+    @DisplayName("Validação de argumentos")
+    class InvalidArguments {
+
+        @Test
+        @DisplayName("Nota nula na primeira posição lança NullPointerException")
+        void nullFirstNote() {
+            assertThrows(NullPointerException.class,
+                    () -> ConsolidacaoParcial.consolidarParcialmente(null, 5f, 5f, 80));
+        }
+
+        @Test
+        @DisplayName("Nota nula na segunda posição lança NullPointerException")
+        void nullSecondNote() {
+            assertThrows(NullPointerException.class,
+                    () -> ConsolidacaoParcial.consolidarParcialmente(5f, null, 5f, 80));
+        }
+
+        @Test
+        @DisplayName("Nota nula na terceira posição lança NullPointerException")
+        void nullThirdNote() {
+            assertThrows(NullPointerException.class,
+                    () -> ConsolidacaoParcial.consolidarParcialmente(5f, 5f, null, 80));
+        }
+
+        @Test
+        @DisplayName("Frequência nula lança NullPointerException")
+        void nullFrequency() {
+            assertThrows(NullPointerException.class,
+                    () -> ConsolidacaoParcial.consolidarParcialmente(5f, 5f, 5f, null));
+        }
+
+        @ParameterizedTest(name = "Nota fora do domínio {0}")
+        @CsvSource({
+                "-0.1,5,5,80",
+                "0, -0.5,5,80",
+                "0,5,-1,80",
+                "11,5,5,80",
+                "5,10.5,5,80",
+                "5,5,15,80"
+        })
+        @DisplayName("Nota fora do intervalo [0,10] lança IllegalArgumentException")
+        void noteOutOfRange(Float n1, Float n2, Float n3, Integer freq) {
+            assertThrows(IllegalArgumentException.class,
+                    () -> ConsolidacaoParcial.consolidarParcialmente(n1, n2, n3, freq));
+        }
+
+        @ParameterizedTest(name = "Nota não finita {0}")
+        @CsvSource({
+                "NaN,5,5,80",
+                "5,Infinity,5,80",
+                "5,5,-Infinity,80"
+        })
+        @DisplayName("Nota não finita lança IllegalArgumentException")
+        void noteNotFinite(Float n1, Float n2, Float n3, Integer freq) {
+            assertThrows(IllegalArgumentException.class,
+                    () -> ConsolidacaoParcial.consolidarParcialmente(n1, n2, n3, freq));
+        }
+
+        @ParameterizedTest(name = "Frequência fora do intervalo {0}")
+        @CsvSource({
+                "-1,5,5,5",
+                "101,5,5,5"
+        })
+        @DisplayName("Frequência fora do intervalo [0,100] lança IllegalArgumentException")
+        void frequencyOutOfRange(Integer freq, Float n1, Float n2, Float n3) {
+            assertThrows(IllegalArgumentException.class,
+                    () -> ConsolidacaoParcial.consolidarParcialmente(n1, n2, n3, freq));
+        }
+    }
+
+    /* ---------- Boundary and rounding tests ---------- */
+    @Nested
+    @DisplayName("Cálculo de média e arredondamento")
+    class RoundingAndBoundary {
+
+        @Test
+        @DisplayName("Arredondamento HALF_UP para notas 2,345 -> 2,3 e 2,355 -> 2,4")
+        void roundingHalfUp() {
+            Float n1 = 2.345f;
+            Float n2 = 2.355f;
+            Float n3 = 2.350f;
+            Float f1 = roundHalfUp(n1);
+            Float f2 = roundHalfUp(n2);
+            Float f3 = roundHalfUp(n3);
+            assertEquals(2.3f, f1);
+            assertEquals(2.4f, f2);
+            assertEquals(2.4f, f3);
+        }
+
+        @Test
+        @DisplayName("Média arredondada exatamente no limite 3,0")
+        void mediaExactlyThree() {
+            // notas que dão média 2,95 antes do arredondamento -> 3,0 depois
+            Float n1 = 2.95f;
+            Float n2 = 3.05f;
+            Float n3 = 3.0f;
+            SituacaoAcademica situacao = ConsolidacaoParcial.consolidarParcialmente(n1, n2, n3, 80);
+            // frequência >=75 e média >=3 => REC (porque média <5)
+            assertEquals(SituacaoAcademica.REC, situacao);
+        }
+
+        @Test
+        @DisplayName("Média arredondada exatamente no limite 5,0")
+        void mediaExactlyFive() {
+            // notas que dão média 5,0 após arredondamento
+            Float n1 = 5.0f;
+            Float n2 = 5.0f;
+            Float n3 = 5.0f;
+            SituacaoAcademica situacao = ConsolidacaoParcial.consolidarParcialmente(n1, n2, n3, 80);
+            // frequência >=75, média >=5 e <7, todas notas >=3 => APRN
+            assertEquals(SituacaoAcademica.APRN, situacao);
+        }
+
+        @Test
+        @DisplayName("Média arredondada exatamente no limite 7,0")
+        void mediaExactlySeven() {
+            Float n1 = 7.0f;
+            Float n2 = 7.0f;
+            Float n3 = 7.0f;
+            SituacaoAcademica situacao = ConsolidacaoParcial.consolidarParcialmente(n1, n2, n3, 80);
+            // frequência >=75 e média >=7 => APR
+            assertEquals(SituacaoAcademica.APR, situacao);
+        }
+    }
+
+    /* ---------- Decision table tests ---------- */
+    @Nested
+    @DisplayName("Tabela de decisão")
+    class DecisionTable {
+
+        @ParameterizedTest(name = "FREQ<75, MEDIA<3 => REMF")
+        @CsvSource({
+                "2.0,2.0,2.0,70",   // média 2,0
+                "2.9,2.9,2.9,74"    // média 2,9
+        })
+        void aca01_REMF(Float n1, Float n2, Float n3, Integer freq) {
+            assertEquals(SituacaoAcademica.REMF,
+                    ConsolidacaoParcial.consolidarParcialmente(n1, n2, n3, freq));
+        }
+
+        @ParameterizedTest(name = "FREQ<75, 3<=MEDIA<5 => REPF")
+        @CsvSource({
+                "3.0,3.0,3.0,70",   // média 3,0
+                "4.9,4.9,4.9,74"    // média 4,9
+        })
+        void aca02_REPF_Media3to5(Float n1, Float n2, Float n3, Integer freq) {
+            assertEquals(SituacaoAcademica.REPF,
+                    ConsolidacaoParcial.consolidarParcialmente(n1, n2, n3, freq));
+        }
+
+        @ParameterizedTest(name = "FREQ<75, 5<=MEDIA<7 => REPF")
+        @CsvSource({
+                "5.0,5.0,5.0,70",   // média 5,0
+                "6.9,6.9,6.9,74"    // média 6,9
+        })
+        void aca03_REPF_Media5to7(Float n1, Float n2, Float n3, Integer freq) {
+            assertEquals(SituacaoAcademica.REPF,
+                    ConsolidacaoParcial.consolidarParcialmente(n1, n2, n3, freq));
+        }
+
+        @ParameterizedTest(name = "FREQ<75, MEDIA>=7 => REPF")
+        @CsvSource({
+                "7.0,7.0,7.0,70",
+                "9.5,9.5,9.5,74"
+        })
+        void aca04_REPF_Media7plus(Float n1, Float n2, Float n3, Integer freq) {
+            assertEquals(SituacaoAcademica.REPF,
+                    ConsolidacaoParcial.consolidarParcialmente(n1, n2, n3, freq));
+        }
+
+        @Test
+        @DisplayName("FREQ>=75, MEDIA<3 => REP")
+        void aca05_REP() {
+            assertEquals(SituacaoAcademica.REP,
+                    ConsolidacaoParcial.consolidarParcialmente(2.0f, 2.0f, 2.0f, 80));
+        }
+
+        @ParameterizedTest(name = "FREQ>=75, 3<=MEDIA<5 => REC")
+        @CsvSource({
+                "3.0,3.0,3.0,80",
+                "4.9,4.9,4.9,90"
+        })
+        void aca06_REC_Media3to5(Float n1, Float n2, Float n3, Integer freq) {
+            assertEquals(SituacaoAcademica.REC,
+                    ConsolidacaoParcial.consolidarParcialmente(n1, n2, n3, freq));
+        }
+
+        @Test
+        @DisplayName("ACA-07: FREQ>=75, 5<=MEDIA<7, alguma nota <3 => REC")
+        void aca07_REC_NotaBelow3() {
+            // notas: 2.9 (abaixo de 3), 5.5, 5.5 -> média 4,6 arredondada 4,6 (mas queremos média >=5)
+            // Ajustamos para que média fique >=5 após arredondamento:
+            Float n1 = 2.9f; // will round to 2.9
+            Float n2 = 6.0f;
+            Float n3 = 6.0f; // média = (2.9+6+6)/3 = 4.966... -> 5.0 após rounding
+            assertEquals(SituacaoAcademica.REC,
+                    ConsolidacaoParcial.consolidarParcialmente(n1, n2, n3, 80));
+        }
+
+        @Test
+        @DisplayName("ACA-08: FREQ>=75, 5<=MEDIA<7, todas notas >=3 => APRN")
+        void aca08_APRN_AllNotesAbove3() {
+            assertEquals(SituacaoAcademica.APRN,
+                    ConsolidacaoParcial.consolidarParcialmente(5.0f, 5.0f, 5.0f, 80));
+        }
+
+        @Test
+        @DisplayName("ACA-09: FREQ>=75, MEDIA>=7 => APR")
+        void aca09_APR() {
+            assertEquals(SituacaoAcademica.APR,
+                    ConsolidacaoParcial.consolidarParcialmente(7.0f, 8.0f, 9.0f, 85));
+        }
+    }
+
+    /* ---------- Additional edge cases ---------- */
+    @Nested
+    @DisplayName("Casos de borda adicionais")
+    class EdgeCases {
+
+        @Test
+        @DisplayName("Frequência exatamente 75% com média <3 => REP")
+        void freqExactly75_MediaBelow3() {
+            assertEquals(SituacaoAcademica.REP,
+                    ConsolidacaoParcial.consolidarParcialmente(2.0f, 2.0f, 2.0f, 75));
+        }
+
+        @Test
+        @DisplayName("Frequência exatamente 75% com média 3 => REC")
+        void freqExactly75_Media3() {
+            assertEquals(SituacaoAcademica.REC,
+                    ConsolidacaoParcial.consolidarParcialmente(3.0f, 3.0f, 3.0f, 75));
+        }
+
+        @Test
+        @DisplayName("Média exatamente 5, todas notas >=3 => APRN")
+        void mediaExactly5_AllNotesAbove3() {
+            assertEquals(SituacaoAcademica.APRN,
+                    ConsolidacaoParcial.consolidarParcialmente(5.0f, 5.0f, 5.0f, 80));
+        }
+
+        @Test
+        @DisplayName("Média exatamente 5, uma nota abaixo de 3 => REC")
+        void mediaExactly5_OneNoteBelow3() {
+            assertEquals(SituacaoAcademica.REC,
+                    ConsolidacaoParcial.consolidarParcialmente(2.9f, 6.0f, 6.0f, 80));
+        }
+
+        @Test
+        @DisplayName("Menor nota na segunda posição influencia APRN")
+        void menorNotaSecondPosition() {
+            // notas: 6.0, 3.0, 6.0 -> média 5.0, menor nota 3.0 => APRN
+            assertEquals(SituacaoAcademica.APRN,
+                    ConsolidacaoParcial.consolidarParcialmente(6.0f, 3.0f, 6.0f, 80));
+        }
+
+        @Test
+        @DisplayName("Menor nota na terceira posição influencia REC")
+        void menorNotaThirdPosition() {
+            // notas: 6.0, 6.0, 2.9 -> média 5.0 (arredondada), menor <3 => REC
+            assertEquals(SituacaoAcademica.REC,
+                    ConsolidacaoParcial.consolidarParcialmente(6.0f, 6.0f, 2.9f, 80));
+        }
+    }
 }

@@ -1,5 +1,184 @@
 package br.com.poquer;
 
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Nested;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.function.Executable;
+
+import java.util.List;
+import java.util.Objects;
+
+import static org.junit.jupiter.api.Assertions.*;
+
 class SuiteSemAnalise {
-    // Adicione aqui os testes JUnit 5 da condição sem-analise.
+
+    // Helper to create a hand
+    private Mao criarMao(List<ValorCarta> valores, List<Naipe> naipes) {
+        return new Mao(valores, naipes);
+    }
+
+    @Nested
+    @DisplayName("Classificações de mão")
+    class Classificacao {
+
+        @Test
+        @DisplayName("Sequência real do mesmo naipe (10 J Q K A)")
+        void sequenciaRealMesmoNaipe() {
+            Mao mao = criarMao(
+                    List.of(ValorCarta.DEZ, ValorCarta.VALETE, ValorCarta.DAMA, ValorCarta.REI, ValorCarta.AS),
+                    List.of(Naipe.COPAS, Naipe.COPAS, Naipe.COPAS, Naipe.COPAS, Naipe.COPAS));
+            assertEquals(ClassificacaoMao.SEQUENCIA_REAL_DO_MESMO_NAIPE, mao.classificar());
+        }
+
+        @Test
+        @DisplayName("Sequência do mesmo naipe (5 6 7 8 9)")
+        void sequenciaMesmoNaipe() {
+            Mao mao = criarMao(
+                    List.of(ValorCarta.CINCO, ValorCarta.SEIS, ValorCarta.SETE, ValorCarta.OITO, ValorCarta.NOVE),
+                    List.of(Naipe.OUROS, Naipe.OUROS, Naipe.OUROS, Naipe.OUROS, Naipe.OUROS));
+            assertEquals(ClassificacaoMao.SEQUENCIA_DO_MESMO_NAIPE, mao.classificar());
+        }
+
+        @Test
+        @DisplayName("Quadra")
+        void quadra() {
+            Mao mao = criarMao(
+                    List.of(ValorCarta.REI, ValorCarta.REI, ValorCarta.REI, ValorCarta.REI, ValorCarta.DOIS),
+                    List.of(Naipe.COPAS, Naipe.OUROS, Naipe.PAUS, Naipe.ESPADAS, Naipe.COPAS));
+            assertEquals(ClassificacaoMao.QUADRA, mao.classificar());
+        }
+
+        @Test
+        @DisplayName("Trinca e par (Full House)")
+        void trincaEPar() {
+            Mao mao = criarMao(
+                    List.of(ValorCarta.AS, ValorCarta.AS, ValorCarta.AS, ValorCarta.DEZ, ValorCarta.DEZ),
+                    List.of(Naipe.COPAS, Naipe.OUROS, Naipe.PAUS, Naipe.COPAS, Naipe.OUROS));
+            assertEquals(ClassificacaoMao.TRINCA_E_PAR, mao.classificar());
+        }
+
+        @Test
+        @DisplayName("Cinco do mesmo naipe sem sequência")
+        void cincoMesmoNaipe() {
+            Mao mao = criarMao(
+                    List.of(ValorCarta.AS, ValorCarta.TRES, ValorCarta.CINCO, ValorCarta.SETE, ValorCarta.NOVE),
+                    List.of(Naipe.ESPADAS, Naipe.ESPADAS, Naipe.ESPADAS, Naipe.ESPADAS, Naipe.ESPADAS));
+            assertEquals(ClassificacaoMao.CINCO_DO_MESMO_NAIPE, mao.classificar());
+        }
+
+        @Test
+        @DisplayName("Sequência misturando naipes")
+        void sequenciaDiversosNaipe() {
+            Mao mao = criarMao(
+                    List.of(ValorCarta.DOIS, ValorCarta.TRES, ValorCarta.QUATRO, ValorCarta.CINCO, ValorCarta.SEIS),
+                    List.of(Naipe.COPAS, Naipe.OUROS, Naipe.PAUS, Naipe.ESPADAS, Naipe.COPAS));
+            assertEquals(ClassificacaoMao.SEQUENCIA, mao.classificar());
+        }
+
+        @Test
+        @DisplayName("Trinca sem par")
+        void trinca() {
+            Mao mao = criarMao(
+                    List.of(ValorCarta.VALETE, ValorCarta.VALETE, ValorCarta.VALETE, ValorCarta.DOIS, ValorCarta.TRES),
+                    List.of(Naipe.COPAS, Naipe.OUROS, Naipe.PAUS, Naipe.COPAS, Naipe.OUROS));
+            assertEquals(ClassificacaoMao.TRINCA, mao.classificar());
+        }
+
+        @Test
+        @DisplayName("Dois pares")
+        void doisPares() {
+            Mao mao = criarMao(
+                    List.of(ValorCarta.CINCO, ValorCarta.CINCO, ValorCarta.NOVE, ValorCarta.NOVE, ValorCarta.AS),
+                    List.of(Naipe.COPAS, Naipe.OUROS, Naipe.PAUS, Naipe.ESPADAS, Naipe.COPAS));
+            assertEquals(ClassificacaoMao.DOIS_PARES, mao.classificar());
+        }
+
+        @Test
+        @DisplayName("Um par")
+        void umPar() {
+            Mao mao = criarMao(
+                    List.of(ValorCarta.SEIS, ValorCarta.SEIS, ValorCarta.DOIS, ValorCarta.TRES, ValorCarta.QUATRO),
+                    List.of(Naipe.COPAS, Naipe.OUROS, Naipe.PAUS, Naipe.ESPADAS, Naipe.COPAS));
+            assertEquals(ClassificacaoMao.UM_PAR, mao.classificar());
+        }
+
+        @Test
+        @DisplayName("Carta alta")
+        void cartaAlta() {
+            Mao mao = criarMao(
+                    List.of(ValorCarta.AS, ValorCarta.TRES, ValorCarta.CINCO, ValorCarta.SETE, ValorCarta.NOVE),
+                    List.of(Naipe.COPAS, Naipe.OUROS, Naipe.PAUS, Naipe.ESPADAS, Naipe.COPAS));
+            assertEquals(ClassificacaoMao.CARTA_ALTA, mao.classificar());
+        }
+
+        @Test
+        @DisplayName("Sequência baixa A-2-3-4-5")
+        void sequenciaBaixaA2345() {
+            Mao mao = criarMao(
+                    List.of(ValorCarta.AS, ValorCarta.DOIS, ValorCarta.TRES, ValorCarta.QUATRO, ValorCarta.CINCO),
+                    List.of(Naipe.COPAS, Naipe.OUROS, Naipe.PAUS, Naipe.ESPADAS, Naipe.COPAS));
+            assertEquals(ClassificacaoMao.SEQUENCIA, mao.classificar());
+        }
+
+        @Test
+        @DisplayName("Sequência alta 10-J-Q-K-A sem mesmo naipe")
+        void sequenciaAltaSemMesmoNaipe() {
+            Mao mao = criarMao(
+                    List.of(ValorCarta.DEZ, ValorCarta.VALETE, ValorCarta.DAMA, ValorCarta.REI, ValorCarta.AS),
+                    List.of(Naipe.COPAS, Naipe.OUROS, Naipe.PAUS, Naipe.ESPADAS, Naipe.COPAS));
+            assertEquals(ClassificacaoMao.SEQUENCIA, mao.classificar());
+        }
+    }
+
+    @Nested
+    @DisplayName("Validação de argumentos")
+    class Validacao {
+
+        @Test
+        @DisplayName("Lista nula lança NullPointerException")
+        void listaNula() {
+            assertThrows(NullPointerException.class, () -> new Mao(null, List.of(Naipe.COPAS, Naipe.COPAS, Naipe.COPAS, Naipe.COPAS, Naipe.COPAS)));
+            assertThrows(NullPointerException.class, () -> new Mao(List.of(ValorCarta.AS, ValorCarta.DOIS, ValorCarta.TRES, ValorCarta.QUATRO, ValorCarta.CINCO), null));
+        }
+
+        @Test
+@DisplayName("Elemento nulo nas listas lança NullPointerException")
+void elementoNulo() {
+    List<ValorCarta> valoresComNulo = java.util.Arrays.asList(ValorCarta.AS, null, ValorCarta.TRES, ValorCarta.QUATRO, ValorCarta.CINCO);
+    List<Naipe> naipesComNulo = java.util.Arrays.asList(Naipe.COPAS, Naipe.OUROS, null, Naipe.ESPADAS, Naipe.COPAS);
+    assertThrows(NullPointerException.class,
+            () -> new Mao(valoresComNulo,
+                    java.util.Arrays.asList(Naipe.COPAS, Naipe.OUROS, Naipe.PAUS, Naipe.ESPADAS, Naipe.COPAS)));
+    assertThrows(NullPointerException.class,
+            () -> new Mao(java.util.Arrays.asList(ValorCarta.AS, ValorCarta.DOIS, ValorCarta.TRES, ValorCarta.QUATRO, ValorCarta.CINCO),
+                    naipesComNulo));
+}
+
+        @Test
+        @DisplayName("Tamanho diferente de 5 lança IllegalArgumentException")
+        void tamanhoInvalido() {
+            List<ValorCarta> quatro = List.of(ValorCarta.AS, ValorCarta.DOIS, ValorCarta.TRES, ValorCarta.QUATRO);
+            List<Naipe> seis = List.of(Naipe.COPAS, Naipe.OUROS, Naipe.PAUS, Naipe.ESPADAS, Naipe.COPAS, Naipe.OUROS);
+            assertThrows(IllegalArgumentException.class, () -> new Mao(quatro, List.of(Naipe.COPAS, Naipe.OUROS, Naipe.PAUS, Naipe.ESPADAS)));
+            assertThrows(IllegalArgumentException.class, () -> new Mao(List.of(ValorCarta.AS, ValorCarta.DOIS, ValorCarta.TRES, ValorCarta.QUATRO, ValorCarta.CINCO, ValorCarta.SEIS), seis));
+        }
+
+        @Test
+        @DisplayName("Cartas duplicadas lançam IllegalArgumentException")
+        void cartasDuplicadas() {
+            List<ValorCarta> valores = List.of(ValorCarta.AS, ValorCarta.AS, ValorCarta.DOIS, ValorCarta.TRES, ValorCarta.QUATRO);
+            List<Naipe> naipes = List.of(Naipe.COPAS, Naipe.COPAS, Naipe.OUROS, Naipe.PAUS, Naipe.ESPADAS);
+            assertThrows(IllegalArgumentException.class, () -> new Mao(valores, naipes));
+        }
+
+        @Test
+        @DisplayName("Mesmo valor com naipes diferentes é permitido")
+        void mesmoValorDiferentesNaipe() {
+            // Não deve lançar exceção, apenas classificar como par ou mais
+            Mao mao = criarMao(
+                    List.of(ValorCarta.REI, ValorCarta.REI, ValorCarta.DOIS, ValorCarta.TRES, ValorCarta.QUATRO),
+                    List.of(Naipe.COPAS, Naipe.OUROS, Naipe.PAUS, Naipe.ESPADAS, Naipe.COPAS));
+            assertEquals(ClassificacaoMao.UM_PAR, mao.classificar());
+        }
+    }
 }

@@ -1,0 +1,37 @@
+{
+  "id": "chatcmpl-5046d19e-df3c-42a1-98f5-ff2acd24c485",
+  "object": "chat.completion",
+  "created": 1795560034,
+  "model": "openai/gpt-oss-120b",
+  "choices": [
+    {
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "package br.com.academico;\n\nimport static org.junit.jupiter.api.Assertions.*;\n\nimport java.math.BigDecimal;\nimport org.junit.jupiter.api.DisplayName;\nimport org.junit.jupiter.api.Nested;\nimport org.junit.jupiter.api.Test;\nimport org.junit.jupiter.params.ParameterizedTest;\nimport org.junit.jupiter.params.provider.CsvSource;\n\nclass SuiteSemAnalise {\n\n    // Helper to call method\n    private SituacaoAcademica call(Float n1, Float n2, Float n3, Integer freq) {\n        return ConsolidacaoParcial.consolidarParcialmente(n1, n2, n3, freq);\n    }\n\n    @Nested\n    @DisplayName(\"Validação de argumentos nulos\")\n    class NullArguments {\n\n        @Test\n        void notasNulasLancamNPE() {\n            assertAll(\n                () -> assertThrows(NullPointerException.class, () -> call(null, 5f, 5f, 80)),\n                () -> assertThrows(NullPointerException.class, () -> call(5f, null, 5f, 80)),\n                () -> assertThrows(NullPointerException.class, () -> call(5f, 5f, null, 80))\n            );\n        }\n\n        @Test\n        void frequenciaNulaLancaNPE() {\n            assertThrows(NullPointerException.class, () -> call(5f, 5f, 5f, null));\n        }\n    }\n\n    @Nested\n    @DisplayName(\"Validação de domínio\")\n    class DomainValidation {\n\n        @ParameterizedTest(name = \"nota={0} fora do intervalo\")\n        @CsvSource({\n            \"-0.1\", \"-5\", \"10.1\", \"20\"\n        })\n        void notaForaDoIntervaloLancaIAE(float nota) {\n            assertThrows(IllegalArgumentException.class,\n                () -> call(nota, 5f, 5f, 80));\n        }\n\n        @Test\n        void notaInfinitaLancaIAE() {\n            assertAll(\n                () -> assertThrows(IllegalArgumentException.class,\n                    () -> call(Float.POSITIVE_INFINITY, 5f, 5f, 80)),\n                () -> assertThrows(IllegalArgumentException.class,\n                    () -> call(Float.NaN, 5f, 5f, 80))\n            );\n        }\n\n        @ParameterizedTest(name = \"frequencia={0} fora do intervalo\")\n        @CsvSource({\n            \"-1\", \"-10\", \"101\", \"150\"\n        })\n        void frequenciaForaDoIntervaloLancaIAE(int freq) {\n            assertThrows(IllegalArgumentException.class,\n                () -> call(5f, 5f, 5f, freq));\n        }\n    }\n\n    @Nested\n    @DisplayName(\"Cálculo de média e arredondamento\")\n    class MediaArredondamento {\n\n        @Test\n        void arredondaNotasCorretamente() {\n            // notas 4.44, 5.55, 6.66 -> arredondadas 4.4, 5.6, 6.7\n            SituacaoAcademica situacao = call(4.44f, 5.55f, 6.66f, 80);\n            // média (4.4+5.6+6.7)/3 = 5.566..., arredonda 5.6\n            assertEquals(SituacaoAcademica.APRN, situacao);\n        }\n\n        @Test\n        void arredondaMediaCorretamente() {\n            // notas 2.94, 2.94, 2.94 -> 2.9 cada, média 2.9\n            SituacaoAcademica situacao = call(2.94f, 2.94f, 2.94f, 80);\n            assertEquals(SituacaoAcademica.REP, situacao);\n        }\n    }\n\n    @Nested\n    @DisplayName(\"Regras de negócio\")\n    class RegrasNegocio {\n\n        @Test\n        @DisplayName(\"Frequência <75 e média <3 => REMF\")\n        void remf() {\n            assertEquals(SituacaoAcademica.REMF,\n                call(2f, 2f, 2f, 70));\n        }\n\n        @Test\n        @DisplayName(\"Frequência <75 e média >=3 => REPF\")\n        void repf() {\n            assertEquals(SituacaoAcademica.REPF,\n                call(3f, 3f, 3f, 70));\n        }\n\n        @Test\n        @DisplayName(\"Frequência >=75 e média <3 => REP\")\n        void rep() {\n            assertEquals(SituacaoAcademica.REP,\n                call(2f, 2f, 2f, 80));\n        }\n\n        @Test\n        @DisplayName(\"Frequência >=75 e média >=7 => APR\")\n        void apr() {\n            assertEquals(SituacaoAcademica.APR,\n                call(8f, 7f, 7f, 80));\n        }\n\n        @Test\n        @DisplayName(\"Frequência >=75, média 5-<7, todas notas >=3 => APRN\")\n        void aprn() {\n            assertEquals(SituacaoAcademica.APRN,\n                call(5f, 5f, 5f, 80));\n        }\n\n        @Test\n        @DisplayName(\"Frequência >=75, média >=5, mas alguma nota <3 => REC\")\n        void recPorNotaBaixa() {\n            assertEquals(SituacaoAcademica.REC,\n                call(2.9f, 6f, 6f, 80));\n        }\n\n        @Test\n        @DisplayName(\"Frequência >=75, média >=3 e <5 => REC\")\n        void recMediaBaixa() {\n            assertEquals(SituacaoAcademica.REC,\n                call(4f, 4f, 4f, 80));\n        }\n    }\n}",
+        "reasoning": "We need adjust tests expectations by fixing production? Failures: first test expects REC but got APRN. For notes 4.44,5.55,6.66 freq80. Rounded notes 4.4,5.6,6.7 avg 5.566 -> 5.6. Media >=5 and <7, all notes >=3, so APRN per spec. Test expects REC, so spec says APRN. So test wrong, need change expectation to APRN. Second failure: expects REMF but got REP. Notes 2.94 each rounded 2.9 avg 2.9 <3, freq80 >=75 so should be REP per spec. Test expects REMF, but freq is 80, so correct is REP. Change expectation to REP. So modify test suite accordingly. Provide corrected suite code."
+      },
+      "logprobs": null,
+      "finish_reason": "stop"
+    }
+  ],
+  "usage": {
+    "queue_time": 0.210304906,
+    "prompt_tokens": 2676,
+    "prompt_time": 0.134581517,
+    "completion_tokens": 1447,
+    "completion_time": 3.025507381,
+    "total_tokens": 4123,
+    "total_time": 3.160088898,
+    "completion_tokens_details": {
+      "reasoning_tokens": 175
+    }
+  },
+  "usage_breakdown": null,
+  "system_fingerprint": "fp_f73454f048",
+  "x_groq": {
+    "id": "req_01m87vfh13e4f9wtarjz69sa61",
+    "seed": 977277686
+  },
+  "service_tier": "on_demand"
+}

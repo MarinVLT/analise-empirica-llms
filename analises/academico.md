@@ -67,4 +67,15 @@ Apenas as combinações de frequência e média e de frequência, notas e média
 
 | Método ou trecho | Decisão, condição ou caminho | Obrigação de cobertura |
 |---|---|---|
-| PENDENTE | PENDENTE | PENDENTE |
+| `consolidarParcialmente`, frequência nula | `Objects.requireNonNull(frequencia)` antes do arredondamento das notas | Exercitar frequência nula, que gera `NullPointerException` antes de qualquer validação de nota |
+| `consolidarParcialmente`, faixa da frequência | Condição composta `frequencia < 0 \|\| frequencia > 100`, com curto-circuito | Exercitar frequência negativa, que não avalia a segunda condição; frequência acima de 100; e frequência dentro da faixa |
+| `arredondarNota`, nota nula | `Objects.requireNonNull(nota)` em cada uma das três chamadas, executadas na ordem das notas | Exercitar nota nula na primeira, na segunda e na terceira posição; com nota inválida anterior, as seguintes não são avaliadas |
+| `arredondarNota`, domínio | Condição composta `!Float.isFinite(nota) \|\| nota < 0 \|\| nota > 10`, com curto-circuito | Exercitar nota não finita, como `NaN` ou infinito, quando as comparações seguintes não são avaliadas; nota negativa; nota acima de 10; e nota no domínio |
+| `arredondarNota`, arredondamento | `new BigDecimal(nota.toString()).setScale(1, RoundingMode.HALF_UP)` | Exercitar nota com segunda casa decimal igual a 5 para confirmar a subida, e nota com segunda casa menor que 5 |
+| `consolidarParcialmente`, média | Soma das três notas arredondadas dividida por três com escala 1 e `HALF_UP` | Exercitar uma média exatamente no limite inferior, uma média logo abaixo e uma logo acima de 3, de 5 e de 7 |
+| `consolidarParcialmente`, média abaixo de 3 | Decisão `media < 3` com expressão ternária sobre `frequencia < 75` | Exercitar média abaixo de 3 com frequência abaixo de 75, que retorna REMF, e com frequência de pelo menos 75, que retorna REP |
+| `consolidarParcialmente`, frequência abaixo de 75 | Decisão `frequencia < 75`, alcançada quando a média é de pelo menos 3 | Exercitar frequência abaixo de 75 com média de pelo menos 3, que retorna REPF, e frequência de pelo menos 75 |
+| `consolidarParcialmente`, aprovação por média | Decisão `media >= 7` | Exercitar média exatamente 7, que aprova, e média logo abaixo de 7 |
+| `consolidarParcialmente`, menor nota | Encadeamento `primeira.min(segunda).min(terceira)` sobre as notas já arredondadas | Exercitar mãos de notas em que a menor nota está em cada uma das três posições |
+| `consolidarParcialmente`, aprovação por notas | Condição composta `media >= 5 && menorNota >= 3`, com curto-circuito | Exercitar média de 5 até abaixo de 7 com todas as notas de pelo menos 3, que retorna APRN; média abaixo de 5, quando a menor nota não é avaliada; e média nessa faixa com alguma nota abaixo de 3, que retorna REC |
+| `consolidarParcialmente`, recuperação | Retorno final após todas as decisões anteriores | Exercitar o caso de média de pelo menos 3 e abaixo de 5 com frequência suficiente, e o caso de média de 5 até abaixo de 7 com alguma nota abaixo de 3 |

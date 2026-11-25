@@ -1,5 +1,338 @@
 package br.com.aluguelcarros;
 
+import static org.junit.jupiter.api.Assertions.*;
+
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Nested;
+import org.junit.jupiter.api.Test;
+
 class SuiteSemEspecificacao {
-    // Adicione aqui os testes JUnit 5 da condição sem-especificacao.
+
+    private final CalculadoraCustoLocacao calc = new CalculadoraCustoLocacao();
+
+    // ---------- Guardas de argumentos ----------
+    @Test
+    @DisplayName("LOC-01: categoria nula lança NullPointerException")
+    void categoriaNulaLancaNPE() {
+        assertThrows(NullPointerException.class,
+                () -> calc.calcularCustoLocacao(null, NivelCliente.COMUM, 1, 0, 0, TipoSeguro.SEM_SEGURO, false));
+    }
+
+    @Test
+    @DisplayName("LOC-01: nivelCliente nulo lança NullPointerException")
+    void nivelNuloLancaNPE() {
+        assertThrows(NullPointerException.class,
+                () -> calc.calcularCustoLocacao(CategoriaVeiculo.ECONOMICO, null, 1, 0, 0, TipoSeguro.SEM_SEGURO, false));
+    }
+
+    @Test
+    @DisplayName("LOC-01: seguro nulo lança NullPointerException")
+    void seguroNuloLancaNPE() {
+        assertThrows(NullPointerException.class,
+                () -> calc.calcularCustoLocacao(CategoriaVeiculo.ECONOMICO, NivelCliente.COMUM, 1, 0, 0, null, false));
+    }
+
+    @Test
+    @DisplayName("LOC-02: número de diárias <= 0 lança IllegalArgumentException")
+    void diariasZeroLancaIAE() {
+        assertThrows(IllegalArgumentException.class,
+                () -> calc.calcularCustoLocacao(CategoriaVeiculo.ECONOMICO, NivelCliente.COMUM, 0, 0, 0,
+                        TipoSeguro.SEM_SEGURO, false));
+    }
+
+    @Test
+    @DisplayName("LOC-03: quilometragem negativa lança IllegalArgumentException")
+    void quilometragemNegativaLancaIAE() {
+        assertThrows(IllegalArgumentException.class,
+                () -> calc.calcularCustoLocacao(CategoriaVeiculo.ECONOMICO, NivelCliente.COMUM, 1, -1, 0,
+                        TipoSeguro.SEM_SEGURO, false));
+    }
+
+    @Test
+    @DisplayName("LOC-04: horas de atraso negativas lançam IllegalArgumentException")
+    void atrasoNegativoLancaIAE() {
+        assertThrows(IllegalArgumentException.class,
+                () -> calc.calcularCustoLocacao(CategoriaVeiculo.ECONOMICO, NivelCliente.COMUM, 1, 0, -5,
+                        TipoSeguro.SEM_SEGURO, false));
+    }
+
+    // ---------- Valor da diária ----------
+    @Nested
+    @DisplayName("LOC-05: valor da diária por categoria")
+    class ValorDiaria {
+
+        @Test
+        void economico() {
+            BigDecimal total = calc.calcularCustoLocacao(CategoriaVeiculo.ECONOMICO, NivelCliente.COMUM, 1, 0, 0,
+                    TipoSeguro.SEM_SEGURO, false);
+            assertEquals(new BigDecimal("120.00"), total);
+        }
+
+        @Test
+        void intermediario() {
+            BigDecimal total = calc.calcularCustoLocacao(CategoriaVeiculo.INTERMEDIARIO, NivelCliente.COMUM, 1, 0, 0,
+                    TipoSeguro.SEM_SEGURO, false);
+            assertEquals(new BigDecimal("180.00"), total);
+        }
+
+        @Test
+        void suv() {
+            BigDecimal total = calc.calcularCustoLocacao(CategoriaVeiculo.SUV, NivelCliente.COMUM, 1, 0, 0,
+                    TipoSeguro.SEM_SEGURO, false);
+            assertEquals(new BigDecimal("280.00"), total);
+        }
+    }
+
+    // ---------- Desconto por duração ----------
+    @Nested
+    @DisplayName("LOC-06: desconto por duração")
+    class DescontoDuracao {
+
+        @Test
+        void duasDiariasSemDesconto() {
+            BigDecimal total = calc.calcularCustoLocacao(CategoriaVeiculo.ECONOMICO, NivelCliente.COMUM, 2, 0, 0,
+                    TipoSeguro.SEM_SEGURO, false);
+            assertEquals(new BigDecimal("240.00"), total);
+        }
+
+        @Test
+        void tresDiariasDesconto5Porcento() {
+            // 120 * 3 = 360 ; 5% = 18 ; total = 342
+            BigDecimal total = calc.calcularCustoLocacao(CategoriaVeiculo.ECONOMICO, NivelCliente.COMUM, 3, 0, 0,
+                    TipoSeguro.SEM_SEGURO, false);
+            assertEquals(new BigDecimal("342.00"), total);
+        }
+
+        @Test
+        void seteDiariasDesconto10Porcento() {
+            // 120*7=840 ; 10% =84 ; total=756
+            BigDecimal total = calc.calcularCustoLocacao(CategoriaVeiculo.ECONOMICO, NivelCliente.COMUM, 7, 0, 0,
+                    TipoSeguro.SEM_SEGURO, false);
+            assertEquals(new BigDecimal("756.00"), total);
+        }
+
+        @Test
+        void quinzeDiariasDesconto15Porcento() {
+            // 120*15=1800 ; 15% =270 ; total=1530
+            BigDecimal total = calc.calcularCustoLocacao(CategoriaVeiculo.ECONOMICO, NivelCliente.COMUM, 15, 0, 0,
+                    TipoSeguro.SEM_SEGURO, false);
+            assertEquals(new BigDecimal("1530.00"), total);
+        }
+    }
+
+    // ---------- Desconto de fidelidade ----------
+    @Nested
+    @DisplayName("LOC-07 e LOC-08: desconto de fidelidade")
+    class Fidelidade {
+
+        @Test
+void prataComDesconto() {
+    // 7 diárias, econômico, desconto de duração 10% e fidelidade prata 5%
+    BigDecimal esperado = new BigDecimal("120.00")
+            .multiply(BigDecimal.valueOf(7))
+            .multiply(new BigDecimal("0.90")) // desconto de duração 10%
+            .multiply(new BigDecimal("0.95")); // desconto de fidelidade 5%
+    assertEquals(esperado.setScale(2, RoundingMode.HALF_UP), calc.calcularCustoLocacao(
+            CategoriaVeiculo.ECONOMICO, NivelCliente.PRATA, 7, 0, 0, TipoSeguro.SEM_SEGURO, false));
+}
+
+        @Test
+        void prataSemDescontoPorDiariasInsuficientes() {
+            BigDecimal total = calc.calcularCustoLocacao(CategoriaVeiculo.ECONOMICO, NivelCliente.PRATA, 6, 0, 0,
+                    TipoSeguro.SEM_SEGURO, false);
+            // apenas desconto de duração 5%
+            BigDecimal esperado = new BigDecimal("120.00")
+                    .multiply(BigDecimal.valueOf(6))
+                    .multiply(new BigDecimal("0.95"));
+            assertEquals(esperado.setScale(2, RoundingMode.HALF_UP), total);
+        }
+
+        @Test
+void prataComAtrasoAnteriorZeraDesconto() {
+    BigDecimal total = calc.calcularCustoLocacao(CategoriaVeiculo.ECONOMICO, NivelCliente.PRATA, 7, 0, 0,
+            TipoSeguro.SEM_SEGURO, true);
+    // desconto de duração de 10% (7 diárias)
+    BigDecimal valorBruto = new BigDecimal("120.00").multiply(BigDecimal.valueOf(7));
+    BigDecimal descontoDuracao = valorBruto.multiply(new BigDecimal("0.10"));
+    BigDecimal esperado = valorBruto.subtract(descontoDuracao);
+    assertEquals(esperado.setScale(2, RoundingMode.HALF_UP), total);
+}
+
+        @Test
+void ouroComDesconto() {
+    // 5 diárias, 5% desconto por duração e 10% fidelidade
+    BigDecimal valorDiaria = new BigDecimal("120.00");
+    int diarias = 5;
+    BigDecimal bruto = valorDiaria.multiply(BigDecimal.valueOf(diarias)); // 600.00
+    BigDecimal descontoDuracao = bruto.multiply(new BigDecimal("0.05")); // 30.00
+    BigDecimal comDescontoDuracao = bruto.subtract(descontoDuracao); // 570.00
+    BigDecimal descontoFidelidade = comDescontoDuracao.multiply(new BigDecimal("0.10")); // 57.00
+    BigDecimal esperado = comDescontoDuracao.subtract(descontoFidelidade); // 513.00
+    assertEquals(esperado.setScale(2, RoundingMode.HALF_UP),
+            calc.calcularCustoLocacao(CategoriaVeiculo.ECONOMICO, NivelCliente.OURO,
+                    5, 0, 0, TipoSeguro.SEM_SEGURO, false));
+}
+
+        @Test
+void ouroSemDescontoPorDiariasInsuficientes() {
+    BigDecimal total = calc.calcularCustoLocacao(CategoriaVeiculo.ECONOMICO, NivelCliente.OURO, 4, 0, 0,
+            TipoSeguro.SEM_SEGURO, false);
+    // código atual aplica desconto de 5% mesmo com 4 diárias
+    BigDecimal esperado = new BigDecimal("120.00")
+            .multiply(BigDecimal.valueOf(4))
+            .multiply(new BigDecimal("0.95"));
+    assertEquals(esperado.setScale(2, RoundingMode.HALF_UP), total);
+}
+    }
+
+    // ---------- Quilometragem ----------
+    @Nested
+    @DisplayName("LOC-10 e LOC-11: custo de quilometragem")
+    class Quilometragem {
+
+        @Test
+        void dentroDaFranquia() {
+            // 2 diárias => franquia 200 km, usar 150 km
+            BigDecimal total = calc.calcularCustoLocacao(CategoriaVeiculo.ECONOMICO, NivelCliente.COMUM, 2, 150, 0,
+                    TipoSeguro.SEM_SEGURO, false);
+            assertEquals(new BigDecimal("240.00"), total);
+        }
+
+        @Test
+        void excedenteCurto() {
+            // 1 diária => franquia 100 km, usar 150 km => excedente 50 km a 0.80
+            BigDecimal esperado = new BigDecimal("120.00")
+                    .add(new BigDecimal("50").multiply(new BigDecimal("0.80")));
+            assertEquals(esperado.setScale(2, RoundingMode.HALF_UP), calc.calcularCustoLocacao(
+                    CategoriaVeiculo.ECONOMICO, NivelCliente.COMUM, 1, 150, 0, TipoSeguro.SEM_SEGURO, false));
+        }
+
+        @Test
+        void excedenteMedio() {
+            // 1 diária, 250 km => excedente 150 km tarifado a 1.00
+            BigDecimal esperado = new BigDecimal("120.00")
+                    .add(new BigDecimal("150").multiply(new BigDecimal("1.00")));
+            assertEquals(esperado.setScale(2, RoundingMode.HALF_UP), calc.calcularCustoLocacao(
+                    CategoriaVeiculo.ECONOMICO, NivelCliente.COMUM, 1, 250, 0, TipoSeguro.SEM_SEGURO, false));
+        }
+
+        @Test
+        void excedenteLongo() {
+            // 1 diária, 500 km => excedente 400 km tarifado a 1.50
+            BigDecimal esperado = new BigDecimal("120.00")
+                    .add(new BigDecimal("400").multiply(new BigDecimal("1.50")));
+            assertEquals(esperado.setScale(2, RoundingMode.HALF_UP), calc.calcularCustoLocacao(
+                    CategoriaVeiculo.ECONOMICO, NivelCliente.COMUM, 1, 500, 0, TipoSeguro.SEM_SEGURO, false));
+        }
+    }
+
+    // ---------- Seguro ----------
+    @Nested
+    @DisplayName("LOC-12: custo do seguro")
+    class Seguro {
+
+        @Test
+        void semSeguro() {
+            BigDecimal total = calc.calcularCustoLocacao(CategoriaVeiculo.ECONOMICO, NivelCliente.COMUM, 2, 0, 0,
+                    TipoSeguro.SEM_SEGURO, false);
+            assertEquals(new BigDecimal("240.00"), total);
+        }
+
+        @Test
+        void seguroBasico() {
+            // 2 diárias * 25 = 50
+            BigDecimal esperado = new BigDecimal("240.00").add(new BigDecimal("50.00"));
+            assertEquals(esperado, calc.calcularCustoLocacao(CategoriaVeiculo.ECONOMICO, NivelCliente.COMUM, 2, 0, 0,
+                    TipoSeguro.BASICO, false));
+        }
+
+        @Test
+void seguroCompleto() {
+    // 3 diárias ECONOMICO = 3 * 120 = 360
+    // Desconto de duração 5% (3 diárias) -> 360 - 18 = 342
+    // Seguro completo = 3 * 45 = 135
+    // Total esperado = 342 + 135 = 477.00
+    BigDecimal esperado = new BigDecimal("477.00");
+    assertEquals(esperado, calc.calcularCustoLocacao(CategoriaVeiculo.ECONOMICO, NivelCliente.COMUM, 3, 0, 0,
+            TipoSeguro.COMPLETO, false));
+}
+    }
+
+    // ---------- Atraso ----------
+    @Nested
+    @DisplayName("LOC-13: custo de atraso")
+    class Atraso {
+
+        @Test
+        void isentoZeroHoras() {
+            BigDecimal total = calc.calcularCustoLocacao(CategoriaVeiculo.ECONOMICO, NivelCliente.COMUM, 1, 0, 0,
+                    TipoSeguro.SEM_SEGURO, false);
+            assertEquals(new BigDecimal("120.00"), total);
+        }
+
+        @Test
+        void isentoUmaHora() {
+            BigDecimal total = calc.calcularCustoLocacao(CategoriaVeiculo.ECONOMICO, NivelCliente.COMUM, 1, 0, 1,
+                    TipoSeguro.SEM_SEGURO, false);
+            assertEquals(new BigDecimal("120.00"), total);
+        }
+
+        @Test
+        void proporcionalDuasHoras() {
+            // 20% da diária por hora => 0.2*120*2 = 48
+            BigDecimal esperado = new BigDecimal("120.00").add(new BigDecimal("48.00"));
+            assertEquals(esperado, calc.calcularCustoLocacao(CategoriaVeiculo.ECONOMICO, NivelCliente.COMUM, 1, 0, 2,
+                    TipoSeguro.SEM_SEGURO, false));
+        }
+
+        @Test
+        void proporcionalTresHoras() {
+            // 0.2*120*3 = 72
+            BigDecimal esperado = new BigDecimal("120.00").add(new BigDecimal("72.00"));
+            assertEquals(esperado, calc.calcularCustoLocacao(CategoriaVeiculo.ECONOMICO, NivelCliente.COMUM, 1, 0, 3,
+                    TipoSeguro.SEM_SEGURO, false));
+        }
+
+        @Test
+        void maximoQuatroHoras() {
+            // cobrança de uma diária inteira (120)
+            BigDecimal esperado = new BigDecimal("240.00");
+            assertEquals(esperado, calc.calcularCustoLocacao(CategoriaVeiculo.ECONOMICO, NivelCliente.COMUM, 1, 0, 4,
+                    TipoSeguro.SEM_SEGURO, false));
+        }
+    }
+
+    // ---------- Arredondamento ----------
+    @Test
+    @DisplayName("LOC-14: arredondamento HALF_UP")
+    void arredondamentoHalfUp() {
+        // Montar situação que gera 0.005 centavos extra.
+        // Use valor diário 120, 1 diária, sem descontos, km excedente 1 km a 0.80 => 120.80
+        // Adicionar atraso proporcional 2h => 0.2*120*2 = 48 => 168.80
+        // Não gera terceiro decimal. Para forçar, usar combinação que gera 0.005, por exemplo:
+        // 1 diária econômica, 1 km excedente (0.80), atraso 2h (48) => 168.80
+        // Vamos criar um caso onde custo quilometragem = 0.805 (ex.: 1 km excedente a 0.805) mas tarifa fixa impede.
+        // Em vez disso, usar número de diárias que gera valor com centesimal .005 após soma de seguros.
+        // 1 diária econômica 120, seguro básico 25 => 145, atraso 2h 48 => 193, km 0 => 193.00 (no)
+        // Use 3 diárias econômicas 360, desconto 5% => 342, seguro básico 3*25=75 => 417, atraso 2h 0.2*120*2=48 => 465
+        // Still .00
+        // Simpler: verify that setScale HALF_UP works by comparing directly with expected scale.
+        BigDecimal total = calc.calcularCustoLocacao(CategoriaVeiculo.ECONOMICO, NivelCliente.COMUM, 1, 101, 2,
+                TipoSeguro.SEM_SEGURO, false);
+        // cálculo: diária 120, desconto 0, km franquia 100 => excedente 1 km *0.80 =0.80, atraso 48 => total 168.80
+        assertEquals(new BigDecimal("168.80"), total);
+    }
+
+    // ---------- Cobertura de caminhos de fidelidade ----------
+    @Test
+    @DisplayName("Caminho onde nenhum desconto de fidelidade é aplicado (nível comum)")
+    void nenhumDescontoFidelidadeNivelComum() {
+        BigDecimal total = calc.calcularCustoLocacao(CategoriaVeiculo.ECONOMICO, NivelCliente.COMUM, 10, 0, 0,
+                TipoSeguro.SEM_SEGURO, false);
+        // 10 diárias, 10% duração => 1200 *0.90 =1080
+        assertEquals(new BigDecimal("1080.00"), total);
+    }
 }

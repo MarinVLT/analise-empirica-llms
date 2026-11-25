@@ -1,0 +1,6 @@
+﻿Medição indisponível (ND).
+
+O tsDetect não reconheceu nenhum método de teste nesta suíte: a classe usa classes internas anotadas com @Nested, e o detector inspeciona apenas métodos declarados diretamente na classe de teste. O scripts/quality.py aborta com 'Arquivo sem testes reconhecidos pelo tsDetect'.
+
+As métricas de JaCoCo e PIT deste perfil estão nos diretórios jacoco/ e pit/, e a execução dos testes está em execucao.log.
+

@@ -1,0 +1,1162 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=windows-1252">
+    <link rel="stylesheet" type="text/css" href="../style.css">
+</head>
+<body>
+
+
+<h1>ConsolidacaoParcial.java</h1>
+
+<table class="src">
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@34652065_1'/>
+1
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@34652065_1'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>package br.com.academico;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@34652065_2'/>
+2
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@34652065_2'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@34652065_3'/>
+3
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@34652065_3'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>import java.math.BigDecimal;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@34652065_4'/>
+4
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@34652065_4'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>import java.math.RoundingMode;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@34652065_5'/>
+5
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@34652065_5'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>import java.util.Objects;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@34652065_6'/>
+6
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@34652065_6'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='uncovered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@34652065_7'/>
+7
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@34652065_7'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='uncovered'><pre><span  class=''>public class ConsolidacaoParcial {</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@34652065_8'/>
+8
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@34652065_8'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    /**</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@34652065_9'/>
+9
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@34652065_9'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * Determina a situa&#231;&#227;o acad&#234;mica parcial com base nas notas e na frequ&#234;ncia.</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@34652065_10'/>
+10
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@34652065_10'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * As notas e a m&#233;dia s&#227;o arredondadas para uma casa decimal com arredondamento</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@34652065_11'/>
+11
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@34652065_11'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * de metade para cima antes da aplica&#231;&#227;o das regras de aprova&#231;&#227;o.</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@34652065_12'/>
+12
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@34652065_12'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     *</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@34652065_13'/>
+13
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@34652065_13'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * @param nota1 nota da primeira unidade, entre 0 e 10</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@34652065_14'/>
+14
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@34652065_14'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * @param nota2 nota da segunda unidade, entre 0 e 10</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@34652065_15'/>
+15
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@34652065_15'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * @param nota3 nota da terceira unidade, entre 0 e 10</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@34652065_16'/>
+16
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@34652065_16'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * @param frequencia frequ&#234;ncia percentual inteira, entre 0 e 100</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@34652065_17'/>
+17
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@34652065_17'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * @return situa&#231;&#227;o acad&#234;mica ap&#243;s a consolida&#231;&#227;o parcial</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@34652065_18'/>
+18
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@34652065_18'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * @throws NullPointerException se algum argumento for nulo</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@34652065_19'/>
+19
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@34652065_19'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * @throws IllegalArgumentException se uma nota for n&#227;o finita ou algum valor estiver fora da faixa</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@34652065_20'/>
+20
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@34652065_20'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     */</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@34652065_21'/>
+21
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@34652065_21'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    public static SituacaoAcademica consolidarParcialmente(</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@34652065_22'/>
+22
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@34652065_22'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>            Float nota1, Float nota2, Float nota3, Integer frequencia) {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@34652065_23'/>
+23
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@34652065_23'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>        Objects.requireNonNull(frequencia, &#34;frequencia&#34;);</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@34652065_24'/>
+24
+</td>
+<td class='survived'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@34652065_24'>4</a>
+<span>
+
+1. consolidarParcialmente : changed conditional boundary &rarr; SURVIVED<br/>
+
+2. consolidarParcialmente : changed conditional boundary &rarr; SURVIVED<br/>
+
+3. consolidarParcialmente : removed conditional - replaced comparison check with false &rarr; KILLED<br/>
+
+4. consolidarParcialmente : removed conditional - replaced comparison check with false &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='survived'>        if (frequencia &#60; 0 || frequencia &#62; 100) {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@34652065_25'/>
+25
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@34652065_25'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>            throw new IllegalArgumentException(&#34;Frequ&#234;ncia deve estar entre 0 e 100&#34;);</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@34652065_26'/>
+26
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@34652065_26'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>        }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@34652065_27'/>
+27
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@34652065_27'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@34652065_28'/>
+28
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@34652065_28'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>        BigDecimal primeira = arredondarNota(nota1);</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@34652065_29'/>
+29
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@34652065_29'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>        BigDecimal segunda = arredondarNota(nota2);</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@34652065_30'/>
+30
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@34652065_30'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>        BigDecimal terceira = arredondarNota(nota3);</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@34652065_31'/>
+31
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@34652065_31'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>        BigDecimal media = primeira.add(segunda).add(terceira)</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@34652065_32'/>
+32
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@34652065_32'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>                .divide(BigDecimal.valueOf(3), 1, RoundingMode.HALF_UP);</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@34652065_33'/>
+33
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@34652065_33'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@34652065_34'/>
+34
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@34652065_34'>2</a>
+<span>
+
+1. consolidarParcialmente : removed conditional - replaced comparison check with false &rarr; KILLED<br/>
+
+2. consolidarParcialmente : changed conditional boundary &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        if (media.compareTo(BigDecimal.valueOf(3)) &#60; 0) {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@34652065_35'/>
+35
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@34652065_35'>3</a>
+<span>
+
+1. consolidarParcialmente : changed conditional boundary &rarr; KILLED<br/>
+
+2. consolidarParcialmente : removed conditional - replaced comparison check with false &rarr; KILLED<br/>
+
+3. consolidarParcialmente : replaced return value with null for br/com/academico/ConsolidacaoParcial::consolidarParcialmente &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>            return frequencia &#60; 75 ? SituacaoAcademica.REMF : SituacaoAcademica.REP;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@34652065_36'/>
+36
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@34652065_36'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>        }</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@34652065_37'/>
+37
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@34652065_37'>2</a>
+<span>
+
+1. consolidarParcialmente : changed conditional boundary &rarr; KILLED<br/>
+
+2. consolidarParcialmente : removed conditional - replaced comparison check with false &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        if (frequencia &#60; 75) {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@34652065_38'/>
+38
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@34652065_38'>1</a>
+<span>
+
+1. consolidarParcialmente : replaced return value with null for br/com/academico/ConsolidacaoParcial::consolidarParcialmente &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>            return SituacaoAcademica.REPF;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@34652065_39'/>
+39
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@34652065_39'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>        }</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@34652065_40'/>
+40
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@34652065_40'>2</a>
+<span>
+
+1. consolidarParcialmente : removed conditional - replaced comparison check with false &rarr; KILLED<br/>
+
+2. consolidarParcialmente : changed conditional boundary &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        if (media.compareTo(BigDecimal.valueOf(7)) &#62;= 0) {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@34652065_41'/>
+41
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@34652065_41'>1</a>
+<span>
+
+1. consolidarParcialmente : replaced return value with null for br/com/academico/ConsolidacaoParcial::consolidarParcialmente &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>            return SituacaoAcademica.APR;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@34652065_42'/>
+42
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@34652065_42'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>        }</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@34652065_43'/>
+43
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@34652065_43'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>        BigDecimal menorNota = primeira.min(segunda).min(terceira);</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@34652065_44'/>
+44
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@34652065_44'>4</a>
+<span>
+
+1. consolidarParcialmente : removed conditional - replaced comparison check with false &rarr; KILLED<br/>
+
+2. consolidarParcialmente : changed conditional boundary &rarr; KILLED<br/>
+
+3. consolidarParcialmente : changed conditional boundary &rarr; KILLED<br/>
+
+4. consolidarParcialmente : removed conditional - replaced comparison check with false &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        if (media.compareTo(BigDecimal.valueOf(5)) &#62;= 0 &#38;&#38; menorNota.compareTo(BigDecimal.valueOf(3)) &#62;= 0) {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@34652065_45'/>
+45
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@34652065_45'>1</a>
+<span>
+
+1. consolidarParcialmente : replaced return value with null for br/com/academico/ConsolidacaoParcial::consolidarParcialmente &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>            return SituacaoAcademica.APRN;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@34652065_46'/>
+46
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@34652065_46'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>        }</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@34652065_47'/>
+47
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@34652065_47'>1</a>
+<span>
+
+1. consolidarParcialmente : replaced return value with null for br/com/academico/ConsolidacaoParcial::consolidarParcialmente &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        return SituacaoAcademica.REC;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@34652065_48'/>
+48
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@34652065_48'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@34652065_49'/>
+49
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@34652065_49'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@34652065_50'/>
+50
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@34652065_50'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    private static BigDecimal arredondarNota(Float nota) {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@34652065_51'/>
+51
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@34652065_51'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>        Objects.requireNonNull(nota, &#34;nota&#34;);</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@34652065_52'/>
+52
+</td>
+<td class='survived'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@34652065_52'>5</a>
+<span>
+
+1. arredondarNota : changed conditional boundary &rarr; SURVIVED<br/>
+
+2. arredondarNota : changed conditional boundary &rarr; SURVIVED<br/>
+
+3. arredondarNota : removed conditional - replaced comparison check with false &rarr; KILLED<br/>
+
+4. arredondarNota : removed conditional - replaced comparison check with false &rarr; KILLED<br/>
+
+5. arredondarNota : removed conditional - replaced equality check with false &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='survived'>        if (!Float.isFinite(nota) || nota &#60; 0 || nota &#62; 10) {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@34652065_53'/>
+53
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@34652065_53'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>            throw new IllegalArgumentException(&#34;Nota deve ser finita e estar entre 0 e 10&#34;);</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@34652065_54'/>
+54
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@34652065_54'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>        }</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@34652065_55'/>
+55
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@34652065_55'>1</a>
+<span>
+
+1. arredondarNota : replaced return value with null for br/com/academico/ConsolidacaoParcial::arredondarNota &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        return new BigDecimal(nota.toString()).setScale(1, RoundingMode.HALF_UP);</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@34652065_56'/>
+56
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@34652065_56'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@34652065_57'/>
+57
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@34652065_57'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>}</span></pre></td></tr>
+
+
+
+<tr><td></td><td></td><td><h2>Mutations</h2></td></tr>
+
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@34652065_24'>24</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@34652065_24'/> 
+
+<p class='SURVIVED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>consolidarParcialmente<br/><b>Killed by : </b>none</span></span> changed conditional boundary &rarr; SURVIVED</span>
+<a title="Click to view covering tests" class="view-covered-by-tests" onClick="document.getElementById('MutationIdentifier-[location=Location-[clazz=br.com.academico.ConsolidacaoParcial,-method=consolidarParcialmente,-methodDesc=(Ljava/lang/Float;Ljava/lang/Float;Ljava/lang/Float;Ljava/lang/Integer;)Lbr/com/academico/SituacaoAcademica;],-indexes=[15],-mutator=org.pitest.mutationtest.engine.gregor.mutators.ConditionalsBoundaryMutator]').style.display=(document.getElementById('MutationIdentifier-[location=Location-[clazz=br.com.academico.ConsolidacaoParcial,-method=consolidarParcialmente,-methodDesc=(Ljava/lang/Float;Ljava/lang/Float;Ljava/lang/Float;Ljava/lang/Integer;)Lbr/com/academico/SituacaoAcademica;],-indexes=[15],-mutator=org.pitest.mutationtest.engine.gregor.mutators.ConditionalsBoundaryMutator]').style.display == 'block')?'none':'block';">Covering tests</a>
+<div class="covered-tests" id="MutationIdentifier-[location=Location-[clazz=br.com.academico.ConsolidacaoParcial,-method=consolidarParcialmente,-methodDesc=(Ljava/lang/Float;Ljava/lang/Float;Ljava/lang/Float;Ljava/lang/Integer;)Lbr/com/academico/SituacaoAcademica;],-indexes=[15],-mutator=org.pitest.mutationtest.engine.gregor.mutators.ConditionalsBoundaryMutator]" style="display:none;">Covered by tests:
+<ul>
+<li>br.com.academico.SuiteSemCodigo.[engine:junit-jupiter]/[class:br.com.academico.SuiteSemCodigo]/[nested-class:InvalidArguments]/[test-template:frequencyOutOfRange(java.lang.Integer, java.lang.Float, java.lang.Float, java.lang.Float)]/[test-template-invocation:#2]</li> <li>br.com.academico.SuiteSemCodigo.[engine:junit-jupiter]/[class:br.com.academico.SuiteSemCodigo]/[nested-class:InvalidArguments]/[method:nullFirstNote()]</li> <li>br.com.academico.SuiteSemCodigo.[engine:junit-jupiter]/[class:br.com.academico.SuiteSemCodigo]/[nested-class:InvalidArguments]/[test-template:noteNotFinite(java.lang.Float, java.lang.Float, java.lang.Float, java.lang.Integer)]/[test-template-invocation:#1]</li> <li>br.com.academico.SuiteSemCodigo.[engine:junit-jupiter]/[class:br.com.academico.SuiteSemCodigo]/[nested-class:InvalidArguments]/[test-template:noteOutOfRange(java.lang.Float, java.lang.Float, java.lang.Float, java.lang.Integer)]/[test-template-invocation:#4]</li> <li>br.com.academico.SuiteSemCodigo.[engine:junit-jupiter]/[class:br.com.academico.SuiteSemCodigo]/[nested-class:InvalidArguments]/[test-template:noteOutOfRange(java.lang.Float, java.lang.Float, java.lang.Float, java.lang.Integer)]/[test-template-invocation:#1]</li> <li>br.com.academico.SuiteSemCodigo.[engine:junit-jupiter]/[class:br.com.academico.SuiteSemCodigo]/[nested-class:InvalidArguments]/[method:nullThirdNote()]</li> <li>br.com.academico.SuiteSemCodigo.[engine:junit-jupiter]/[class:br.com.academico.SuiteSemCodigo]/[nested-class:InvalidArguments]/[test-template:noteNotFinite(java.lang.Float, java.lang.Float, java.lang.Float, java.lang.Integer)]/[test-template-invocation:#2]</li> <li>br.com.academico.SuiteSemCodigo.[engine:junit-jupiter]/[class:br.com.academico.SuiteSemCodigo]/[nested-class:InvalidArguments]/[test-template:noteNotFinite(java.lang.Float, java.lang.Float, java.lang.Float, java.lang.Integer)]/[test-template-invocation:#3]</li> <li>br.com.academico.SuiteSemCodigo.[engine:junit-jupiter]/[class:br.com.academico.SuiteSemCodigo]/[nested-class:InvalidArguments]/[test-template:noteOutOfRange(java.lang.Float, java.lang.Float, java.lang.Float, java.lang.Integer)]/[test-template-invocation:#5]</li> <li>br.com.academico.SuiteSemCodigo.[engine:junit-jupiter]/[class:br.com.academico.SuiteSemCodigo]/[nested-class:InvalidArguments]/[test-template:noteOutOfRange(java.lang.Float, java.lang.Float, java.lang.Float, java.lang.Integer)]/[test-template-invocation:#3]</li> <li>br.com.academico.SuiteSemCodigo.[engine:junit-jupiter]/[class:br.com.academico.SuiteSemCodigo]/[nested-class:InvalidArguments]/[method:nullSecondNote()]</li> <li>br.com.academico.SuiteSemCodigo.[engine:junit-jupiter]/[class:br.com.academico.SuiteSemCodigo]/[nested-class:InvalidArguments]/[test-template:noteOutOfRange(java.lang.Float, java.lang.Float, java.lang.Float, java.lang.Integer)]/[test-template-invocation:#2]</li> <li>br.com.academico.SuiteSemCodigo.[engine:junit-jupiter]/[class:br.com.academico.SuiteSemCodigo]/[nested-class:InvalidArguments]/[test-template:noteOutOfRange(java.lang.Float, java.lang.Float, java.lang.Float, java.lang.Integer)]/[test-template-invocation:#6]</li> <li>br.com.academico.SuiteSemCodigo.[engine:junit-jupiter]/[class:br.com.academico.SuiteSemCodigo]/[nested-class:DecisionTable]/[test-template:aca02_REPF_Media3to5(java.lang.Float, java.lang.Float, java.lang.Float, java.lang.Integer)]/[test-template-invocation:#1]</li> <li>br.com.academico.SuiteSemCodigo.[engine:junit-jupiter]/[class:br.com.academico.SuiteSemCodigo]/[nested-class:EdgeCases]/[method:freqExactly75_Media3()]</li> <li>br.com.academico.SuiteSemCodigo.[engine:junit-jupiter]/[class:br.com.academico.SuiteSemCodigo]/[nested-class:DecisionTable]/[test-template:aca02_REPF_Media3to5(java.lang.Float, java.lang.Float, java.lang.Float, java.lang.Integer)]/[test-template-invocation:#2]</li> <li>br.com.academico.SuiteSemCodigo.[engine:junit-jupiter]/[class:br.com.academico.SuiteSemCodigo]/[nested-class:DecisionTable]/[method:aca05_REP()]</li> <li>br.com.academico.SuiteSemCodigo.[engine:junit-jupiter]/[class:br.com.academico.SuiteSemCodigo]/[nested-class:DecisionTable]/[test-template:aca01_REMF(java.lang.Float, java.lang.Float, java.lang.Float, java.lang.Integer)]/[test-template-invocation:#2]</li> <li>br.com.academico.SuiteSemCodigo.[engine:junit-jupiter]/[class:br.com.academico.SuiteSemCodigo]/[nested-class:RoundingAndBoundary]/[method:mediaExactlySeven()]</li> <li>br.com.academico.SuiteSemCodigo.[engine:junit-jupiter]/[class:br.com.academico.SuiteSemCodigo]/[nested-class:DecisionTable]/[test-template:aca03_REPF_Media5to7(java.lang.Float, java.lang.Float, java.lang.Float, java.lang.Integer)]/[test-template-invocation:#1]</li> <li>br.com.academico.SuiteSemCodigo.[engine:junit-jupiter]/[class:br.com.academico.SuiteSemCodigo]/[nested-class:DecisionTable]/[test-template:aca03_REPF_Media5to7(java.lang.Float, java.lang.Float, java.lang.Float, java.lang.Integer)]/[test-template-invocation:#2]</li> <li>br.com.academico.SuiteSemCodigo.[engine:junit-jupiter]/[class:br.com.academico.SuiteSemCodigo]/[nested-class:DecisionTable]/[test-template:aca04_REPF_Media7plus(java.lang.Float, java.lang.Float, java.lang.Float, java.lang.Integer)]/[test-template-invocation:#1]</li> <li>br.com.academico.SuiteSemCodigo.[engine:junit-jupiter]/[class:br.com.academico.SuiteSemCodigo]/[nested-class:DecisionTable]/[test-template:aca04_REPF_Media7plus(java.lang.Float, java.lang.Float, java.lang.Float, java.lang.Integer)]/[test-template-invocation:#2]</li> <li>br.com.academico.SuiteSemCodigo.[engine:junit-jupiter]/[class:br.com.academico.SuiteSemCodigo]/[nested-class:DecisionTable]/[test-template:aca06_REC_Media3to5(java.lang.Float, java.lang.Float, java.lang.Float, java.lang.Integer)]/[test-template-invocation:#1]</li> <li>br.com.academico.SuiteSemCodigo.[engine:junit-jupiter]/[class:br.com.academico.SuiteSemCodigo]/[nested-class:DecisionTable]/[test-template:aca06_REC_Media3to5(java.lang.Float, java.lang.Float, java.lang.Float, java.lang.Integer)]/[test-template-invocation:#2]</li> <li>br.com.academico.SuiteSemCodigo.[engine:junit-jupiter]/[class:br.com.academico.SuiteSemCodigo]/[nested-class:RoundingAndBoundary]/[method:mediaExactlyThree()]</li> <li>br.com.academico.SuiteSemCodigo.[engine:junit-jupiter]/[class:br.com.academico.SuiteSemCodigo]/[nested-class:DecisionTable]/[method:aca09_APR()]</li> <li>br.com.academico.SuiteSemCodigo.[engine:junit-jupiter]/[class:br.com.academico.SuiteSemCodigo]/[nested-class:EdgeCases]/[method:freqExactly75_MediaBelow3()]</li> <li>br.com.academico.SuiteSemCodigo.[engine:junit-jupiter]/[class:br.com.academico.SuiteSemCodigo]/[nested-class:DecisionTable]/[method:aca08_APRN_AllNotesAbove3()]</li> <li>br.com.academico.SuiteSemCodigo.[engine:junit-jupiter]/[class:br.com.academico.SuiteSemCodigo]/[nested-class:DecisionTable]/[method:aca07_REC_NotaBelow3()]</li> <li>br.com.academico.SuiteSemCodigo.[engine:junit-jupiter]/[class:br.com.academico.SuiteSemCodigo]/[nested-class:EdgeCases]/[method:mediaExactly5_AllNotesAbove3()]</li> <li>br.com.academico.SuiteSemCodigo.[engine:junit-jupiter]/[class:br.com.academico.SuiteSemCodigo]/[nested-class:EdgeCases]/[method:mediaExactly5_OneNoteBelow3()]</li> <li>br.com.academico.SuiteSemCodigo.[engine:junit-jupiter]/[class:br.com.academico.SuiteSemCodigo]/[nested-class:EdgeCases]/[method:menorNotaSecondPosition()]</li> <li>br.com.academico.SuiteSemCodigo.[engine:junit-jupiter]/[class:br.com.academico.SuiteSemCodigo]/[nested-class:RoundingAndBoundary]/[method:mediaExactlyFive()]</li> <li>br.com.academico.SuiteSemCodigo.[engine:junit-jupiter]/[class:br.com.academico.SuiteSemCodigo]/[nested-class:DecisionTable]/[test-template:aca01_REMF(java.lang.Float, java.lang.Float, java.lang.Float, java.lang.Integer)]/[test-template-invocation:#1]</li> <li>br.com.academico.SuiteSemCodigo.[engine:junit-jupiter]/[class:br.com.academico.SuiteSemCodigo]/[nested-class:EdgeCases]/[method:menorNotaThirdPosition()]</li> 
+</ul>
+</div></div> <p class='SURVIVED'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>consolidarParcialmente<br/><b>Killed by : </b>none</span></span> changed conditional boundary &rarr; SURVIVED</span>
+<a title="Click to view covering tests" class="view-covered-by-tests" onClick="document.getElementById('MutationIdentifier-[location=Location-[clazz=br.com.academico.ConsolidacaoParcial,-method=consolidarParcialmente,-methodDesc=(Ljava/lang/Float;Ljava/lang/Float;Ljava/lang/Float;Ljava/lang/Integer;)Lbr/com/academico/SituacaoAcademica;],-indexes=[11],-mutator=org.pitest.mutationtest.engine.gregor.mutators.ConditionalsBoundaryMutator]').style.display=(document.getElementById('MutationIdentifier-[location=Location-[clazz=br.com.academico.ConsolidacaoParcial,-method=consolidarParcialmente,-methodDesc=(Ljava/lang/Float;Ljava/lang/Float;Ljava/lang/Float;Ljava/lang/Integer;)Lbr/com/academico/SituacaoAcademica;],-indexes=[11],-mutator=org.pitest.mutationtest.engine.gregor.mutators.ConditionalsBoundaryMutator]').style.display == 'block')?'none':'block';">Covering tests</a>
+<div class="covered-tests" id="MutationIdentifier-[location=Location-[clazz=br.com.academico.ConsolidacaoParcial,-method=consolidarParcialmente,-methodDesc=(Ljava/lang/Float;Ljava/lang/Float;Ljava/lang/Float;Ljava/lang/Integer;)Lbr/com/academico/SituacaoAcademica;],-indexes=[11],-mutator=org.pitest.mutationtest.engine.gregor.mutators.ConditionalsBoundaryMutator]" style="display:none;">Covered by tests:
+<ul>
+<li>br.com.academico.SuiteSemCodigo.[engine:junit-jupiter]/[class:br.com.academico.SuiteSemCodigo]/[nested-class:InvalidArguments]/[test-template:frequencyOutOfRange(java.lang.Integer, java.lang.Float, java.lang.Float, java.lang.Float)]/[test-template-invocation:#1]</li> <li>br.com.academico.SuiteSemCodigo.[engine:junit-jupiter]/[class:br.com.academico.SuiteSemCodigo]/[nested-class:InvalidArguments]/[test-template:frequencyOutOfRange(java.lang.Integer, java.lang.Float, java.lang.Float, java.lang.Float)]/[test-template-invocation:#2]</li> <li>br.com.academico.SuiteSemCodigo.[engine:junit-jupiter]/[class:br.com.academico.SuiteSemCodigo]/[nested-class:InvalidArguments]/[method:nullFirstNote()]</li> <li>br.com.academico.SuiteSemCodigo.[engine:junit-jupiter]/[class:br.com.academico.SuiteSemCodigo]/[nested-class:InvalidArguments]/[test-template:noteNotFinite(java.lang.Float, java.lang.Float, java.lang.Float, java.lang.Integer)]/[test-template-invocation:#1]</li> <li>br.com.academico.SuiteSemCodigo.[engine:junit-jupiter]/[class:br.com.academico.SuiteSemCodigo]/[nested-class:InvalidArguments]/[test-template:noteOutOfRange(java.lang.Float, java.lang.Float, java.lang.Float, java.lang.Integer)]/[test-template-invocation:#4]</li> <li>br.com.academico.SuiteSemCodigo.[engine:junit-jupiter]/[class:br.com.academico.SuiteSemCodigo]/[nested-class:InvalidArguments]/[test-template:noteOutOfRange(java.lang.Float, java.lang.Float, java.lang.Float, java.lang.Integer)]/[test-template-invocation:#1]</li> <li>br.com.academico.SuiteSemCodigo.[engine:junit-jupiter]/[class:br.com.academico.SuiteSemCodigo]/[nested-class:InvalidArguments]/[method:nullThirdNote()]</li> <li>br.com.academico.SuiteSemCodigo.[engine:junit-jupiter]/[class:br.com.academico.SuiteSemCodigo]/[nested-class:InvalidArguments]/[test-template:noteNotFinite(java.lang.Float, java.lang.Float, java.lang.Float, java.lang.Integer)]/[test-template-invocation:#2]</li> <li>br.com.academico.SuiteSemCodigo.[engine:junit-jupiter]/[class:br.com.academico.SuiteSemCodigo]/[nested-class:InvalidArguments]/[test-template:noteNotFinite(java.lang.Float, java.lang.Float, java.lang.Float, java.lang.Integer)]/[test-template-invocation:#3]</li> <li>br.com.academico.SuiteSemCodigo.[engine:junit-jupiter]/[class:br.com.academico.SuiteSemCodigo]/[nested-class:InvalidArguments]/[test-template:noteOutOfRange(java.lang.Float, java.lang.Float, java.lang.Float, java.lang.Integer)]/[test-template-invocation:#5]</li> <li>br.com.academico.SuiteSemCodigo.[engine:junit-jupiter]/[class:br.com.academico.SuiteSemCodigo]/[nested-class:InvalidArguments]/[test-template:noteOutOfRange(java.lang.Float, java.lang.Float, java.lang.Float, java.lang.Integer)]/[test-template-invocation:#3]</li> <li>br.com.academico.SuiteSemCodigo.[engine:junit-jupiter]/[class:br.com.academico.SuiteSemCodigo]/[nested-class:InvalidArguments]/[method:nullSecondNote()]</li> <li>br.com.academico.SuiteSemCodigo.[engine:junit-jupiter]/[class:br.com.academico.SuiteSemCodigo]/[nested-class:InvalidArguments]/[test-template:noteOutOfRange(java.lang.Float, java.lang.Float, java.lang.Float, java.lang.Integer)]/[test-template-invocation:#2]</li> <li>br.com.academico.SuiteSemCodigo.[engine:junit-jupiter]/[class:br.com.academico.SuiteSemCodigo]/[nested-class:InvalidArguments]/[test-template:noteOutOfRange(java.lang.Float, java.lang.Float, java.lang.Float, java.lang.Integer)]/[test-template-invocation:#6]</li> <li>br.com.academico.SuiteSemCodigo.[engine:junit-jupiter]/[class:br.com.academico.SuiteSemCodigo]/[nested-class:DecisionTable]/[test-template:aca02_REPF_Media3to5(java.lang.Float, java.lang.Float, java.lang.Float, java.lang.Integer)]/[test-template-invocation:#1]</li> <li>br.com.academico.SuiteSemCodigo.[engine:junit-jupiter]/[class:br.com.academico.SuiteSemCodigo]/[nested-class:EdgeCases]/[method:freqExactly75_Media3()]</li> <li>br.com.academico.SuiteSemCodigo.[engine:junit-jupiter]/[class:br.com.academico.SuiteSemCodigo]/[nested-class:DecisionTable]/[test-template:aca02_REPF_Media3to5(java.lang.Float, java.lang.Float, java.lang.Float, java.lang.Integer)]/[test-template-invocation:#2]</li> <li>br.com.academico.SuiteSemCodigo.[engine:junit-jupiter]/[class:br.com.academico.SuiteSemCodigo]/[nested-class:DecisionTable]/[method:aca05_REP()]</li> <li>br.com.academico.SuiteSemCodigo.[engine:junit-jupiter]/[class:br.com.academico.SuiteSemCodigo]/[nested-class:DecisionTable]/[test-template:aca01_REMF(java.lang.Float, java.lang.Float, java.lang.Float, java.lang.Integer)]/[test-template-invocation:#2]</li> <li>br.com.academico.SuiteSemCodigo.[engine:junit-jupiter]/[class:br.com.academico.SuiteSemCodigo]/[nested-class:RoundingAndBoundary]/[method:mediaExactlySeven()]</li> <li>br.com.academico.SuiteSemCodigo.[engine:junit-jupiter]/[class:br.com.academico.SuiteSemCodigo]/[nested-class:DecisionTable]/[test-template:aca03_REPF_Media5to7(java.lang.Float, java.lang.Float, java.lang.Float, java.lang.Integer)]/[test-template-invocation:#1]</li> <li>br.com.academico.SuiteSemCodigo.[engine:junit-jupiter]/[class:br.com.academico.SuiteSemCodigo]/[nested-class:DecisionTable]/[test-template:aca03_REPF_Media5to7(java.lang.Float, java.lang.Float, java.lang.Float, java.lang.Integer)]/[test-template-invocation:#2]</li> <li>br.com.academico.SuiteSemCodigo.[engine:junit-jupiter]/[class:br.com.academico.SuiteSemCodigo]/[nested-class:DecisionTable]/[test-template:aca04_REPF_Media7plus(java.lang.Float, java.lang.Float, java.lang.Float, java.lang.Integer)]/[test-template-invocation:#1]</li> <li>br.com.academico.SuiteSemCodigo.[engine:junit-jupiter]/[class:br.com.academico.SuiteSemCodigo]/[nested-class:DecisionTable]/[test-template:aca04_REPF_Media7plus(java.lang.Float, java.lang.Float, java.lang.Float, java.lang.Integer)]/[test-template-invocation:#2]</li> <li>br.com.academico.SuiteSemCodigo.[engine:junit-jupiter]/[class:br.com.academico.SuiteSemCodigo]/[nested-class:DecisionTable]/[test-template:aca06_REC_Media3to5(java.lang.Float, java.lang.Float, java.lang.Float, java.lang.Integer)]/[test-template-invocation:#1]</li> <li>br.com.academico.SuiteSemCodigo.[engine:junit-jupiter]/[class:br.com.academico.SuiteSemCodigo]/[nested-class:DecisionTable]/[test-template:aca06_REC_Media3to5(java.lang.Float, java.lang.Float, java.lang.Float, java.lang.Integer)]/[test-template-invocation:#2]</li> <li>br.com.academico.SuiteSemCodigo.[engine:junit-jupiter]/[class:br.com.academico.SuiteSemCodigo]/[nested-class:RoundingAndBoundary]/[method:mediaExactlyThree()]</li> <li>br.com.academico.SuiteSemCodigo.[engine:junit-jupiter]/[class:br.com.academico.SuiteSemCodigo]/[nested-class:DecisionTable]/[method:aca09_APR()]</li> <li>br.com.academico.SuiteSemCodigo.[engine:junit-jupiter]/[class:br.com.academico.SuiteSemCodigo]/[nested-class:EdgeCases]/[method:freqExactly75_MediaBelow3()]</li> <li>br.com.academico.SuiteSemCodigo.[engine:junit-jupiter]/[class:br.com.academico.SuiteSemCodigo]/[nested-class:DecisionTable]/[method:aca08_APRN_AllNotesAbove3()]</li> <li>br.com.academico.SuiteSemCodigo.[engine:junit-jupiter]/[class:br.com.academico.SuiteSemCodigo]/[nested-class:DecisionTable]/[method:aca07_REC_NotaBelow3()]</li> <li>br.com.academico.SuiteSemCodigo.[engine:junit-jupiter]/[class:br.com.academico.SuiteSemCodigo]/[nested-class:EdgeCases]/[method:mediaExactly5_AllNotesAbove3()]</li> <li>br.com.academico.SuiteSemCodigo.[engine:junit-jupiter]/[class:br.com.academico.SuiteSemCodigo]/[nested-class:EdgeCases]/[method:mediaExactly5_OneNoteBelow3()]</li> <li>br.com.academico.SuiteSemCodigo.[engine:junit-jupiter]/[class:br.com.academico.SuiteSemCodigo]/[nested-class:EdgeCases]/[method:menorNotaSecondPosition()]</li> <li>br.com.academico.SuiteSemCodigo.[engine:junit-jupiter]/[class:br.com.academico.SuiteSemCodigo]/[nested-class:RoundingAndBoundary]/[method:mediaExactlyFive()]</li> <li>br.com.academico.SuiteSemCodigo.[engine:junit-jupiter]/[class:br.com.academico.SuiteSemCodigo]/[nested-class:DecisionTable]/[test-template:aca01_REMF(java.lang.Float, java.lang.Float, java.lang.Float, java.lang.Integer)]/[test-template-invocation:#1]</li> <li>br.com.academico.SuiteSemCodigo.[engine:junit-jupiter]/[class:br.com.academico.SuiteSemCodigo]/[nested-class:EdgeCases]/[method:menorNotaThirdPosition()]</li> 
+</ul>
+</div></div> <p class='KILLED'><span class='pop'>3.<span><b>3</b><br/><b>Location : </b>consolidarParcialmente<br/><b>Killed by : </b>br.com.academico.SuiteSemCodigo.[engine:junit-jupiter]/[class:br.com.academico.SuiteSemCodigo]/[nested-class:InvalidArguments]/[test-template:frequencyOutOfRange(java.lang.Integer, java.lang.Float, java.lang.Float, java.lang.Float)]/[test-template-invocation:#2]</span></span> removed conditional - replaced comparison check with false &rarr; KILLED</span>
+</div> <p class='KILLED'><span class='pop'>4.<span><b>4</b><br/><b>Location : </b>consolidarParcialmente<br/><b>Killed by : </b>br.com.academico.SuiteSemCodigo.[engine:junit-jupiter]/[class:br.com.academico.SuiteSemCodigo]/[nested-class:InvalidArguments]/[method:nullFirstNote()]</span></span> removed conditional - replaced comparison check with false &rarr; KILLED</span>
+</div> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@34652065_34'>34</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@34652065_34'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>consolidarParcialmente<br/><b>Killed by : </b>br.com.academico.SuiteSemCodigo.[engine:junit-jupiter]/[class:br.com.academico.SuiteSemCodigo]/[nested-class:DecisionTable]/[method:aca05_REP()]</span></span> removed conditional - replaced comparison check with false &rarr; KILLED</span>
+</div> <p class='KILLED'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>consolidarParcialmente<br/><b>Killed by : </b>br.com.academico.SuiteSemCodigo.[engine:junit-jupiter]/[class:br.com.academico.SuiteSemCodigo]/[nested-class:DecisionTable]/[test-template:aca02_REPF_Media3to5(java.lang.Float, java.lang.Float, java.lang.Float, java.lang.Integer)]/[test-template-invocation:#1]</span></span> changed conditional boundary &rarr; KILLED</span>
+</div> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@34652065_35'>35</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@34652065_35'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>consolidarParcialmente<br/><b>Killed by : </b>br.com.academico.SuiteSemCodigo.[engine:junit-jupiter]/[class:br.com.academico.SuiteSemCodigo]/[nested-class:EdgeCases]/[method:freqExactly75_MediaBelow3()]</span></span> changed conditional boundary &rarr; KILLED</span>
+</div> <p class='KILLED'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>consolidarParcialmente<br/><b>Killed by : </b>br.com.academico.SuiteSemCodigo.[engine:junit-jupiter]/[class:br.com.academico.SuiteSemCodigo]/[nested-class:DecisionTable]/[test-template:aca01_REMF(java.lang.Float, java.lang.Float, java.lang.Float, java.lang.Integer)]/[test-template-invocation:#2]</span></span> removed conditional - replaced comparison check with false &rarr; KILLED</span>
+</div> <p class='KILLED'><span class='pop'>3.<span><b>3</b><br/><b>Location : </b>consolidarParcialmente<br/><b>Killed by : </b>br.com.academico.SuiteSemCodigo.[engine:junit-jupiter]/[class:br.com.academico.SuiteSemCodigo]/[nested-class:DecisionTable]/[test-template:aca01_REMF(java.lang.Float, java.lang.Float, java.lang.Float, java.lang.Integer)]/[test-template-invocation:#2]</span></span> replaced return value with null for br/com/academico/ConsolidacaoParcial::consolidarParcialmente &rarr; KILLED</span>
+</div> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@34652065_37'>37</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@34652065_37'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>consolidarParcialmente<br/><b>Killed by : </b>br.com.academico.SuiteSemCodigo.[engine:junit-jupiter]/[class:br.com.academico.SuiteSemCodigo]/[nested-class:EdgeCases]/[method:freqExactly75_Media3()]</span></span> changed conditional boundary &rarr; KILLED</span>
+</div> <p class='KILLED'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>consolidarParcialmente<br/><b>Killed by : </b>br.com.academico.SuiteSemCodigo.[engine:junit-jupiter]/[class:br.com.academico.SuiteSemCodigo]/[nested-class:DecisionTable]/[test-template:aca02_REPF_Media3to5(java.lang.Float, java.lang.Float, java.lang.Float, java.lang.Integer)]/[test-template-invocation:#1]</span></span> removed conditional - replaced comparison check with false &rarr; KILLED</span>
+</div> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@34652065_38'>38</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@34652065_38'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>consolidarParcialmente<br/><b>Killed by : </b>br.com.academico.SuiteSemCodigo.[engine:junit-jupiter]/[class:br.com.academico.SuiteSemCodigo]/[nested-class:DecisionTable]/[test-template:aca02_REPF_Media3to5(java.lang.Float, java.lang.Float, java.lang.Float, java.lang.Integer)]/[test-template-invocation:#1]</span></span> replaced return value with null for br/com/academico/ConsolidacaoParcial::consolidarParcialmente &rarr; KILLED</span>
+</div> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@34652065_40'>40</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@34652065_40'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>consolidarParcialmente<br/><b>Killed by : </b>br.com.academico.SuiteSemCodigo.[engine:junit-jupiter]/[class:br.com.academico.SuiteSemCodigo]/[nested-class:DecisionTable]/[method:aca09_APR()]</span></span> removed conditional - replaced comparison check with false &rarr; KILLED</span>
+</div> <p class='KILLED'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>consolidarParcialmente<br/><b>Killed by : </b>br.com.academico.SuiteSemCodigo.[engine:junit-jupiter]/[class:br.com.academico.SuiteSemCodigo]/[nested-class:RoundingAndBoundary]/[method:mediaExactlySeven()]</span></span> changed conditional boundary &rarr; KILLED</span>
+</div> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@34652065_41'>41</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@34652065_41'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>consolidarParcialmente<br/><b>Killed by : </b>br.com.academico.SuiteSemCodigo.[engine:junit-jupiter]/[class:br.com.academico.SuiteSemCodigo]/[nested-class:DecisionTable]/[method:aca09_APR()]</span></span> replaced return value with null for br/com/academico/ConsolidacaoParcial::consolidarParcialmente &rarr; KILLED</span>
+</div> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@34652065_44'>44</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@34652065_44'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>consolidarParcialmente<br/><b>Killed by : </b>br.com.academico.SuiteSemCodigo.[engine:junit-jupiter]/[class:br.com.academico.SuiteSemCodigo]/[nested-class:EdgeCases]/[method:menorNotaSecondPosition()]</span></span> removed conditional - replaced comparison check with false &rarr; KILLED</span>
+</div> <p class='KILLED'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>consolidarParcialmente<br/><b>Killed by : </b>br.com.academico.SuiteSemCodigo.[engine:junit-jupiter]/[class:br.com.academico.SuiteSemCodigo]/[nested-class:EdgeCases]/[method:menorNotaSecondPosition()]</span></span> changed conditional boundary &rarr; KILLED</span>
+</div> <p class='KILLED'><span class='pop'>3.<span><b>3</b><br/><b>Location : </b>consolidarParcialmente<br/><b>Killed by : </b>br.com.academico.SuiteSemCodigo.[engine:junit-jupiter]/[class:br.com.academico.SuiteSemCodigo]/[nested-class:EdgeCases]/[method:menorNotaSecondPosition()]</span></span> changed conditional boundary &rarr; KILLED</span>
+</div> <p class='KILLED'><span class='pop'>4.<span><b>4</b><br/><b>Location : </b>consolidarParcialmente<br/><b>Killed by : </b>br.com.academico.SuiteSemCodigo.[engine:junit-jupiter]/[class:br.com.academico.SuiteSemCodigo]/[nested-class:EdgeCases]/[method:menorNotaSecondPosition()]</span></span> removed conditional - replaced comparison check with false &rarr; KILLED</span>
+</div> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@34652065_45'>45</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@34652065_45'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>consolidarParcialmente<br/><b>Killed by : </b>br.com.academico.SuiteSemCodigo.[engine:junit-jupiter]/[class:br.com.academico.SuiteSemCodigo]/[nested-class:EdgeCases]/[method:menorNotaSecondPosition()]</span></span> replaced return value with null for br/com/academico/ConsolidacaoParcial::consolidarParcialmente &rarr; KILLED</span>
+</div> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@34652065_47'>47</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@34652065_47'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>consolidarParcialmente<br/><b>Killed by : </b>br.com.academico.SuiteSemCodigo.[engine:junit-jupiter]/[class:br.com.academico.SuiteSemCodigo]/[nested-class:RoundingAndBoundary]/[method:mediaExactlyThree()]</span></span> replaced return value with null for br/com/academico/ConsolidacaoParcial::consolidarParcialmente &rarr; KILLED</span>
+</div> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@34652065_52'>52</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@34652065_52'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>arredondarNota<br/><b>Killed by : </b>br.com.academico.SuiteSemCodigo.[engine:junit-jupiter]/[class:br.com.academico.SuiteSemCodigo]/[nested-class:InvalidArguments]/[test-template:noteOutOfRange(java.lang.Float, java.lang.Float, java.lang.Float, java.lang.Integer)]/[test-template-invocation:#4]</span></span> removed conditional - replaced comparison check with false &rarr; KILLED</span>
+</div> <p class='SURVIVED'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>arredondarNota<br/><b>Killed by : </b>none</span></span> changed conditional boundary &rarr; SURVIVED</span>
+<a title="Click to view covering tests" class="view-covered-by-tests" onClick="document.getElementById('MutationIdentifier-[location=Location-[clazz=br.com.academico.ConsolidacaoParcial,-method=arredondarNota,-methodDesc=(Ljava/lang/Float;)Ljava/math/BigDecimal;],-indexes=[17],-mutator=org.pitest.mutationtest.engine.gregor.mutators.ConditionalsBoundaryMutator]').style.display=(document.getElementById('MutationIdentifier-[location=Location-[clazz=br.com.academico.ConsolidacaoParcial,-method=arredondarNota,-methodDesc=(Ljava/lang/Float;)Ljava/math/BigDecimal;],-indexes=[17],-mutator=org.pitest.mutationtest.engine.gregor.mutators.ConditionalsBoundaryMutator]').style.display == 'block')?'none':'block';">Covering tests</a>
+<div class="covered-tests" id="MutationIdentifier-[location=Location-[clazz=br.com.academico.ConsolidacaoParcial,-method=arredondarNota,-methodDesc=(Ljava/lang/Float;)Ljava/math/BigDecimal;],-indexes=[17],-mutator=org.pitest.mutationtest.engine.gregor.mutators.ConditionalsBoundaryMutator]" style="display:none;">Covered by tests:
+<ul>
+<li>br.com.academico.SuiteSemCodigo.[engine:junit-jupiter]/[class:br.com.academico.SuiteSemCodigo]/[nested-class:InvalidArguments]/[test-template:noteOutOfRange(java.lang.Float, java.lang.Float, java.lang.Float, java.lang.Integer)]/[test-template-invocation:#4]</li> <li>br.com.academico.SuiteSemCodigo.[engine:junit-jupiter]/[class:br.com.academico.SuiteSemCodigo]/[nested-class:InvalidArguments]/[test-template:noteOutOfRange(java.lang.Float, java.lang.Float, java.lang.Float, java.lang.Integer)]/[test-template-invocation:#1]</li> <li>br.com.academico.SuiteSemCodigo.[engine:junit-jupiter]/[class:br.com.academico.SuiteSemCodigo]/[nested-class:InvalidArguments]/[method:nullThirdNote()]</li> <li>br.com.academico.SuiteSemCodigo.[engine:junit-jupiter]/[class:br.com.academico.SuiteSemCodigo]/[nested-class:InvalidArguments]/[test-template:noteNotFinite(java.lang.Float, java.lang.Float, java.lang.Float, java.lang.Integer)]/[test-template-invocation:#2]</li> <li>br.com.academico.SuiteSemCodigo.[engine:junit-jupiter]/[class:br.com.academico.SuiteSemCodigo]/[nested-class:InvalidArguments]/[test-template:noteNotFinite(java.lang.Float, java.lang.Float, java.lang.Float, java.lang.Integer)]/[test-template-invocation:#3]</li> <li>br.com.academico.SuiteSemCodigo.[engine:junit-jupiter]/[class:br.com.academico.SuiteSemCodigo]/[nested-class:InvalidArguments]/[test-template:noteOutOfRange(java.lang.Float, java.lang.Float, java.lang.Float, java.lang.Integer)]/[test-template-invocation:#5]</li> <li>br.com.academico.SuiteSemCodigo.[engine:junit-jupiter]/[class:br.com.academico.SuiteSemCodigo]/[nested-class:InvalidArguments]/[test-template:noteOutOfRange(java.lang.Float, java.lang.Float, java.lang.Float, java.lang.Integer)]/[test-template-invocation:#3]</li> <li>br.com.academico.SuiteSemCodigo.[engine:junit-jupiter]/[class:br.com.academico.SuiteSemCodigo]/[nested-class:InvalidArguments]/[method:nullSecondNote()]</li> <li>br.com.academico.SuiteSemCodigo.[engine:junit-jupiter]/[class:br.com.academico.SuiteSemCodigo]/[nested-class:InvalidArguments]/[test-template:noteOutOfRange(java.lang.Float, java.lang.Float, java.lang.Float, java.lang.Integer)]/[test-template-invocation:#2]</li> <li>br.com.academico.SuiteSemCodigo.[engine:junit-jupiter]/[class:br.com.academico.SuiteSemCodigo]/[nested-class:InvalidArguments]/[test-template:noteOutOfRange(java.lang.Float, java.lang.Float, java.lang.Float, java.lang.Integer)]/[test-template-invocation:#6]</li> <li>br.com.academico.SuiteSemCodigo.[engine:junit-jupiter]/[class:br.com.academico.SuiteSemCodigo]/[nested-class:DecisionTable]/[test-template:aca02_REPF_Media3to5(java.lang.Float, java.lang.Float, java.lang.Float, java.lang.Integer)]/[test-template-invocation:#1]</li> <li>br.com.academico.SuiteSemCodigo.[engine:junit-jupiter]/[class:br.com.academico.SuiteSemCodigo]/[nested-class:EdgeCases]/[method:freqExactly75_Media3()]</li> <li>br.com.academico.SuiteSemCodigo.[engine:junit-jupiter]/[class:br.com.academico.SuiteSemCodigo]/[nested-class:DecisionTable]/[test-template:aca02_REPF_Media3to5(java.lang.Float, java.lang.Float, java.lang.Float, java.lang.Integer)]/[test-template-invocation:#2]</li> <li>br.com.academico.SuiteSemCodigo.[engine:junit-jupiter]/[class:br.com.academico.SuiteSemCodigo]/[nested-class:DecisionTable]/[method:aca05_REP()]</li> <li>br.com.academico.SuiteSemCodigo.[engine:junit-jupiter]/[class:br.com.academico.SuiteSemCodigo]/[nested-class:DecisionTable]/[test-template:aca01_REMF(java.lang.Float, java.lang.Float, java.lang.Float, java.lang.Integer)]/[test-template-invocation:#2]</li> <li>br.com.academico.SuiteSemCodigo.[engine:junit-jupiter]/[class:br.com.academico.SuiteSemCodigo]/[nested-class:RoundingAndBoundary]/[method:mediaExactlySeven()]</li> <li>br.com.academico.SuiteSemCodigo.[engine:junit-jupiter]/[class:br.com.academico.SuiteSemCodigo]/[nested-class:DecisionTable]/[test-template:aca03_REPF_Media5to7(java.lang.Float, java.lang.Float, java.lang.Float, java.lang.Integer)]/[test-template-invocation:#1]</li> <li>br.com.academico.SuiteSemCodigo.[engine:junit-jupiter]/[class:br.com.academico.SuiteSemCodigo]/[nested-class:DecisionTable]/[test-template:aca03_REPF_Media5to7(java.lang.Float, java.lang.Float, java.lang.Float, java.lang.Integer)]/[test-template-invocation:#2]</li> <li>br.com.academico.SuiteSemCodigo.[engine:junit-jupiter]/[class:br.com.academico.SuiteSemCodigo]/[nested-class:DecisionTable]/[test-template:aca04_REPF_Media7plus(java.lang.Float, java.lang.Float, java.lang.Float, java.lang.Integer)]/[test-template-invocation:#1]</li> <li>br.com.academico.SuiteSemCodigo.[engine:junit-jupiter]/[class:br.com.academico.SuiteSemCodigo]/[nested-class:DecisionTable]/[test-template:aca04_REPF_Media7plus(java.lang.Float, java.lang.Float, java.lang.Float, java.lang.Integer)]/[test-template-invocation:#2]</li> <li>br.com.academico.SuiteSemCodigo.[engine:junit-jupiter]/[class:br.com.academico.SuiteSemCodigo]/[nested-class:DecisionTable]/[test-template:aca06_REC_Media3to5(java.lang.Float, java.lang.Float, java.lang.Float, java.lang.Integer)]/[test-template-invocation:#1]</li> <li>br.com.academico.SuiteSemCodigo.[engine:junit-jupiter]/[class:br.com.academico.SuiteSemCodigo]/[nested-class:DecisionTable]/[test-template:aca06_REC_Media3to5(java.lang.Float, java.lang.Float, java.lang.Float, java.lang.Integer)]/[test-template-invocation:#2]</li> <li>br.com.academico.SuiteSemCodigo.[engine:junit-jupiter]/[class:br.com.academico.SuiteSemCodigo]/[nested-class:RoundingAndBoundary]/[method:mediaExactlyThree()]</li> <li>br.com.academico.SuiteSemCodigo.[engine:junit-jupiter]/[class:br.com.academico.SuiteSemCodigo]/[nested-class:DecisionTable]/[method:aca09_APR()]</li> <li>br.com.academico.SuiteSemCodigo.[engine:junit-jupiter]/[class:br.com.academico.SuiteSemCodigo]/[nested-class:EdgeCases]/[method:freqExactly75_MediaBelow3()]</li> <li>br.com.academico.SuiteSemCodigo.[engine:junit-jupiter]/[class:br.com.academico.SuiteSemCodigo]/[nested-class:DecisionTable]/[method:aca08_APRN_AllNotesAbove3()]</li> <li>br.com.academico.SuiteSemCodigo.[engine:junit-jupiter]/[class:br.com.academico.SuiteSemCodigo]/[nested-class:DecisionTable]/[method:aca07_REC_NotaBelow3()]</li> <li>br.com.academico.SuiteSemCodigo.[engine:junit-jupiter]/[class:br.com.academico.SuiteSemCodigo]/[nested-class:EdgeCases]/[method:mediaExactly5_AllNotesAbove3()]</li> <li>br.com.academico.SuiteSemCodigo.[engine:junit-jupiter]/[class:br.com.academico.SuiteSemCodigo]/[nested-class:EdgeCases]/[method:mediaExactly5_OneNoteBelow3()]</li> <li>br.com.academico.SuiteSemCodigo.[engine:junit-jupiter]/[class:br.com.academico.SuiteSemCodigo]/[nested-class:EdgeCases]/[method:menorNotaSecondPosition()]</li> <li>br.com.academico.SuiteSemCodigo.[engine:junit-jupiter]/[class:br.com.academico.SuiteSemCodigo]/[nested-class:RoundingAndBoundary]/[method:mediaExactlyFive()]</li> <li>br.com.academico.SuiteSemCodigo.[engine:junit-jupiter]/[class:br.com.academico.SuiteSemCodigo]/[nested-class:DecisionTable]/[test-template:aca01_REMF(java.lang.Float, java.lang.Float, java.lang.Float, java.lang.Integer)]/[test-template-invocation:#1]</li> <li>br.com.academico.SuiteSemCodigo.[engine:junit-jupiter]/[class:br.com.academico.SuiteSemCodigo]/[nested-class:EdgeCases]/[method:menorNotaThirdPosition()]</li> 
+</ul>
+</div></div> <p class='KILLED'><span class='pop'>3.<span><b>3</b><br/><b>Location : </b>arredondarNota<br/><b>Killed by : </b>br.com.academico.SuiteSemCodigo.[engine:junit-jupiter]/[class:br.com.academico.SuiteSemCodigo]/[nested-class:InvalidArguments]/[method:nullThirdNote()]</span></span> removed conditional - replaced comparison check with false &rarr; KILLED</span>
+</div> <p class='KILLED'><span class='pop'>4.<span><b>4</b><br/><b>Location : </b>arredondarNota<br/><b>Killed by : </b>br.com.academico.SuiteSemCodigo.[engine:junit-jupiter]/[class:br.com.academico.SuiteSemCodigo]/[nested-class:InvalidArguments]/[method:nullThirdNote()]</span></span> removed conditional - replaced equality check with false &rarr; KILLED</span>
+</div> <p class='SURVIVED'><span class='pop'>5.<span><b>5</b><br/><b>Location : </b>arredondarNota<br/><b>Killed by : </b>none</span></span> changed conditional boundary &rarr; SURVIVED</span>
+<a title="Click to view covering tests" class="view-covered-by-tests" onClick="document.getElementById('MutationIdentifier-[location=Location-[clazz=br.com.academico.ConsolidacaoParcial,-method=arredondarNota,-methodDesc=(Ljava/lang/Float;)Ljava/math/BigDecimal;],-indexes=[22],-mutator=org.pitest.mutationtest.engine.gregor.mutators.ConditionalsBoundaryMutator]').style.display=(document.getElementById('MutationIdentifier-[location=Location-[clazz=br.com.academico.ConsolidacaoParcial,-method=arredondarNota,-methodDesc=(Ljava/lang/Float;)Ljava/math/BigDecimal;],-indexes=[22],-mutator=org.pitest.mutationtest.engine.gregor.mutators.ConditionalsBoundaryMutator]').style.display == 'block')?'none':'block';">Covering tests</a>
+<div class="covered-tests" id="MutationIdentifier-[location=Location-[clazz=br.com.academico.ConsolidacaoParcial,-method=arredondarNota,-methodDesc=(Ljava/lang/Float;)Ljava/math/BigDecimal;],-indexes=[22],-mutator=org.pitest.mutationtest.engine.gregor.mutators.ConditionalsBoundaryMutator]" style="display:none;">Covered by tests:
+<ul>
+<li>br.com.academico.SuiteSemCodigo.[engine:junit-jupiter]/[class:br.com.academico.SuiteSemCodigo]/[nested-class:InvalidArguments]/[test-template:noteOutOfRange(java.lang.Float, java.lang.Float, java.lang.Float, java.lang.Integer)]/[test-template-invocation:#4]</li> <li>br.com.academico.SuiteSemCodigo.[engine:junit-jupiter]/[class:br.com.academico.SuiteSemCodigo]/[nested-class:InvalidArguments]/[method:nullThirdNote()]</li> <li>br.com.academico.SuiteSemCodigo.[engine:junit-jupiter]/[class:br.com.academico.SuiteSemCodigo]/[nested-class:InvalidArguments]/[test-template:noteNotFinite(java.lang.Float, java.lang.Float, java.lang.Float, java.lang.Integer)]/[test-template-invocation:#2]</li> <li>br.com.academico.SuiteSemCodigo.[engine:junit-jupiter]/[class:br.com.academico.SuiteSemCodigo]/[nested-class:InvalidArguments]/[test-template:noteNotFinite(java.lang.Float, java.lang.Float, java.lang.Float, java.lang.Integer)]/[test-template-invocation:#3]</li> <li>br.com.academico.SuiteSemCodigo.[engine:junit-jupiter]/[class:br.com.academico.SuiteSemCodigo]/[nested-class:InvalidArguments]/[test-template:noteOutOfRange(java.lang.Float, java.lang.Float, java.lang.Float, java.lang.Integer)]/[test-template-invocation:#5]</li> <li>br.com.academico.SuiteSemCodigo.[engine:junit-jupiter]/[class:br.com.academico.SuiteSemCodigo]/[nested-class:InvalidArguments]/[test-template:noteOutOfRange(java.lang.Float, java.lang.Float, java.lang.Float, java.lang.Integer)]/[test-template-invocation:#3]</li> <li>br.com.academico.SuiteSemCodigo.[engine:junit-jupiter]/[class:br.com.academico.SuiteSemCodigo]/[nested-class:InvalidArguments]/[method:nullSecondNote()]</li> <li>br.com.academico.SuiteSemCodigo.[engine:junit-jupiter]/[class:br.com.academico.SuiteSemCodigo]/[nested-class:InvalidArguments]/[test-template:noteOutOfRange(java.lang.Float, java.lang.Float, java.lang.Float, java.lang.Integer)]/[test-template-invocation:#2]</li> <li>br.com.academico.SuiteSemCodigo.[engine:junit-jupiter]/[class:br.com.academico.SuiteSemCodigo]/[nested-class:InvalidArguments]/[test-template:noteOutOfRange(java.lang.Float, java.lang.Float, java.lang.Float, java.lang.Integer)]/[test-template-invocation:#6]</li> <li>br.com.academico.SuiteSemCodigo.[engine:junit-jupiter]/[class:br.com.academico.SuiteSemCodigo]/[nested-class:DecisionTable]/[test-template:aca02_REPF_Media3to5(java.lang.Float, java.lang.Float, java.lang.Float, java.lang.Integer)]/[test-template-invocation:#1]</li> <li>br.com.academico.SuiteSemCodigo.[engine:junit-jupiter]/[class:br.com.academico.SuiteSemCodigo]/[nested-class:EdgeCases]/[method:freqExactly75_Media3()]</li> <li>br.com.academico.SuiteSemCodigo.[engine:junit-jupiter]/[class:br.com.academico.SuiteSemCodigo]/[nested-class:DecisionTable]/[test-template:aca02_REPF_Media3to5(java.lang.Float, java.lang.Float, java.lang.Float, java.lang.Integer)]/[test-template-invocation:#2]</li> <li>br.com.academico.SuiteSemCodigo.[engine:junit-jupiter]/[class:br.com.academico.SuiteSemCodigo]/[nested-class:DecisionTable]/[method:aca05_REP()]</li> <li>br.com.academico.SuiteSemCodigo.[engine:junit-jupiter]/[class:br.com.academico.SuiteSemCodigo]/[nested-class:DecisionTable]/[test-template:aca01_REMF(java.lang.Float, java.lang.Float, java.lang.Float, java.lang.Integer)]/[test-template-invocation:#2]</li> <li>br.com.academico.SuiteSemCodigo.[engine:junit-jupiter]/[class:br.com.academico.SuiteSemCodigo]/[nested-class:RoundingAndBoundary]/[method:mediaExactlySeven()]</li> <li>br.com.academico.SuiteSemCodigo.[engine:junit-jupiter]/[class:br.com.academico.SuiteSemCodigo]/[nested-class:DecisionTable]/[test-template:aca03_REPF_Media5to7(java.lang.Float, java.lang.Float, java.lang.Float, java.lang.Integer)]/[test-template-invocation:#1]</li> <li>br.com.academico.SuiteSemCodigo.[engine:junit-jupiter]/[class:br.com.academico.SuiteSemCodigo]/[nested-class:DecisionTable]/[test-template:aca03_REPF_Media5to7(java.lang.Float, java.lang.Float, java.lang.Float, java.lang.Integer)]/[test-template-invocation:#2]</li> <li>br.com.academico.SuiteSemCodigo.[engine:junit-jupiter]/[class:br.com.academico.SuiteSemCodigo]/[nested-class:DecisionTable]/[test-template:aca04_REPF_Media7plus(java.lang.Float, java.lang.Float, java.lang.Float, java.lang.Integer)]/[test-template-invocation:#1]</li> <li>br.com.academico.SuiteSemCodigo.[engine:junit-jupiter]/[class:br.com.academico.SuiteSemCodigo]/[nested-class:DecisionTable]/[test-template:aca04_REPF_Media7plus(java.lang.Float, java.lang.Float, java.lang.Float, java.lang.Integer)]/[test-template-invocation:#2]</li> <li>br.com.academico.SuiteSemCodigo.[engine:junit-jupiter]/[class:br.com.academico.SuiteSemCodigo]/[nested-class:DecisionTable]/[test-template:aca06_REC_Media3to5(java.lang.Float, java.lang.Float, java.lang.Float, java.lang.Integer)]/[test-template-invocation:#1]</li> <li>br.com.academico.SuiteSemCodigo.[engine:junit-jupiter]/[class:br.com.academico.SuiteSemCodigo]/[nested-class:DecisionTable]/[test-template:aca06_REC_Media3to5(java.lang.Float, java.lang.Float, java.lang.Float, java.lang.Integer)]/[test-template-invocation:#2]</li> <li>br.com.academico.SuiteSemCodigo.[engine:junit-jupiter]/[class:br.com.academico.SuiteSemCodigo]/[nested-class:RoundingAndBoundary]/[method:mediaExactlyThree()]</li> <li>br.com.academico.SuiteSemCodigo.[engine:junit-jupiter]/[class:br.com.academico.SuiteSemCodigo]/[nested-class:DecisionTable]/[method:aca09_APR()]</li> <li>br.com.academico.SuiteSemCodigo.[engine:junit-jupiter]/[class:br.com.academico.SuiteSemCodigo]/[nested-class:EdgeCases]/[method:freqExactly75_MediaBelow3()]</li> <li>br.com.academico.SuiteSemCodigo.[engine:junit-jupiter]/[class:br.com.academico.SuiteSemCodigo]/[nested-class:DecisionTable]/[method:aca08_APRN_AllNotesAbove3()]</li> <li>br.com.academico.SuiteSemCodigo.[engine:junit-jupiter]/[class:br.com.academico.SuiteSemCodigo]/[nested-class:DecisionTable]/[method:aca07_REC_NotaBelow3()]</li> <li>br.com.academico.SuiteSemCodigo.[engine:junit-jupiter]/[class:br.com.academico.SuiteSemCodigo]/[nested-class:EdgeCases]/[method:mediaExactly5_AllNotesAbove3()]</li> <li>br.com.academico.SuiteSemCodigo.[engine:junit-jupiter]/[class:br.com.academico.SuiteSemCodigo]/[nested-class:EdgeCases]/[method:mediaExactly5_OneNoteBelow3()]</li> <li>br.com.academico.SuiteSemCodigo.[engine:junit-jupiter]/[class:br.com.academico.SuiteSemCodigo]/[nested-class:EdgeCases]/[method:menorNotaSecondPosition()]</li> <li>br.com.academico.SuiteSemCodigo.[engine:junit-jupiter]/[class:br.com.academico.SuiteSemCodigo]/[nested-class:RoundingAndBoundary]/[method:mediaExactlyFive()]</li> <li>br.com.academico.SuiteSemCodigo.[engine:junit-jupiter]/[class:br.com.academico.SuiteSemCodigo]/[nested-class:DecisionTable]/[test-template:aca01_REMF(java.lang.Float, java.lang.Float, java.lang.Float, java.lang.Integer)]/[test-template-invocation:#1]</li> <li>br.com.academico.SuiteSemCodigo.[engine:junit-jupiter]/[class:br.com.academico.SuiteSemCodigo]/[nested-class:EdgeCases]/[method:menorNotaThirdPosition()]</li> 
+</ul>
+</div></div> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@34652065_55'>55</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@34652065_55'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>arredondarNota<br/><b>Killed by : </b>br.com.academico.SuiteSemCodigo.[engine:junit-jupiter]/[class:br.com.academico.SuiteSemCodigo]/[nested-class:DecisionTable]/[test-template:aca02_REPF_Media3to5(java.lang.Float, java.lang.Float, java.lang.Float, java.lang.Integer)]/[test-template-invocation:#1]</span></span> replaced return value with null for br/com/academico/ConsolidacaoParcial::arredondarNota &rarr; KILLED</span>
+</div> 
+</td>
+</tr>
+
+</table>
+
+
+<h2>Active mutators</h2>
+<ul>
+
+<li class='mutator'>CONDITIONALS_BOUNDARY</li>
+
+<li class='mutator'>EMPTY_RETURNS</li>
+
+<li class='mutator'>FALSE_RETURNS</li>
+
+<li class='mutator'>INCREMENTS</li>
+
+<li class='mutator'>INVERT_NEGS</li>
+
+<li class='mutator'>MATH</li>
+
+<li class='mutator'>NULL_RETURNS</li>
+
+<li class='mutator'>PRIMITIVE_RETURNS</li>
+
+<li class='mutator'>REMOVE_CONDITIONALS_EQUAL_ELSE</li>
+
+<li class='mutator'>REMOVE_CONDITIONALS_ORDER_ELSE</li>
+
+<li class='mutator'>TRUE_RETURNS</li>
+
+<li class='mutator'>VOID_METHOD_CALLS</li>
+
+</ul>
+
+<h2>Tests examined</h2>
+<ul>
+<li>br.com.academico.SuiteSemCodigo.[engine:junit-jupiter]/[class:br.com.academico.SuiteSemCodigo]/[nested-class:DecisionTable]/[test-template:aca02_REPF_Media3to5(java.lang.Float, java.lang.Float, java.lang.Float, java.lang.Integer)]/[test-template-invocation:#1] (0 ms)</li><li>br.com.academico.SuiteSemCodigo.[engine:junit-jupiter]/[class:br.com.academico.SuiteSemCodigo]/[nested-class:DecisionTable]/[test-template:aca03_REPF_Media5to7(java.lang.Float, java.lang.Float, java.lang.Float, java.lang.Integer)]/[test-template-invocation:#1] (0 ms)</li><li>br.com.academico.SuiteSemCodigo.[engine:junit-jupiter]/[class:br.com.academico.SuiteSemCodigo]/[nested-class:DecisionTable]/[test-template:aca03_REPF_Media5to7(java.lang.Float, java.lang.Float, java.lang.Float, java.lang.Integer)]/[test-template-invocation:#2] (0 ms)</li><li>br.com.academico.SuiteSemCodigo.[engine:junit-jupiter]/[class:br.com.academico.SuiteSemCodigo]/[nested-class:EdgeCases]/[method:freqExactly75_Media3()] (0 ms)</li><li>br.com.academico.SuiteSemCodigo.[engine:junit-jupiter]/[class:br.com.academico.SuiteSemCodigo]/[nested-class:DecisionTable]/[test-template:aca02_REPF_Media3to5(java.lang.Float, java.lang.Float, java.lang.Float, java.lang.Integer)]/[test-template-invocation:#2] (0 ms)</li><li>br.com.academico.SuiteSemCodigo.[engine:junit-jupiter]/[class:br.com.academico.SuiteSemCodigo]/[nested-class:DecisionTable]/[test-template:aca04_REPF_Media7plus(java.lang.Float, java.lang.Float, java.lang.Float, java.lang.Integer)]/[test-template-invocation:#1] (0 ms)</li><li>br.com.academico.SuiteSemCodigo.[engine:junit-jupiter]/[class:br.com.academico.SuiteSemCodigo]/[nested-class:DecisionTable]/[test-template:aca04_REPF_Media7plus(java.lang.Float, java.lang.Float, java.lang.Float, java.lang.Integer)]/[test-template-invocation:#2] (0 ms)</li><li>br.com.academico.SuiteSemCodigo.[engine:junit-jupiter]/[class:br.com.academico.SuiteSemCodigo]/[nested-class:DecisionTable]/[method:aca05_REP()] (0 ms)</li><li>br.com.academico.SuiteSemCodigo.[engine:junit-jupiter]/[class:br.com.academico.SuiteSemCodigo]/[nested-class:DecisionTable]/[test-template:aca06_REC_Media3to5(java.lang.Float, java.lang.Float, java.lang.Float, java.lang.Integer)]/[test-template-invocation:#1] (0 ms)</li><li>br.com.academico.SuiteSemCodigo.[engine:junit-jupiter]/[class:br.com.academico.SuiteSemCodigo]/[nested-class:DecisionTable]/[test-template:aca06_REC_Media3to5(java.lang.Float, java.lang.Float, java.lang.Float, java.lang.Integer)]/[test-template-invocation:#2] (0 ms)</li><li>br.com.academico.SuiteSemCodigo.[engine:junit-jupiter]/[class:br.com.academico.SuiteSemCodigo]/[nested-class:RoundingAndBoundary]/[method:mediaExactlyThree()] (0 ms)</li><li>br.com.academico.SuiteSemCodigo.[engine:junit-jupiter]/[class:br.com.academico.SuiteSemCodigo]/[nested-class:DecisionTable]/[method:aca09_APR()] (0 ms)</li><li>br.com.academico.SuiteSemCodigo.[engine:junit-jupiter]/[class:br.com.academico.SuiteSemCodigo]/[nested-class:DecisionTable]/[test-template:aca01_REMF(java.lang.Float, java.lang.Float, java.lang.Float, java.lang.Integer)]/[test-template-invocation:#2] (0 ms)</li><li>br.com.academico.SuiteSemCodigo.[engine:junit-jupiter]/[class:br.com.academico.SuiteSemCodigo]/[nested-class:RoundingAndBoundary]/[method:mediaExactlySeven()] (0 ms)</li><li>br.com.academico.SuiteSemCodigo.[engine:junit-jupiter]/[class:br.com.academico.SuiteSemCodigo]/[nested-class:EdgeCases]/[method:freqExactly75_MediaBelow3()] (0 ms)</li><li>br.com.academico.SuiteSemCodigo.[engine:junit-jupiter]/[class:br.com.academico.SuiteSemCodigo]/[nested-class:EdgeCases]/[method:mediaExactly5_OneNoteBelow3()] (0 ms)</li><li>br.com.academico.SuiteSemCodigo.[engine:junit-jupiter]/[class:br.com.academico.SuiteSemCodigo]/[nested-class:DecisionTable]/[method:aca08_APRN_AllNotesAbove3()] (0 ms)</li><li>br.com.academico.SuiteSemCodigo.[engine:junit-jupiter]/[class:br.com.academico.SuiteSemCodigo]/[nested-class:DecisionTable]/[method:aca07_REC_NotaBelow3()] (0 ms)</li><li>br.com.academico.SuiteSemCodigo.[engine:junit-jupiter]/[class:br.com.academico.SuiteSemCodigo]/[nested-class:EdgeCases]/[method:menorNotaSecondPosition()] (0 ms)</li><li>br.com.academico.SuiteSemCodigo.[engine:junit-jupiter]/[class:br.com.academico.SuiteSemCodigo]/[nested-class:EdgeCases]/[method:mediaExactly5_AllNotesAbove3()] (0 ms)</li><li>br.com.academico.SuiteSemCodigo.[engine:junit-jupiter]/[class:br.com.academico.SuiteSemCodigo]/[nested-class:RoundingAndBoundary]/[method:mediaExactlyFive()] (0 ms)</li><li>br.com.academico.SuiteSemCodigo.[engine:junit-jupiter]/[class:br.com.academico.SuiteSemCodigo]/[nested-class:DecisionTable]/[test-template:aca01_REMF(java.lang.Float, java.lang.Float, java.lang.Float, java.lang.Integer)]/[test-template-invocation:#1] (12 ms)</li><li>br.com.academico.SuiteSemCodigo.[engine:junit-jupiter]/[class:br.com.academico.SuiteSemCodigo]/[nested-class:EdgeCases]/[method:menorNotaThirdPosition()] (45 ms)</li><li>br.com.academico.SuiteSemCodigo.[engine:junit-jupiter]/[class:br.com.academico.SuiteSemCodigo]/[nested-class:InvalidArguments]/[test-template:noteOutOfRange(java.lang.Float, java.lang.Float, java.lang.Float, java.lang.Integer)]/[test-template-invocation:#4] (0 ms)</li><li>br.com.academico.SuiteSemCodigo.[engine:junit-jupiter]/[class:br.com.academico.SuiteSemCodigo]/[nested-class:InvalidArguments]/[method:nullThirdNote()] (0 ms)</li><li>br.com.academico.SuiteSemCodigo.[engine:junit-jupiter]/[class:br.com.academico.SuiteSemCodigo]/[nested-class:InvalidArguments]/[test-template:noteNotFinite(java.lang.Float, java.lang.Float, java.lang.Float, java.lang.Integer)]/[test-template-invocation:#2] (0 ms)</li><li>br.com.academico.SuiteSemCodigo.[engine:junit-jupiter]/[class:br.com.academico.SuiteSemCodigo]/[nested-class:InvalidArguments]/[test-template:noteNotFinite(java.lang.Float, java.lang.Float, java.lang.Float, java.lang.Integer)]/[test-template-invocation:#3] (0 ms)</li><li>br.com.academico.SuiteSemCodigo.[engine:junit-jupiter]/[class:br.com.academico.SuiteSemCodigo]/[nested-class:InvalidArguments]/[test-template:noteOutOfRange(java.lang.Float, java.lang.Float, java.lang.Float, java.lang.Integer)]/[test-template-invocation:#5] (0 ms)</li><li>br.com.academico.SuiteSemCodigo.[engine:junit-jupiter]/[class:br.com.academico.SuiteSemCodigo]/[nested-class:InvalidArguments]/[test-template:noteOutOfRange(java.lang.Float, java.lang.Float, java.lang.Float, java.lang.Integer)]/[test-template-invocation:#3] (0 ms)</li><li>br.com.academico.SuiteSemCodigo.[engine:junit-jupiter]/[class:br.com.academico.SuiteSemCodigo]/[nested-class:InvalidArguments]/[method:nullSecondNote()] (1 ms)</li><li>br.com.academico.SuiteSemCodigo.[engine:junit-jupiter]/[class:br.com.academico.SuiteSemCodigo]/[nested-class:InvalidArguments]/[test-template:noteOutOfRange(java.lang.Float, java.lang.Float, java.lang.Float, java.lang.Integer)]/[test-template-invocation:#2] (0 ms)</li><li>br.com.academico.SuiteSemCodigo.[engine:junit-jupiter]/[class:br.com.academico.SuiteSemCodigo]/[nested-class:InvalidArguments]/[test-template:noteOutOfRange(java.lang.Float, java.lang.Float, java.lang.Float, java.lang.Integer)]/[test-template-invocation:#6] (0 ms)</li><li>br.com.academico.SuiteSemCodigo.[engine:junit-jupiter]/[class:br.com.academico.SuiteSemCodigo]/[nested-class:InvalidArguments]/[test-template:noteOutOfRange(java.lang.Float, java.lang.Float, java.lang.Float, java.lang.Integer)]/[test-template-invocation:#1] (0 ms)</li><li>br.com.academico.SuiteSemCodigo.[engine:junit-jupiter]/[class:br.com.academico.SuiteSemCodigo]/[nested-class:InvalidArguments]/[test-template:frequencyOutOfRange(java.lang.Integer, java.lang.Float, java.lang.Float, java.lang.Float)]/[test-template-invocation:#2] (0 ms)</li><li>br.com.academico.SuiteSemCodigo.[engine:junit-jupiter]/[class:br.com.academico.SuiteSemCodigo]/[nested-class:InvalidArguments]/[method:nullFirstNote()] (0 ms)</li><li>br.com.academico.SuiteSemCodigo.[engine:junit-jupiter]/[class:br.com.academico.SuiteSemCodigo]/[nested-class:InvalidArguments]/[test-template:noteNotFinite(java.lang.Float, java.lang.Float, java.lang.Float, java.lang.Integer)]/[test-template-invocation:#1] (0 ms)</li><li>br.com.academico.SuiteSemCodigo.[engine:junit-jupiter]/[class:br.com.academico.SuiteSemCodigo]/[nested-class:InvalidArguments]/[test-template:frequencyOutOfRange(java.lang.Integer, java.lang.Float, java.lang.Float, java.lang.Float)]/[test-template-invocation:#1] (0 ms)</li>
+</ul>
+
+<br/>
+
+Report generated by <a href='https://pitest.org'>PIT</a> 1.17.3
+
+</body>
+</html>

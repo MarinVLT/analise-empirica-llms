@@ -24,7 +24,7 @@ CABECALHOS = {
 PARAMETROS = {
     "model": "openai/gpt-oss-120b",
     "temperature": 0,
-    "max_completion_tokens": 4096,
+    "max_completion_tokens": 8192,
     "reasoning_effort": "low",
     "stream": False,
 }
